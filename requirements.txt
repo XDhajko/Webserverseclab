@@ -1,0 +1,6 @@
+streamlit>=1.35.0
+streamlit-option-menu
+pyyaml==6.0.1
+paramiko==3.4.0
+pandas
+streamlit-aggrid

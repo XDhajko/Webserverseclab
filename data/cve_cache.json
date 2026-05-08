@@ -1,0 +1,43 @@
+{
+  "_meta": {
+    "last_updated": "1970-01-01T00:00:00Z",
+    "source": "manual",
+    "schema": "v1"
+  },
+  "apache:2.4.49": [
+    {
+      "cve": "CVE-2021-41773",
+      "cvss": 9.8,
+      "vector": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "cwe": "CWE-22",
+      "description": "Path traversal and possible RCE"
+    }
+  ],
+  "apache:2.4.50": [
+    {
+      "cve": "CVE-2021-42013",
+      "cvss": 9.8,
+      "vector": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "cwe": "CWE-22",
+      "description": "Path traversal and command execution"
+    }
+  ],
+  "apache:2.4.52": [
+    {
+      "cve": "CVE-2023-25690",
+      "cvss": 9.8,
+      "vector": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "cwe": "CWE-444",
+      "description": "HTTP request smuggling in mod_proxy"
+    }
+  ],
+  "nginx:1.18.0": [
+    {
+      "cve": "CVE-2021-23017",
+      "cvss": 7.7,
+      "vector": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+      "cwe": "CWE-193",
+      "description": "Resolver off-by-one write"
+    }
+  ]
+}

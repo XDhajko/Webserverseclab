@@ -1,0 +1,7 @@
+rules:
+  - rule_id: G1
+    category: fingerprinting
+    severity: medium
+    applies_to: [apache, nginx, ols]
+    remediation:
+      apache: { tags: ['apache_hide_version'], note: 'Disable version in Server header' }

@@ -1,0 +1,198 @@
+{
+  "rules": [
+    {
+      "rule_id": "G1",
+      "title": "Version and fingerprint disclosure",
+      "category": "fingerprinting",
+      "severity": "medium",
+      "applies_to": ["apache", "nginx", "ols"],
+      "expected": true,
+      "tags": {
+        "apache": ["apache_hide_version"],
+        "nginx": ["nginx_hide_version"],
+        "ols": ["ols_hide_version"]
+      }
+    },
+    {
+      "rule_id": "G2",
+      "title": "Directory listing exposed",
+      "category": "files",
+      "severity": "medium",
+      "applies_to": ["apache", "nginx", "ols"],
+      "expected": true,
+      "tags": {
+        "apache": ["apache_no_autoindex"],
+        "nginx": ["nginx_no_autoindex"],
+        "ols": ["ols_no_autoindex"]
+      }
+    },
+    {
+      "rule_id": "G3",
+      "title": "Risky HTTP methods",
+      "category": "methods",
+      "severity": "medium",
+      "applies_to": ["apache", "nginx"],
+      "expected": true,
+      "tags": {
+        "apache": ["apache_disable_trace"],
+        "nginx": ["nginx_restrict_methods"],
+        "ols": ["ols_restrict_methods"]
+      }
+    },
+    {
+      "rule_id": "G4",
+      "title": "TLS and transport posture",
+      "category": "tls",
+      "severity": "high",
+      "applies_to": ["apache", "nginx", "ols"],
+      "expected": true,
+      "tags": {
+        "apache": ["apache_tls_hardening"],
+        "nginx": ["nginx_tls_hardening"],
+        "ols": ["ols_tls_hardening"]
+      }
+    },
+    {
+      "rule_id": "G6",
+      "title": "Logging and audit hygiene",
+      "category": "logging",
+      "severity": "medium",
+      "applies_to": ["apache", "nginx", "ols"],
+      "expected": true,
+      "tags": {
+        "apache": ["apache_secure_logging"],
+        "nginx": ["nginx_secure_logging"],
+        "ols": ["ols_secure_logging"]
+      }
+    },
+    {
+      "rule_id": "G8",
+      "title": "Unsafe override/runtime controls",
+      "category": "config",
+      "severity": "medium",
+      "applies_to": ["apache"],
+      "expected": false,
+      "tags": {
+        "apache": ["apache_restrict_overrides"],
+        "nginx": ["nginx_hardening_baseline"],
+        "ols": ["ols_hardening_baseline"]
+      }
+    },
+    {
+      "rule_id": "G9",
+      "title": "Sensitive content exposed",
+      "category": "files",
+      "severity": "high",
+      "applies_to": ["apache", "nginx", "ols"],
+      "expected": true,
+      "tags": {
+        "apache": ["remove_sensitive_files"],
+        "nginx": ["remove_sensitive_files"],
+        "ols": ["remove_sensitive_files"]
+      }
+    },
+    {
+      "rule_id": "M1",
+      "title": "Administrative status surface",
+      "category": "information",
+      "severity": "medium",
+      "applies_to": ["apache", "nginx"],
+      "expected": true,
+      "tags": {
+        "apache": ["restrict_status_page"],
+        "nginx": ["restrict_status_page"],
+        "ols": ["restrict_status_page"]
+      }
+    },
+    {
+      "rule_id": "AP-A5-G8",
+      "title": "Apache AllowOverride broad override",
+      "category": "config",
+      "severity": "medium",
+      "applies_to": ["apache"],
+      "expected": true,
+      "tags": {"apache": ["apache_restrict_overrides"]}
+    },
+    {
+      "rule_id": "AP-A7-WAF",
+      "title": "Apache ModSecurity disabled or detect-only",
+      "category": "modules",
+      "severity": "medium",
+      "applies_to": ["apache"],
+      "expected": true,
+      "tags": {"apache": ["apache_enable_modsecurity"]}
+    },
+    {
+      "rule_id": "AP-G6-LOGPATH",
+      "title": "Apache logs in web root",
+      "category": "logging",
+      "severity": "high",
+      "applies_to": ["apache"],
+      "expected": true,
+      "tags": {"apache": ["apache_secure_logging"]}
+    },
+    {
+      "rule_id": "NG-N2-G2",
+      "title": "Nginx autoindex enabled",
+      "category": "files",
+      "severity": "medium",
+      "applies_to": ["nginx"],
+      "expected": true,
+      "tags": {"nginx": ["nginx_no_autoindex"]}
+    },
+    {
+      "rule_id": "NG-N5-G3",
+      "title": "Nginx methods and request limits",
+      "category": "methods",
+      "severity": "medium",
+      "applies_to": ["nginx"],
+      "expected": true,
+      "tags": {"nginx": ["nginx_restrict_methods"]}
+    },
+    {
+      "rule_id": "NG-G6-COOKIELOG",
+      "title": "Nginx log includes cookies",
+      "category": "logging",
+      "severity": "high",
+      "applies_to": ["nginx"],
+      "expected": true,
+      "tags": {"nginx": ["nginx_secure_logging"]}
+    },
+    {
+      "rule_id": "OLS-O1-ADMIN",
+      "title": "OpenLiteSpeed WebAdmin exposure",
+      "category": "admin_surface",
+      "severity": "medium",
+      "applies_to": ["ols"],
+      "expected": true,
+      "tags": {"ols": ["ols_restrict_admin"]}
+    },
+    {
+      "rule_id": "OLS-O4-G2",
+      "title": "OpenLiteSpeed example vhost or directory listing",
+      "category": "files",
+      "severity": "medium",
+      "applies_to": ["ols"],
+      "expected": true,
+      "tags": {"ols": ["ols_no_autoindex"]}
+    },
+    {
+      "rule_id": "OLS-HTTP-ONLY",
+      "title": "OpenLiteSpeed lacks HTTPS listener",
+      "category": "tls",
+      "severity": "medium",
+      "applies_to": ["ols"],
+      "expected": true,
+      "tags": {"ols": ["ols_enable_https"]}
+    },
+    {
+      "rule_id": "OLS-O2-ADMIN-PASSWORD",
+      "title": "OpenLiteSpeed weak admin password",
+      "category": "auth",
+      "severity": "high",
+      "applies_to": ["ols"],
+      "expected": true,
+      "tags": {"ols": ["ols_admin_password"]}
+    }
+  ]
+}

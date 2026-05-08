@@ -1,0 +1,1005 @@
+- rule_id: G1-Apache-ServerTokens
+  title: Server Banner Disclosure
+  category: Information Disclosure
+  rule_type: configuration
+  wstg_id: WSTG-CONF-02
+  cwe_id: CWE-200
+  affects: [apache]
+  detection:
+    type: config_check
+    file: /etc/apache2/apache2.conf
+    directive: ServerTokens
+    insecure_value: Full
+  severity:
+    type: configuration
+    base_score: 5.3
+    rating: Medium
+  remediation:
+    directive: ServerTokens Prod
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://httpd.apache.org/docs/2.4/misc/security_tips.html
+  expected: false
+  tags:
+    apache: [apache_hide_version]
+
+- rule_id: G1-Nginx-ServerTokens
+  title: Server Banner Disclosure
+  category: Information Disclosure
+  rule_type: configuration
+  wstg_id: WSTG-CONF-02
+  cwe_id: CWE-200
+  affects: [nginx]
+  detection:
+    type: config_check
+    file: /etc/nginx/nginx.conf
+    directive: server_tokens
+    insecure_value: on
+  severity:
+    type: configuration
+    base_score: 5.0
+    rating: Medium
+  remediation:
+    directive: server_tokens off
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://nginx.org/en/docs/http/ngx_http_core_module.html#server_tokens
+  expected: false
+  tags:
+    nginx: [nginx_hide_version]
+
+- rule_id: G2-Directory-Listing
+  title: Directory Listing Enabled
+  category: Access Control
+  rule_type: configuration
+  wstg_id: WSTG-CONF-03
+  cwe_id: CWE-548
+  affects: [apache, nginx, ols]
+  detection:
+    type: response_and_config
+    pattern: autoindex|Options Indexes
+  severity:
+    type: configuration
+    base_score: 5.3
+    rating: Medium
+  remediation:
+    directive: Disable directory indexing
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://cwe.mitre.org/data/definitions/548.html
+  expected: false
+  tags:
+    apache: [apache_no_autoindex]
+    nginx: [nginx_no_autoindex]
+    ols: [ols_no_autoindex]
+
+- rule_id: G3-HTTP-Methods
+  title: Risky HTTP Methods Enabled
+  category: HTTP Behavior
+  rule_type: configuration
+  wstg_id: WSTG-CONF-01
+  cwe_id: CWE-693
+  affects: [apache, nginx]
+  detection:
+    type: protocol_check
+    method: TRACE
+  severity:
+    type: configuration
+    base_score: 5.9
+    rating: Medium
+  remediation:
+    directive: Disable TRACE and restrict methods
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://cwe.mitre.org/data/definitions/693.html
+  expected: false
+  tags:
+    apache: [apache_disable_trace]
+    nginx: [nginx_restrict_methods]
+
+- rule_id: G4-TLS-Posture
+  title: Weak TLS/Transport Posture
+  category: TLS & Transport
+  rule_type: configuration
+  wstg_id: WSTG-CONF-04
+  cwe_id: CWE-326
+  affects: [apache, nginx]
+  detection:
+    type: tls_scan
+    source: testssl
+  severity:
+    type: configuration
+    base_score: 6.8
+    rating: Medium
+  remediation:
+    directive: Enforce modern TLS and headers
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://wiki.mozilla.org/Security/Server_Side_TLS
+  expected: false
+  tags:
+    apache: [apache_tls_hardening]
+    nginx: [nginx_tls_hardening]
+
+- rule_id: G5-Security-Headers
+  title: Missing Security Response Headers
+  category: HTTP Behavior
+  rule_type: configuration
+  wstg_id: WSTG-CONF-05
+  cwe_id: CWE-693
+  affects: [apache, nginx, ols]
+  detection:
+    type: response_header_check
+    source: nikto
+    patterns: [X-Frame-Options, X-Content-Type-Options, Content-Security-Policy]
+  severity:
+    type: configuration
+    base_score: 5.4
+    rating: Medium
+  remediation:
+    directive: Add baseline security response headers
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
+  expected: false
+  tags:
+    apache: [apache_security_headers]
+    nginx: [nginx_security_headers]
+    ols: [ols_security_headers]
+
+- rule_id: G6-Logging-Hygiene
+  title: Insecure Logging Configuration
+  category: Logging & Monitoring
+  rule_type: configuration
+  wstg_id: WSTG-CONF-07
+  cwe_id: CWE-532
+  affects: [apache, nginx, ols]
+  detection:
+    type: config_check
+    pattern: access log in webroot|cookie logging
+  severity:
+    type: configuration
+    base_score: 5.6
+    rating: Medium
+  remediation:
+    directive: Move logs out of webroot and avoid sensitive fields
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://cwe.mitre.org/data/definitions/532.html
+  expected: false
+  tags:
+    apache: [apache_secure_logging]
+    nginx: [nginx_secure_logging]
+    ols: [ols_secure_logging]
+
+- rule_id: G8-Metafiles
+  title: Web Server Metafile Information Exposure
+  category: Information Disclosure
+  rule_type: configuration
+  wstg_id: WSTG-INFO-03
+  cwe_id: CWE-200
+  affects: [apache, nginx, ols]
+  detection:
+    type: content_discovery
+    source: gobuster
+    patterns: [robots.txt, sitemap.xml, security.txt, crossdomain.xml, clientaccesspolicy.xml]
+  severity:
+    type: configuration
+    base_score: 3.7
+    rating: Low
+  remediation:
+    directive: Review metafiles for sensitive path disclosure and restrict unnecessary entries
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/01-Information_Gathering/03-Review_Webserver_Metafiles_for_Information_Leakage
+    - https://cwe.mitre.org/data/definitions/200.html
+  expected: false
+  tags:
+    apache: [review_metafiles]
+    nginx: [review_metafiles]
+    ols: [review_metafiles]
+
+- rule_id: G8
+  title: Web Server Metafile Information Exposure
+  category: Information Disclosure
+  rule_type: normalized_rule
+  wstg_id: WSTG-INFO-03
+  cwe_id: CWE-200
+  affects: [apache, nginx, ols]
+  detection:
+    type: normalized_rule
+  severity:
+    type: configuration
+    base_score: 3.7
+    rating: Low
+  remediation:
+    directive: Review metafiles for sensitive path disclosure and restrict unnecessary entries
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/01-Information_Gathering/03-Review_Webserver_Metafiles_for_Information_Leakage
+    - https://cwe.mitre.org/data/definitions/200.html
+  expected: false
+  tags:
+    apache: [review_metafiles]
+    nginx: [review_metafiles]
+    ols: [review_metafiles]
+
+- rule_id: G9-Sensitive-Files
+  title: Sensitive Files Exposed
+  category: Information Disclosure
+  rule_type: configuration
+  wstg_id: WSTG-CONF-06
+  cwe_id: CWE-538
+  affects: [apache, nginx, ols]
+  detection:
+    type: content_discovery
+    source: gobuster
+    patterns: [.env, .git/config, backup_2025.sql, info.php]
+  severity:
+    type: configuration
+    base_score: 7.5
+    rating: High
+  remediation:
+    directive: Remove/block sensitive files from web root
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://cwe.mitre.org/data/definitions/538.html
+  expected: false
+  tags:
+    apache: [remove_sensitive_files]
+    nginx: [remove_sensitive_files]
+    ols: [remove_sensitive_files]
+
+- rule_id: M1-Status-Page-Exposure
+  title: Administrative Status Interface Exposed
+  category: Admin Interfaces
+  rule_type: configuration
+  wstg_id: WSTG-CONF-08
+  cwe_id: CWE-200
+  affects: [apache, nginx]
+  detection:
+    type: content_discovery
+    source: gobuster
+    patterns: [/server-status, /nginx_status]
+  severity:
+    type: configuration
+    base_score: 5.3
+    rating: Medium
+  remediation:
+    directive: Restrict status endpoints to localhost/management network
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://httpd.apache.org/docs/2.4/mod/mod_status.html
+  expected: false
+  tags:
+    apache: [restrict_status_page]
+    nginx: [restrict_status_page]
+
+- rule_id: AP-A5-G8-AllowOverride
+  title: Apache .htaccess Override Risk
+  category: Access Control
+  rule_type: configuration
+  wstg_id: WSTG-CONF-03
+  cwe_id: CWE-16
+  affects: [apache]
+  detection:
+    type: config_check
+    file: /etc/apache2/apache2.conf
+    directive: AllowOverride
+    insecure_value: All
+  severity:
+    type: configuration
+    base_score: 5.3
+    rating: Medium
+  remediation:
+    directive: AllowOverride None
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://httpd.apache.org/docs/2.4/mod/core.html#allowoverride
+  expected: false
+  tags:
+    apache: [apache_restrict_overrides]
+
+- rule_id: AP-A7-WAF
+  title: Apache WAF Not Enforcing
+  category: Access Control
+  rule_type: configuration
+  wstg_id: WSTG-CONF-08
+  cwe_id: CWE-693
+  affects: [apache]
+  detection:
+    type: config_check
+    directive: SecRuleEngine
+    insecure_value: DetectionOnly
+  severity:
+    type: configuration
+    base_score: 6.0
+    rating: Medium
+  remediation:
+    directive: SecRuleEngine On
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://github.com/owasp-modsecurity/ModSecurity
+  expected: true
+  tags:
+    apache: [apache_enable_modsecurity]
+
+- rule_id: NG-N2-G2-Autoindex
+  title: NGINX Autoindex Enabled
+  category: Access Control
+  rule_type: configuration
+  wstg_id: WSTG-CONF-03
+  cwe_id: CWE-548
+  affects: [nginx]
+  detection:
+    type: config_check
+    directive: autoindex
+    insecure_value: on
+  severity:
+    type: configuration
+    base_score: 5.3
+    rating: Medium
+  remediation:
+    directive: autoindex off
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://nginx.org/en/docs/http/ngx_http_autoindex_module.html
+  expected: false
+  tags:
+    nginx: [nginx_no_autoindex]
+
+- rule_id: NG-N5-G3-Methods-Limits
+  title: NGINX Methods and Limits Weak
+  category: HTTP Behavior
+  rule_type: configuration
+  wstg_id: WSTG-CONF-01
+  cwe_id: CWE-16
+  affects: [nginx]
+  detection:
+    type: config_check
+    pattern: limit_except|client_max_body_size
+  severity:
+    type: configuration
+    base_score: 5.9
+    rating: Medium
+  remediation:
+    directive: Restrict methods and set size limits
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://nginx.org/en/docs/http/ngx_http_core_module.html#limit_except
+  expected: false
+  tags:
+    nginx: [nginx_restrict_methods]
+
+- rule_id: OLS-O1-Admin-Exposure
+  title: OpenLiteSpeed WebAdmin Exposure
+  category: Admin Interfaces
+  rule_type: configuration
+  wstg_id: WSTG-CONF-08
+  cwe_id: CWE-284
+  affects: [ols]
+  detection:
+    type: network_and_config
+    port: 7080
+  severity:
+    type: configuration
+    base_score: 6.5
+    rating: Medium
+  remediation:
+    directive: Bind admin listener to localhost
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://openlitespeed.org/
+  expected: false
+  tags:
+    ols: [ols_restrict_admin]
+
+- rule_id: OLS-O2-Admin-Password
+  title: OpenLiteSpeed Weak Admin Password
+  category: Admin Interfaces
+  rule_type: configuration
+  wstg_id: WSTG-CONF-08
+  cwe_id: CWE-521
+  affects: [ols]
+  detection:
+    type: credential_check
+    file: /usr/local/lsws/admin/conf/htpasswd
+  severity:
+    type: configuration
+    base_score: 7.1
+    rating: High
+  remediation:
+    directive: Set strong random admin password
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://cwe.mitre.org/data/definitions/521.html
+  expected: false
+  tags:
+    ols: [ols_admin_password]
+
+- rule_id: OLS-HTTP-ONLY
+  title: OpenLiteSpeed HTTP-Only Deployment
+  category: TLS & Transport
+  rule_type: configuration
+  wstg_id: WSTG-CONF-04
+  cwe_id: CWE-319
+  affects: [ols]
+  detection:
+    type: listener_check
+    secure_port: 443
+  severity:
+    type: configuration
+    base_score: 5.8
+    rating: Medium
+  remediation:
+    directive: Add HTTPS listener and enforce TLS
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://www.rfc-editor.org/rfc/rfc8446
+  expected: true
+  tags:
+    ols: [ols_enable_https]
+
+- rule_id: CVE-Apache-2.4.49-Traversal
+  title: Apache Path Traversal Vulnerability
+  category: Components & Dependencies
+  rule_type: vulnerability
+  wstg_id: WSTG-CONF-08
+  cwe_id: CWE-22
+  affects: [apache]
+  cve_dependent: true
+  detection:
+    type: version_check
+    product: apache
+    version: 2.4.49
+  severity:
+    type: vulnerability
+    base_score: 9.8
+    rating: Critical
+  remediation:
+    directive: Upgrade Apache to fixed version
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://nvd.nist.gov/vuln/detail/CVE-2021-41773
+  expected: false
+  tags:
+    apache: [apache_upgrade]
+
+- rule_id: G1
+  title: Server Banner Disclosure
+  category: Information Disclosure
+  rule_type: configuration
+  wstg_id: WSTG-CONF-02
+  cwe_id: CWE-200
+  affects: [apache, nginx, ols]
+  detection: {type: normalized_rule}
+  severity: {type: configuration, base_score: 5.3, rating: Medium}
+  remediation: {directive: Hide software version metadata}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+  expected: true
+
+- rule_id: G2
+  title: Directory Listing Enabled
+  category: Access Control
+  rule_type: configuration
+  wstg_id: WSTG-CONF-03
+  cwe_id: CWE-548
+  affects: [apache, nginx, ols]
+  detection: {type: normalized_rule}
+  severity: {type: configuration, base_score: 5.3, rating: Medium}
+  remediation: {directive: Disable autoindex and indexes}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+  expected: true
+
+- rule_id: G3
+  title: Risky HTTP Methods Enabled
+  category: HTTP Behavior
+  rule_type: configuration
+  wstg_id: WSTG-CONF-01
+  cwe_id: CWE-693
+  affects: [apache, nginx]
+  detection: {type: normalized_rule}
+  severity: {type: configuration, base_score: 5.9, rating: Medium}
+  remediation: {directive: Disable TRACE and limit methods}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+  expected: true
+
+- rule_id: G4
+  title: TLS and Transport Misconfiguration
+  category: TLS & Transport
+  rule_type: configuration
+  wstg_id: WSTG-CONF-04
+  cwe_id: CWE-326
+  affects: [apache, nginx, ols]
+  detection: {type: normalized_rule}
+  severity: {type: configuration, base_score: 6.8, rating: Medium}
+  remediation: {directive: Harden TLS and transport controls}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+  expected: true
+  tags:
+    apache: [apache_tls_hardening]
+    nginx: [nginx_tls_hardening]
+    ols: [ols_tls_hardening]
+
+- rule_id: G4-CERT
+  title: TLS Certificate Trust or Validity Failure
+  category: TLS & Transport
+  rule_type: configuration
+  wstg_id: WSTG-CRYP-01
+  cwe_id: CWE-295
+  affects: [apache, nginx, ols]
+  detection:
+    type: tls_scan
+    source: testssl
+    ids: [cert_trust, cert_chain_of_trust, cert_notAfter, cert_notBefore, cert_extlifeSpan, cert_expiration, cert_revocation, cert_signatureAlgorithm, cert_keySize]
+  severity: {type: configuration, base_score: 7.5, rating: High}
+  remediation: {directive: Deploy a valid CA-signed certificate with correct chain and adequate key size}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://cwe.mitre.org/data/definitions/295.html
+  expected: false
+  tags:
+    apache: [apache_tls_certificate]
+    nginx: [nginx_tls_certificate]
+    ols: [ols_tls_certificate]
+
+- rule_id: G4-PROTO
+  title: Deprecated TLS Protocol Version Enabled
+  category: TLS & Transport
+  rule_type: configuration
+  wstg_id: WSTG-CRYP-01
+  cwe_id: CWE-326
+  affects: [apache, nginx, ols]
+  detection:
+    type: tls_scan
+    source: testssl
+    ids: [SSLv2, SSLv3, TLS1, TLS1_1]
+  severity: {type: configuration, base_score: 6.5, rating: Medium}
+  remediation: {directive: Disable SSLv2, SSLv3, TLS 1.0, and TLS 1.1; enforce TLS 1.2+ only}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://www.rfc-editor.org/rfc/rfc8996
+  expected: false
+  tags:
+    apache: [apache_tls_hardening]
+    nginx: [nginx_tls_hardening]
+    ols: [ols_tls_hardening]
+
+- rule_id: G4-CIPHER
+  title: Weak or Deprecated Cipher Suite Offered
+  category: TLS & Transport
+  rule_type: configuration
+  wstg_id: WSTG-CRYP-01
+  cwe_id: CWE-327
+  affects: [apache, nginx, ols]
+  detection:
+    type: tls_scan
+    source: testssl
+    ids: [sweet32, RC4, strong_encryption, FS_KEMs, cipher_order]
+  severity: {type: configuration, base_score: 5.9, rating: Medium}
+  remediation: {directive: Remove RC4, 3DES, NULL, and export ciphers; prefer AEAD suites with forward secrecy}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://wiki.mozilla.org/Security/Server_Side_TLS
+  expected: false
+  tags:
+    apache: [apache_tls_hardening]
+    nginx: [nginx_tls_hardening]
+    ols: [ols_tls_hardening]
+
+- rule_id: G4-HSTS
+  title: HSTS Policy Missing or Insufficient
+  category: TLS & Transport
+  rule_type: configuration
+  wstg_id: WSTG-CRYP-03
+  cwe_id: CWE-523
+  affects: [apache, nginx, ols]
+  detection:
+    type: tls_scan
+    source: testssl
+    ids: [HSTS, HSTS_time, HSTS_subdomains, HSTS_preload]
+  severity: {type: configuration, base_score: 5.4, rating: Medium}
+  remediation: {directive: Set Strict-Transport-Security with max-age >= 31536000 and includeSubDomains}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html
+  expected: false
+  tags:
+    apache: [apache_security_headers]
+    nginx: [nginx_security_headers]
+    ols: [ols_security_headers]
+
+- rule_id: G4-CAA
+  title: DNS CAA Record Not Configured
+  category: TLS & Transport
+  rule_type: configuration
+  wstg_id: WSTG-CRYP-01
+  cwe_id: CWE-295
+  affects: [apache, nginx, ols]
+  detection:
+    type: tls_scan
+    source: testssl
+    ids: [DNS_CAArecord]
+  severity: {type: configuration, base_score: 3.7, rating: Low}
+  remediation: {directive: Add a DNS CAA record restricting certificate issuance to approved CAs}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://www.rfc-editor.org/rfc/rfc8659
+  expected: false
+  tags:
+    apache: [fix_dns_caa]
+    nginx: [fix_dns_caa]
+    ols: [fix_dns_caa]
+
+- rule_id: G4-VULN
+  title: Known TLS Implementation Vulnerability
+  category: TLS & Transport
+  rule_type: configuration
+  wstg_id: WSTG-CRYP-01
+  cwe_id: CWE-310
+  affects: [apache, nginx, ols]
+  detection:
+    type: tls_scan
+    source: testssl
+    ids: [BREACH, POODLE_SSL, LUCKY13, ROBOT, CRIME_TLS, DROWN, Heartbleed, CCS, ticketbleed, LOGJAM, FREAK, BEAST]
+  severity: {type: configuration, base_score: 7.4, rating: High}
+  remediation: {directive: Upgrade TLS stack, disable vulnerable features, and apply vendor patches}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://cwe.mitre.org/data/definitions/310.html
+  expected: false
+  tags:
+    apache: [apache_tls_hardening]
+    nginx: [nginx_tls_hardening]
+    ols: [ols_tls_hardening]
+
+- rule_id: G6
+  title: Logging Misconfiguration
+  category: Logging & Monitoring
+  rule_type: configuration
+  wstg_id: WSTG-CONF-07
+  cwe_id: CWE-532
+  affects: [apache, nginx, ols]
+  detection: {type: normalized_rule}
+  severity: {type: configuration, base_score: 5.6, rating: Medium}
+  remediation: {directive: Use secure logging defaults}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+  expected: true
+
+- rule_id: G5
+  title: Missing Security Response Headers
+  category: HTTP Behavior
+  rule_type: configuration
+  wstg_id: WSTG-CONF-05
+  cwe_id: CWE-693
+  affects: [apache, nginx, ols]
+  detection: {type: normalized_rule}
+  severity: {type: configuration, base_score: 5.4, rating: Medium}
+  remediation: {directive: Configure security headers for responses}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+  expected: true
+
+- rule_id: G7-ETAG-LEAK
+  title: ETag Header Leaks Inode Information
+  category: Information Disclosure
+  rule_type: configuration
+  wstg_id: WSTG-INFO-02
+  cwe_id: CWE-200
+  affects: [apache]
+  detection:
+    type: response_header_check
+    source: nikto
+    pattern: ETag.*inode
+  severity: {type: configuration, base_score: 3.7, rating: Low}
+  remediation: {directive: Set FileETag to MTime Size or None to suppress inode leakage}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://httpd.apache.org/docs/2.4/mod/core.html#fileetag
+  expected: false
+
+- rule_id: G9
+  title: Sensitive Files Exposed
+  category: Information Disclosure
+  rule_type: configuration
+  wstg_id: WSTG-CONF-06
+  cwe_id: CWE-538
+  affects: [apache, nginx, ols]
+  detection: {type: normalized_rule}
+  severity: {type: configuration, base_score: 7.5, rating: High}
+  remediation: {directive: Remove and block sensitive files}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+  expected: true
+
+- rule_id: M1
+  title: Administrative Status Interface Exposed
+  category: Admin Interfaces
+  rule_type: configuration
+  wstg_id: WSTG-CONF-08
+  cwe_id: CWE-200
+  affects: [apache, nginx]
+  detection: {type: normalized_rule}
+  severity: {type: configuration, base_score: 5.3, rating: Medium}
+  remediation: {directive: Restrict status endpoints}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+  expected: true
+
+- rule_id: AP-A5-G8
+  title: Apache .htaccess Override Risk
+  category: Access Control
+  rule_type: configuration
+  wstg_id: WSTG-CONF-03
+  cwe_id: CWE-16
+  affects: [apache]
+  detection: {type: normalized_rule}
+  severity: {type: configuration, base_score: 5.3, rating: Medium}
+  remediation: {directive: AllowOverride None}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+  expected: true
+
+- rule_id: AP-G6-LOGPATH
+  title: Apache Logs Exposed In Web Root
+  category: Logging & Monitoring
+  rule_type: configuration
+  wstg_id: WSTG-CONF-07
+  cwe_id: CWE-532
+  affects: [apache]
+  detection: {type: normalized_rule}
+  severity: {type: configuration, base_score: 7.1, rating: High}
+  remediation: {directive: Move logs to system log directory}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+  expected: true
+
+- rule_id: NG-N2-G2
+  title: NGINX Autoindex Enabled
+  category: Access Control
+  rule_type: configuration
+  wstg_id: WSTG-CONF-03
+  cwe_id: CWE-548
+  affects: [nginx]
+  detection: {type: normalized_rule}
+  severity: {type: configuration, base_score: 5.3, rating: Medium}
+  remediation: {directive: autoindex off}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+  expected: true
+
+- rule_id: NG-N5-G3
+  title: NGINX Methods and Limits Weak
+  category: HTTP Behavior
+  rule_type: configuration
+  wstg_id: WSTG-CONF-01
+  cwe_id: CWE-16
+  affects: [nginx]
+  detection: {type: normalized_rule}
+  severity: {type: configuration, base_score: 5.9, rating: Medium}
+  remediation: {directive: Enforce method and body limits}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+  expected: true
+
+- rule_id: NG-G6-COOKIELOG
+  title: NGINX Cookie Logging Enabled
+  category: Logging & Monitoring
+  rule_type: configuration
+  wstg_id: WSTG-CONF-07
+  cwe_id: CWE-532
+  affects: [nginx]
+  detection: {type: normalized_rule}
+  severity: {type: configuration, base_score: 7.1, rating: High}
+  remediation: {directive: Remove cookie fields from logs}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+  expected: true
+
+- rule_id: OLS-O1-ADMIN
+  title: OpenLiteSpeed WebAdmin Exposure
+  category: Admin Interfaces
+  rule_type: configuration
+  wstg_id: WSTG-CONF-08
+  cwe_id: CWE-284
+  affects: [ols]
+  detection: {type: normalized_rule}
+  severity: {type: configuration, base_score: 6.5, rating: Medium}
+  remediation: {directive: Bind WebAdmin to localhost}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+  expected: true
+
+- rule_id: OLS-O4-G2
+  title: OpenLiteSpeed Example VHost/Index Exposure
+  category: Access Control
+  rule_type: configuration
+  wstg_id: WSTG-CONF-03
+  cwe_id: CWE-548
+  affects: [ols]
+  detection: {type: normalized_rule}
+  severity: {type: configuration, base_score: 5.3, rating: Medium}
+  remediation: {directive: Disable listing and remove example content}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+  expected: true
+
+- rule_id: OLS-O2-ADMIN-PASSWORD
+  title: OpenLiteSpeed Weak Admin Password
+  category: Admin Interfaces
+  rule_type: configuration
+  wstg_id: WSTG-CONF-08
+  cwe_id: CWE-521
+  affects: [ols]
+  detection: {type: normalized_rule}
+  severity: {type: configuration, base_score: 7.1, rating: High}
+  remediation: {directive: Configure strong admin password}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+  expected: true
+
+- rule_id: NIKTO-GEN
+  title: Generic Nikto Web Hardening Finding
+  category: Information Disclosure
+  rule_type: configuration
+  wstg_id: WSTG-CONF-05
+  cwe_id: CWE-693
+  affects: [apache, nginx, ols]
+  detection: {type: normalized_rule}
+  severity: {type: configuration, base_score: 5.0, rating: Medium}
+  remediation: {directive: Add missing hardening headers and disable risky defaults}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+  expected: false
+
+- rule_id: INFO-01
+  title: Exposed Service Surface (Informational)
+  category: Components & Dependencies
+  rule_type: configuration
+  wstg_id: WSTG-INFO-02
+  cwe_id: CWE-200
+  affects: [apache, nginx, ols]
+  detection: {type: normalized_rule}
+  severity: {type: configuration, base_score: 0.0, rating: Info}
+  remediation: {directive: Validate service exposure against approved architecture}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+  expected: false
+
+- rule_id: AG-PLATFORM
+  title: Platform Fingerprint Collected
+  category: Components & Dependencies
+  rule_type: configuration
+  wstg_id: WSTG-INFO-08
+  cwe_id: CWE-200
+  affects: [apache, nginx, ols]
+  detection: {type: host_agent}
+  severity: {type: configuration, base_score: 0.0, rating: Info}
+  remediation: {directive: Ensure platform metadata is not exposed publicly}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+  expected: false
+
+- rule_id: AG-RUNTIME-USER
+  title: Web Service Runtime Account Weakness
+  category: Access Control
+  rule_type: configuration
+  wstg_id: WSTG-CONF-07
+  cwe_id: CWE-250
+  affects: [apache, nginx, ols]
+  detection: {type: host_agent}
+  severity: {type: configuration, base_score: 6.5, rating: Medium}
+  remediation: {directive: Run web services with dedicated non-privileged users}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+  expected: false
+
+- rule_id: AG-WEBROOT-PERMS
+  title: Weak Web Root Permissions
+  category: Access Control
+  rule_type: configuration
+  wstg_id: WSTG-CONF-06
+  cwe_id: CWE-732
+  affects: [apache, nginx, ols]
+  detection: {type: host_agent}
+  severity: {type: configuration, base_score: 6.5, rating: Medium}
+  remediation: {directive: Restrict web root ownership and write permissions}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+  expected: false
+
+- rule_id: AG-TLS-KEY-PERMS
+  title: Weak TLS Private Key Permissions
+  category: TLS & Transport
+  rule_type: configuration
+  wstg_id: WSTG-CONF-04
+  cwe_id: CWE-732
+  affects: [apache, nginx, ols]
+  detection: {type: host_agent}
+  severity: {type: configuration, base_score: 7.5, rating: High}
+  remediation: {directive: Restrict TLS private key permissions to root/service user only}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+  expected: false
+
+- rule_id: AG-MODULES-01
+  title: Risky or Unnecessary Modules Enabled
+  category: Components & Dependencies
+  rule_type: configuration
+  wstg_id: WSTG-CONF-08
+  cwe_id: CWE-16
+  affects: [apache, nginx, ols]
+  detection: {type: host_agent}
+  severity: {type: configuration, base_score: 5.0, rating: Medium}
+  remediation: {directive: Disable unused modules and keep required modules minimal}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+  expected: false
+
+- rule_id: AG-PATCH-STATE
+  title: Pending Security Updates
+  category: Components & Dependencies
+  rule_type: configuration
+  wstg_id: WSTG-CONF-08
+  cwe_id: CWE-1104
+  affects: [apache, nginx, ols]
+  detection: {type: host_agent}
+  severity: {type: configuration, base_score: 6.0, rating: Medium}
+  remediation: {directive: Apply pending OS and package security updates}
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+  expected: false
+
+- rule_id: CVE-Apache-2.4.52-Request-Smuggling
+  title: Apache HTTP Server 2.4.52 Request Smuggling Risk
+  category: Components & Dependencies
+  rule_type: vulnerability
+  wstg_id: WSTG-CONF-08
+  cwe_id: CWE-444
+  affects: [apache]
+  cve_dependent: true
+  detection:
+    type: version_check
+    product: apache
+    version: 2.4.52
+  severity:
+    type: vulnerability
+    base_score: 9.8
+    rating: Critical
+  remediation:
+    directive: Upgrade Apache to a patched release
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://nvd.nist.gov/vuln/detail/CVE-2023-25690
+  expected: false
+  tags:
+    apache: [apache_upgrade]
+
+- rule_id: CVE-Nginx-1.18.0-Resolver-OOB
+  title: NGINX 1.18.0 Resolver Off-By-One Vulnerability Risk
+  category: Components & Dependencies
+  rule_type: vulnerability
+  wstg_id: WSTG-CONF-08
+  cwe_id: CWE-193
+  affects: [nginx]
+  cve_dependent: true
+  detection:
+    type: version_check
+    product: nginx
+    version: 1.18.0
+  severity:
+    type: vulnerability
+    base_score: 7.7
+    rating: High
+  remediation:
+    directive: Upgrade NGINX to a patched release
+  references:
+    - https://owasp.org/www-project-web-security-testing-guide/
+    - https://nvd.nist.gov/vuln/detail/CVE-2021-23017
+  expected: false
+  tags:
+    nginx: [nginx_upgrade]
+

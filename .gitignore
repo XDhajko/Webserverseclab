@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Backup files
+*.bak
+
+# Runtime data - scan outputs and run artifacts
+scans/*.json
+runs/*/
+
+# Local config overrides
+config/app_settings.json
+
+# macOS
+.DS_Store
+
+# Editor
+.idea/
+.vscode/
