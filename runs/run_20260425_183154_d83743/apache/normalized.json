@@ -1,0 +1,113 @@
+[
+  {
+    "run_id": "run_20260425_183154_d83743",
+    "scan_id": "run_20260425_183154_d83743",
+    "target": {
+      "name": "apache",
+      "ip": "192.168.56.10",
+      "platform": "apache"
+    },
+    "server_type": "apache",
+    "source": "nmap",
+    "rule_id": "G4-CERT",
+    "category": "tls",
+    "severity": "high",
+    "title": "Self-Signed TLS Certificate Detected",
+    "description": "The TLS certificate on port 443 is self-signed (subject and issuer both 'vm-apache'). Self-signed certificates are not trusted by browsers and indicate missing CA-signed deployment.",
+    "wstg_id": "WSTG-CRYP-01",
+    "cwe_id": "CWE-295",
+    "cve_list": [],
+    "cvss": 7.5,
+    "evidence": {
+      "observed": "Subject CN=vm-apache, Issuer CN=vm-apache",
+      "raw_path": "runs\\run_20260425_183154_d83743\\apache\\raw\\nmap.xml"
+    },
+    "status": "open",
+    "recommendation": "Review and apply hardening via Ansible.",
+    "ansible": {
+      "tags": [
+        "apache_tls_certificate"
+      ],
+      "requires_reboot": false
+    },
+    "rule_meta": {
+      "catalog_rule_id": "G4-CERT",
+      "title": "TLS Certificate Trust or Validity Failure",
+      "applies_to": [
+        "apache",
+        "nginx",
+        "ols"
+      ],
+      "expected": false
+    },
+    "references": [
+      "https://owasp.org/www-project-web-security-testing-guide/",
+      "https://cwe.mitre.org/data/definitions/295.html"
+    ],
+    "evidence_entries": [
+      {
+        "source": "nmap",
+        "observed": "Subject CN=vm-apache, Issuer CN=vm-apache",
+        "raw_path": "runs\\run_20260425_183154_d83743\\apache\\raw\\nmap.xml"
+      },
+      {
+        "source": "testssl",
+        "observed": "cert_trust: certificate does not match supplied URI\ncert_chain_of_trust: failed (self signed).\ncert_extlifeSpan: 3650 days\ncert_revocation: Neither CRL nor OCSP URI provided",
+        "raw_path": "runs\\run_20260425_183154_d83743\\apache\\raw\\testssl.json"
+      }
+    ]
+  },
+  {
+    "run_id": "run_20260425_183154_d83743",
+    "scan_id": "run_20260425_183154_d83743",
+    "target": {
+      "name": "apache",
+      "ip": "192.168.56.10",
+      "platform": "apache"
+    },
+    "server_type": "apache",
+    "source": "testssl",
+    "rule_id": "G4-CAA",
+    "category": "tls",
+    "severity": "low",
+    "title": "TLS Issue: DNS_CAArecord",
+    "description": "No DNS CAA record is configured. This does not expose data directly, but allows any CA to issue certificates for the domain unless restricted.",
+    "wstg_id": "WSTG-CRYP-01",
+    "cwe_id": "CWE-295",
+    "cve_list": [],
+    "cvss": 3.7,
+    "evidence": {
+      "observed": "TestSSL performed check 'DNS_CAArecord' and returned vague value: '--'",
+      "raw_path": "runs\\run_20260425_183154_d83743\\apache\\raw\\testssl.json"
+    },
+    "status": "open",
+    "recommendation": "Review and apply hardening via Ansible.",
+    "ansible": {
+      "tags": [
+        "fix_dns_caa"
+      ],
+      "requires_reboot": false
+    },
+    "rule_meta": {
+      "catalog_rule_id": "G4-CAA",
+      "title": "DNS CAA Record Not Configured",
+      "applies_to": [
+        "apache",
+        "nginx",
+        "ols"
+      ],
+      "expected": false
+    },
+    "references": [
+      "https://owasp.org/www-project-web-security-testing-guide/",
+      "https://www.rfc-editor.org/rfc/rfc8659"
+    ],
+    "evidence_entries": [
+      {
+        "source": "testssl",
+        "observed": "TestSSL performed check 'DNS_CAArecord' and returned vague value: '--'",
+        "raw_path": "runs\\run_20260425_183154_d83743\\apache\\raw\\testssl.json"
+      }
+    ]
+  }
+]

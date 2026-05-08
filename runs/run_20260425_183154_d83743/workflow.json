@@ -1,0 +1,214 @@
+{
+  "created_at": "2026-04-25T16:31:54.608481+00:00",
+  "targets": [
+    {
+      "name": "ols",
+      "ip": "192.168.56.12",
+      "platform": "ols",
+      "https_port": 7080,
+      "user": "vagrant",
+      "ssh_port": 22,
+      "ssh_username": "vagrant",
+      "ssh_auth_type": "key",
+      "ssh_key_original_path": "vagrant:ols",
+      "ssh_key_internal_path": "C:\\Users\\D0do\\.webserverseclab\\keys\\ols_64f42e81532a.key",
+      "ssh_key_passphrase": "",
+      "ssh_password": ""
+    },
+    {
+      "name": "nginx",
+      "ip": "192.168.56.11",
+      "platform": "nginx",
+      "https_port": 443,
+      "user": "vagrant",
+      "ssh_port": 22,
+      "ssh_username": "vagrant",
+      "ssh_auth_type": "key",
+      "ssh_key_original_path": "vagrant:nginx",
+      "ssh_key_internal_path": "C:\\Users\\D0do\\.webserverseclab\\keys\\nginx_2a30762df328.key",
+      "ssh_key_passphrase": "",
+      "ssh_password": ""
+    },
+    {
+      "name": "apache",
+      "ip": "192.168.56.10",
+      "platform": "apache",
+      "https_port": 443,
+      "user": "vagrant",
+      "ssh_port": 22,
+      "ssh_username": "vagrant",
+      "ssh_auth_type": "key",
+      "ssh_key_original_path": "vagrant:apache",
+      "ssh_key_internal_path": "C:\\Users\\D0do\\.webserverseclab\\keys\\apache_fa433f304c97.key",
+      "ssh_key_passphrase": "",
+      "ssh_password": ""
+    }
+  ],
+  "rescan_of": "run_20260425_174922_de985e",
+  "scan": {
+    "status": "done",
+    "scan_profile": "standards_mode",
+    "agent_mode": "deep",
+    "progress": {
+      "completed": 15,
+      "total": 15,
+      "label": "Scan completed"
+    },
+    "logs": [
+      {
+        "ts": "2026-04-25T16:31:54.729311+00:00",
+        "level": "info",
+        "message": "Initialized scan session run_20260425_183154_d83743"
+      },
+      {
+        "ts": "2026-04-25T16:31:54.752472+00:00",
+        "level": "info",
+        "message": "### Target: ols (192.168.56.12)"
+      },
+      {
+        "ts": "2026-04-25T16:31:57.357003+00:00",
+        "level": "info",
+        "message": "[Nikto] scan completed."
+      },
+      {
+        "ts": "2026-04-25T16:31:58.038982+00:00",
+        "level": "info",
+        "message": "[Gobuster] scan completed."
+      },
+      {
+        "ts": "2026-04-25T16:33:11.532979+00:00",
+        "level": "info",
+        "message": "[TestSSL] scan completed."
+      },
+      {
+        "ts": "2026-04-25T16:33:42.529622+00:00",
+        "level": "info",
+        "message": "[Nmap] scan completed."
+      },
+      {
+        "ts": "2026-04-25T16:33:42.572334+00:00",
+        "level": "info",
+        "message": "All scans completed for ols"
+      },
+      {
+        "ts": "2026-04-25T16:33:42.591367+00:00",
+        "level": "info",
+        "message": "Running internal agent for ols..."
+      },
+      {
+        "ts": "2026-04-25T16:33:55.153149+00:00",
+        "level": "info",
+        "message": "[agent] completed."
+      },
+      {
+        "ts": "2026-04-25T16:33:55.196752+00:00",
+        "level": "info",
+        "message": "### Target: nginx (192.168.56.11)"
+      },
+      {
+        "ts": "2026-04-25T16:33:55.489663+00:00",
+        "level": "info",
+        "message": "[Nikto] scan completed."
+      },
+      {
+        "ts": "2026-04-25T16:33:57.319267+00:00",
+        "level": "info",
+        "message": "[Gobuster] scan completed."
+      },
+      {
+        "ts": "2026-04-25T16:34:11.482416+00:00",
+        "level": "info",
+        "message": "[Nmap] scan completed."
+      },
+      {
+        "ts": "2026-04-25T16:35:22.564173+00:00",
+        "level": "info",
+        "message": "[TestSSL] scan completed."
+      },
+      {
+        "ts": "2026-04-25T16:35:22.602711+00:00",
+        "level": "info",
+        "message": "All scans completed for nginx"
+      },
+      {
+        "ts": "2026-04-25T16:35:22.620911+00:00",
+        "level": "info",
+        "message": "Running internal agent for nginx..."
+      },
+      {
+        "ts": "2026-04-25T16:35:34.261267+00:00",
+        "level": "info",
+        "message": "[agent] completed."
+      },
+      {
+        "ts": "2026-04-25T16:35:34.309472+00:00",
+        "level": "info",
+        "message": "### Target: apache (192.168.56.10)"
+      },
+      {
+        "ts": "2026-04-25T16:35:34.604199+00:00",
+        "level": "info",
+        "message": "[Nikto] scan completed."
+      },
+      {
+        "ts": "2026-04-25T16:35:40.987844+00:00",
+        "level": "info",
+        "message": "[Gobuster] scan completed."
+      },
+      {
+        "ts": "2026-04-25T16:35:50.562864+00:00",
+        "level": "info",
+        "message": "[Nmap] scan completed."
+      },
+      {
+        "ts": "2026-04-25T16:37:02.512071+00:00",
+        "level": "info",
+        "message": "[TestSSL] scan completed."
+      },
+      {
+        "ts": "2026-04-25T16:37:02.557060+00:00",
+        "level": "info",
+        "message": "All scans completed for apache"
+      },
+      {
+        "ts": "2026-04-25T16:37:02.575279+00:00",
+        "level": "info",
+        "message": "Running internal agent for apache..."
+      },
+      {
+        "ts": "2026-04-25T16:37:15.073338+00:00",
+        "level": "info",
+        "message": "[agent] completed."
+      },
+      {
+        "ts": "2026-04-25T16:37:15.114984+00:00",
+        "level": "info",
+        "message": "Normalizing and mapping finding data to internal templates..."
+      },
+      {
+        "ts": "2026-04-25T16:37:15.431419+00:00",
+        "level": "info",
+        "message": "Scan completed successfully."
+      }
+    ],
+    "error": "",
+    "started_at": "2026-04-25T16:31:54.700621+00:00",
+    "finished_at": "2026-04-25T16:37:15.409859+00:00"
+  },
+  "hardening": {
+    "status": "idle",
+    "progress": {
+      "completed": 0,
+      "total": 0,
+      "label": ""
+    },
+    "logs": [],
+    "error": "",
+    "started_at": null,
+    "finished_at": null,
+    "source_run_id": "run_20260425_183154_d83743",
+    "rescan_run_id": null
+  },
+  "run_id": "run_20260425_183154_d83743",
+  "updated_at": "2026-04-25T16:37:15.431447+00:00"
+}

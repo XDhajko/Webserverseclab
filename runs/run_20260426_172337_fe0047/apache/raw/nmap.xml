@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.98 scan initiated Sun Apr 26 15:27:55 2026 as: nmap -sV -p 80,443,7080 -&#45;script http-methods,http-server-header,ssl-cert -oX /runs/run_20260426_172337_fe0047/apache/raw/nmap.xml 192.168.56.10 -->
+<nmaprun scanner="nmap" args="nmap -sV -p 80,443,7080 -&#45;script http-methods,http-server-header,ssl-cert -oX /runs/run_20260426_172337_fe0047/apache/raw/nmap.xml 192.168.56.10" start="1777217275" startstr="Sun Apr 26 15:27:55 2026" version="7.98" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="3" services="80,443,7080"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="unknown-response" reason_ttl="0"/>
+<address addr="192.168.56.10" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<host starttime="1777217277" endtime="1777217291"><status state="up" reason="reset" reason_ttl="63"/>
+<address addr="192.168.56.10" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="63"/><service name="http" product="Apache httpd" method="probed" conf="10"><cpe>cpe:/a:apache:http_server</cpe></service><script id="http-server-header" output="Apache"><elem>Apache</elem>
+</script></port>
+<port protocol="tcp" portid="443"><state state="open" reason="syn-ack" reason_ttl="63"/><service name="http" product="Apache httpd" tunnel="ssl" method="probed" conf="10"><cpe>cpe:/a:apache:http_server</cpe></service><script id="ssl-cert" output="Subject: commonName=vm-apache&#xa;Subject Alternative Name: DNS:vm-apache&#xa;Issuer: commonName=vm-apache&#xa;Public Key type: rsa&#xa;Public Key bits: 2048&#xa;Signature Algorithm: sha256WithRSAEncryption&#xa;Not valid before: 2026-04-26T11:57:02&#xa;Not valid after:  2036-04-23T11:57:02&#xa;MD5:     3fad 20ff f5a2 9bde 7473 9c3e c74c e3dd&#xa;SHA-1:   b385 14aa 97fd 3126 0d33 a21f 5ff9 1eb4 0847 fd3a&#xa;SHA-256: c81c 6fd9 786b 9b44 486d ea4f 8dec 5818 e154 adbb 6983 cfbe a0a0 7116 5b85 5a02"><table key="subject">
+<elem key="commonName">vm-apache</elem>
+</table>
+<table key="issuer">
+<elem key="commonName">vm-apache</elem>
+</table>
+<table key="pubkey">
+<elem key="type">rsa</elem>
+<elem key="bits">2048</elem>
+<elem key="modulus">B0A8275AC920069E18750E06482DD13437FE224BF6EE97A165629F7E8173CACC8CEE6C6F31E458878F2A3080D716D7212D41698DB1FC57B377CE686784157BC68D223BB2B4B10A5C5C608D16D938D3809808182A9CAD41AD339D5DCB2C90B76FB87E0C3795E6C666FE8AFAF475C8366B317986F483E9BEE4D54079DC81420571CFD6D951B1F9BE1A544D10D417F8AB769AA7095FB1C9781A5310D6D8A3D31729086039B8DA433047ED26C6885E89DE9E04C3CC2C3BC52402A7ED12468C9F808CD93AC337E8112CE786B4666632156F82A41B9855BC0473F1216914B55D13337F8B9CEAAB6D17B41B39F946DF4F830ED7DAE432195500036D4978306EB81C1523</elem>
+<elem key="exponent">65537</elem>
+</table>
+<table key="extensions">
+<table>
+<elem key="name">X509v3 Basic Constraints</elem>
+<elem key="value">CA:FALSE</elem>
+</table>
+<table>
+<elem key="name">X509v3 Subject Alternative Name</elem>
+<elem key="value">DNS:vm-apache</elem>
+</table>
+<table>
+<elem key="name">X509v3 Subject Key Identifier</elem>
+<elem key="value">07:AE:55:E5:BD:A0:EE:87:5F:66:4F:5F:72:8E:C4:6F:99:B9:3B:5A</elem>
+</table>
+</table>
+<elem key="sig_algo">sha256WithRSAEncryption</elem>
+<table key="validity">
+<elem key="notBefore">2026-04-26T11:57:02</elem>
+<elem key="notAfter">2036-04-23T11:57:02</elem>
+</table>
+<elem key="md5">3fad20fff5a29bde74739c3ec74ce3dd</elem>
+<elem key="sha1">b38514aa97fd31260d33a21f5ff91eb40847fd3a</elem>
+<elem key="sha256">c81c6fd9786b9b44486dea4f8dec5818e154adbb6983cfbea0a071165b855a02</elem>
+<elem key="pem">-&#45;&#45;&#45;&#45;BEGIN CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;MIIC+DCCAeCgAwIBAgIUURfNtuXqtfJuizX7fOVWYtHVIFEwDQYJKoZIhvcNAQEL&#xa;BQAwFDESMBAGA1UEAwwJdm0tYXBhY2hlMB4XDTI2MDQyNjExNTcwMloXDTM2MDQy&#xa;MzExNTcwMlowFDESMBAGA1UEAwwJdm0tYXBhY2hlMIIBIjANBgkqhkiG9w0BAQEF&#xa;AAOCAQ8AMIIBCgKCAQEAsKgnWskgBp4YdQ4GSC3RNDf+Ikv27pehZWKffoFzysyM&#xa;7mxvMeRYh48qMIDXFtchLUFpjbH8V7N3zmhnhBV7xo0iO7K0sQpcXGCNFtk404CY&#xa;CBgqnK1BrTOdXcsskLdvuH4MN5Xmxmb+ivr0dcg2azF5hvSD6b7k1UB53IFCBXHP&#xa;1tlRsfm+GlRNENQX+Kt2mqcJX7HJeBpTENbYo9MXKQhgObjaQzBH7SbGiF6J3p4E&#xa;w8wsO8UkAqftEkaMn4CM2TrDN+gRLOeGtGZmMhVvgqQbmFW8BHPxIWkUtV0TM3+L&#xa;nOqrbRe0Gzn5Rt9Pgw7X2uQyGVUAA21JeDBuuBwVIwIDAQABo0IwQDAJBgNVHRME&#xa;AjAAMBQGA1UdEQQNMAuCCXZtLWFwYWNoZTAdBgNVHQ4EFgQUB65V5b2g7odfZk9f&#xa;co7Eb5m5O1owDQYJKoZIhvcNAQELBQADggEBAJM8eGvz1y89byTZurCgNE7AqMH9&#xa;9/RWSuVYh3fEAz8yKJMe+H8fvd4uChhXt0cDiUHB2vfMga1UNw6Vm+MWwLtJpO1u&#xa;Vd0Y3hn7CriLDwaJgsUvN6vZIqDIyhJatqSs43nTqZHsbC1hx+S++oxWvzC6kCjv&#xa;Cu67nrem2GyVE25IlSRNnawTIieTY/gskLA65GU6N1r6/lKXP1C5XU1uXErcecxY&#xa;iDe3wYYFRXqWfYrFcTKmyqLbVGoTZd/ew86f/WyvByQkeTw77Fxv7xrvMnWWbixy&#xa;P5kqSt2cc/VZGFKUrqyH1nMQeToqjpaYtSIu8coEChraNCWt4jPeFmmd+Ek=&#xa;-&#45;&#45;&#45;&#45;END CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;</elem>
+</script><script id="http-server-header" output="Apache"><elem>Apache</elem>
+</script></port>
+<port protocol="tcp" portid="7080"><state state="filtered" reason="no-response" reason_ttl="0"/><service name="empowerid" method="table" conf="3"/></port>
+</ports>
+<times srtt="2385" rttvar="4433" to="100000"/>
+</host>
+<runstats><finished time="1777217291" timestr="Sun Apr 26 15:28:11 2026" summary="Nmap done at Sun Apr 26 15:28:11 2026; 1 IP address (1 host up) scanned in 16.08 seconds" elapsed="16.08" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

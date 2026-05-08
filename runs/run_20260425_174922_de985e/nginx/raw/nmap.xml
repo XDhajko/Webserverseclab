@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.98 scan initiated Sat Apr 25 15:51:26 2026 as: nmap -sV -p 80,443,7080 -&#45;script http-methods,http-server-header,ssl-cert -oX /runs/run_20260425_174922_de985e/nginx/raw/nmap.xml 192.168.56.11 -->
+<nmaprun scanner="nmap" args="nmap -sV -p 80,443,7080 -&#45;script http-methods,http-server-header,ssl-cert -oX /runs/run_20260425_174922_de985e/nginx/raw/nmap.xml 192.168.56.11" start="1777132286" startstr="Sat Apr 25 15:51:26 2026" version="7.98" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="3" services="80,443,7080"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="unknown-response" reason_ttl="0"/>
+<address addr="192.168.56.11" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<host starttime="1777132288" endtime="1777132302"><status state="up" reason="reset" reason_ttl="63"/>
+<address addr="192.168.56.11" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="63"/><service name="http" product="nginx" version="1.18.0" extrainfo="Ubuntu" ostype="Linux" method="probed" conf="10"><cpe>cpe:/a:igor_sysoev:nginx:1.18.0</cpe><cpe>cpe:/o:linux:linux_kernel</cpe></service><script id="http-server-header" output="nginx/1.18.0 (Ubuntu)"><elem>nginx/1.18.0 (Ubuntu)</elem>
+</script><script id="http-methods" output="&#xa;  Supported Methods: GET HEAD"><table key="Supported Methods">
+<elem>GET</elem>
+<elem>HEAD</elem>
+</table>
+</script></port>
+<port protocol="tcp" portid="443"><state state="open" reason="syn-ack" reason_ttl="63"/><service name="http" product="nginx" version="1.18.0" extrainfo="Ubuntu" ostype="Linux" tunnel="ssl" method="probed" conf="10"><cpe>cpe:/a:igor_sysoev:nginx:1.18.0</cpe><cpe>cpe:/o:linux:linux_kernel</cpe></service><script id="http-methods" output="&#xa;  Supported Methods: GET HEAD"><table key="Supported Methods">
+<elem>GET</elem>
+<elem>HEAD</elem>
+</table>
+</script><script id="http-server-header" output="nginx/1.18.0 (Ubuntu)"><elem>nginx/1.18.0 (Ubuntu)</elem>
+</script><script id="ssl-cert" output="Subject: commonName=vm-nginx&#xa;Subject Alternative Name: DNS:vm-nginx&#xa;Issuer: commonName=vm-nginx&#xa;Public Key type: rsa&#xa;Public Key bits: 2048&#xa;Signature Algorithm: sha256WithRSAEncryption&#xa;Not valid before: 2026-04-25T06:59:55&#xa;Not valid after:  2036-04-22T06:59:55&#xa;MD5:     18e6 421d ba12 d8f0 90ac 7e70 301d bd4b&#xa;SHA-1:   e925 023b f96b ebeb 50a1 514f 802f 8db4 bb16 4052&#xa;SHA-256: 97f3 296c 3750 6f2f 6981 65aa 2167 9707 cb02 a83e b999 6b1d 4723 69ae 68a8 7b74"><table key="subject">
+<elem key="commonName">vm-nginx</elem>
+</table>
+<table key="issuer">
+<elem key="commonName">vm-nginx</elem>
+</table>
+<table key="pubkey">
+<elem key="type">rsa</elem>
+<elem key="bits">2048</elem>
+<elem key="modulus">B928BEFEB853118988C0F0F8B30C4D48B9FAAE74ED1CB2954977D887D968454FD0B5DB9E19282B00481791465321FF20D3A188BD94934C6C187D97D84DCFDCA9583071F28FBE46FF8842E3528938AABD3A5DBA46018A204CCD2CFF87AFC794A1C526EFAF882C367ECC7E5F0A0CBACC0126399D93D5DAD2FA5D25AC6E0FD7FC5A49F080119F703CB31694C5992E3B9E5B23CF874E5610D64DB8906E88C2B49CD5655F788DC7F6D291CDA2477971D1CA21344D34E2D16330D0CB77823C86E4D6A31331FF1104F943CC0E71730A8298B72BDFBBA2373355F4C34D33EDFB5CBAC3974CAADDE27DD4A7205B628ACB832E8F9208690C03AA84C21A865EF51893F14BE5</elem>
+<elem key="exponent">65537</elem>
+</table>
+<table key="extensions">
+<table>
+<elem key="name">X509v3 Basic Constraints</elem>
+<elem key="value">CA:FALSE</elem>
+</table>
+<table>
+<elem key="name">X509v3 Subject Alternative Name</elem>
+<elem key="value">DNS:vm-nginx</elem>
+</table>
+<table>
+<elem key="name">X509v3 Subject Key Identifier</elem>
+<elem key="value">D7:04:00:52:44:49:A6:AB:F9:64:13:D7:F4:81:26:BB:FF:49:71:06</elem>
+</table>
+</table>
+<elem key="sig_algo">sha256WithRSAEncryption</elem>
+<table key="validity">
+<elem key="notBefore">2026-04-25T06:59:55</elem>
+<elem key="notAfter">2036-04-22T06:59:55</elem>
+</table>
+<elem key="md5">18e6421dba12d8f090ac7e70301dbd4b</elem>
+<elem key="sha1">e925023bf96bebeb50a1514f802f8db4bb164052</elem>
+<elem key="sha256">97f3296c37506f2f698165aa21679707cb02a83eb9996b1d472369ae68a87b74</elem>
+<elem key="pem">-&#45;&#45;&#45;&#45;BEGIN CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;MIIC9TCCAd2gAwIBAgIUcIkrKAAm3B8si7+Fvy/vNLZ1eugwDQYJKoZIhvcNAQEL&#xa;BQAwEzERMA8GA1UEAwwIdm0tbmdpbngwHhcNMjYwNDI1MDY1OTU1WhcNMzYwNDIy&#xa;MDY1OTU1WjATMREwDwYDVQQDDAh2bS1uZ2lueDCCASIwDQYJKoZIhvcNAQEBBQAD&#xa;ggEPADCCAQoCggEBALkovv64UxGJiMDw+LMMTUi5+q507RyylUl32IfZaEVP0LXb&#xa;nhkoKwBIF5FGUyH/INOhiL2Uk0xsGH2X2E3P3KlYMHHyj75G/4hC41KJOKq9Ol26&#xa;RgGKIEzNLP+Hr8eUocUm76+ILDZ+zH5fCgy6zAEmOZ2T1drS+l0lrG4P1/xaSfCA&#xa;EZ9wPLMWlMWZLjueWyPPh05WENZNuJBuiMK0nNVlX3iNx/bSkc2iR3lx0cohNE00&#xa;4tFjMNDLd4I8huTWoxMx/xEE+UPMDnFzCoKYtyvfu6I3M1X0w00z7ftcusOXTKrd&#xa;4n3UpyBbYorLgy6PkghpDAOqhMIahl71GJPxS+UCAwEAAaNBMD8wCQYDVR0TBAIw&#xa;ADATBgNVHREEDDAKggh2bS1uZ2lueDAdBgNVHQ4EFgQU1wQAUkRJpqv5ZBPX9IEm&#xa;u/9JcQYwDQYJKoZIhvcNAQELBQADggEBABEoS4F3MRCXsbJsZMZmTn5ENYK0bKoK&#xa;FloJJjL8rxWi/dZIMQ03xr0UzogTNtbvttkgFhTyMOg6vZ71+ts+YJV7/f6AqWpF&#xa;NegtiAK9sbO6Wy3J1nFIZB6LS1YThAeORu6NNNha+9lOn4R1yCyy1mZ4BH1E3Gd2&#xa;2j1m6lfk8SXZZusD8WEq+/u2JXn0zEQWkznagxxCSRD2hdQgYm402GFOowM9eXTB&#xa;WU/GR9jK945ORbojv1uf61umjkGRNtMFw4X8m/iht9n/Z49tfBrb1ZetfKhQ1BnE&#xa;YFGkcyrthFLmbUoavSPLLDh9VSDz8VGJmhxdjAUfwo2UcF+Pu/VsCJg=&#xa;-&#45;&#45;&#45;&#45;END CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;</elem>
+</script></port>
+<port protocol="tcp" portid="7080"><state state="filtered" reason="no-response" reason_ttl="0"/><service name="empowerid" method="table" conf="3"/></port>
+</ports>
+<times srtt="1489" rttvar="3495" to="100000"/>
+</host>
+<runstats><finished time="1777132302" timestr="Sat Apr 25 15:51:42 2026" summary="Nmap done at Sat Apr 25 15:51:42 2026; 1 IP address (1 host up) scanned in 15.92 seconds" elapsed="15.92" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

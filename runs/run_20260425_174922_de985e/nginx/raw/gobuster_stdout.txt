@@ -1,0 +1,7 @@
+/assets (Status: 301)
+/css (Status: 301)
+/index.html (Status: 200)
+/js (Status: 301)
+/backup_2025.sql (Status: 200)
+/.env (Status: 200)
+/nginx_status (Status: 200)

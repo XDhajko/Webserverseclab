@@ -1,0 +1,900 @@
+{
+  "created_at": "2026-04-25T15:49:22.458843+00:00",
+  "targets": [
+    {
+      "name": "ols",
+      "ip": "192.168.56.12",
+      "platform": "ols",
+      "https_port": 7080,
+      "user": "vagrant",
+      "ssh_port": 22,
+      "ssh_username": "vagrant",
+      "ssh_auth_type": "key",
+      "ssh_key_original_path": "vagrant:ols",
+      "ssh_key_internal_path": "C:\\Users\\D0do\\.webserverseclab\\keys\\ols_64f42e81532a.key",
+      "ssh_key_passphrase": "",
+      "ssh_password": ""
+    },
+    {
+      "name": "nginx",
+      "ip": "192.168.56.11",
+      "platform": "nginx",
+      "https_port": 443,
+      "user": "vagrant",
+      "ssh_port": 22,
+      "ssh_username": "vagrant",
+      "ssh_auth_type": "key",
+      "ssh_key_original_path": "vagrant:nginx",
+      "ssh_key_internal_path": "C:\\Users\\D0do\\.webserverseclab\\keys\\nginx_2a30762df328.key",
+      "ssh_key_passphrase": "",
+      "ssh_password": ""
+    },
+    {
+      "name": "apache",
+      "ip": "192.168.56.10",
+      "platform": "apache",
+      "https_port": 443,
+      "user": "vagrant",
+      "ssh_port": 22,
+      "ssh_username": "vagrant",
+      "ssh_auth_type": "key",
+      "ssh_key_original_path": "vagrant:apache",
+      "ssh_key_internal_path": "C:\\Users\\D0do\\.webserverseclab\\keys\\apache_fa433f304c97.key",
+      "ssh_key_passphrase": "",
+      "ssh_password": ""
+    }
+  ],
+  "rescan_of": null,
+  "scan": {
+    "status": "done",
+    "scan_profile": "standards_mode",
+    "agent_mode": "deep",
+    "progress": {
+      "completed": 15,
+      "total": 15,
+      "label": "Scan completed"
+    },
+    "logs": [
+      {
+        "ts": "2026-04-25T15:49:22.575286+00:00",
+        "level": "info",
+        "message": "Initialized scan session run_20260425_174922_de985e"
+      },
+      {
+        "ts": "2026-04-25T15:49:22.594038+00:00",
+        "level": "info",
+        "message": "### Target: ols (192.168.56.12)"
+      },
+      {
+        "ts": "2026-04-25T15:49:25.935584+00:00",
+        "level": "info",
+        "message": "[Nikto] scan completed."
+      },
+      {
+        "ts": "2026-04-25T15:49:27.252864+00:00",
+        "level": "info",
+        "message": "[Gobuster] scan completed."
+      },
+      {
+        "ts": "2026-04-25T15:51:08.332781+00:00",
+        "level": "info",
+        "message": "[TestSSL] scan completed."
+      },
+      {
+        "ts": "2026-04-25T15:51:12.910402+00:00",
+        "level": "info",
+        "message": "[Nmap] scan completed."
+      },
+      {
+        "ts": "2026-04-25T15:51:12.947121+00:00",
+        "level": "info",
+        "message": "All scans completed for ols"
+      },
+      {
+        "ts": "2026-04-25T15:51:12.965852+00:00",
+        "level": "info",
+        "message": "Running internal agent for ols..."
+      },
+      {
+        "ts": "2026-04-25T15:51:26.343125+00:00",
+        "level": "info",
+        "message": "[agent] completed."
+      },
+      {
+        "ts": "2026-04-25T15:51:26.385230+00:00",
+        "level": "info",
+        "message": "### Target: nginx (192.168.56.11)"
+      },
+      {
+        "ts": "2026-04-25T15:51:26.754572+00:00",
+        "level": "info",
+        "message": "[Nikto] scan completed."
+      },
+      {
+        "ts": "2026-04-25T15:51:28.479727+00:00",
+        "level": "info",
+        "message": "[Gobuster] scan completed."
+      },
+      {
+        "ts": "2026-04-25T15:51:42.700576+00:00",
+        "level": "info",
+        "message": "[Nmap] scan completed."
+      },
+      {
+        "ts": "2026-04-25T15:53:26.101463+00:00",
+        "level": "info",
+        "message": "[TestSSL] scan completed."
+      },
+      {
+        "ts": "2026-04-25T15:53:26.141870+00:00",
+        "level": "info",
+        "message": "All scans completed for nginx"
+      },
+      {
+        "ts": "2026-04-25T15:53:26.158503+00:00",
+        "level": "info",
+        "message": "Running internal agent for nginx..."
+      },
+      {
+        "ts": "2026-04-25T15:53:39.099220+00:00",
+        "level": "info",
+        "message": "[agent] completed."
+      },
+      {
+        "ts": "2026-04-25T15:53:39.154051+00:00",
+        "level": "info",
+        "message": "### Target: apache (192.168.56.10)"
+      },
+      {
+        "ts": "2026-04-25T15:53:39.444594+00:00",
+        "level": "info",
+        "message": "[Nikto] scan completed."
+      },
+      {
+        "ts": "2026-04-25T15:53:45.452118+00:00",
+        "level": "info",
+        "message": "[Gobuster] scan completed."
+      },
+      {
+        "ts": "2026-04-25T15:53:55.525364+00:00",
+        "level": "info",
+        "message": "[Nmap] scan completed."
+      },
+      {
+        "ts": "2026-04-25T15:56:14.966449+00:00",
+        "level": "info",
+        "message": "[TestSSL] scan completed."
+      },
+      {
+        "ts": "2026-04-25T15:56:15.001054+00:00",
+        "level": "info",
+        "message": "All scans completed for apache"
+      },
+      {
+        "ts": "2026-04-25T15:56:15.017336+00:00",
+        "level": "info",
+        "message": "Running internal agent for apache..."
+      },
+      {
+        "ts": "2026-04-25T15:56:30.316540+00:00",
+        "level": "info",
+        "message": "[agent] completed."
+      },
+      {
+        "ts": "2026-04-25T15:56:30.352535+00:00",
+        "level": "info",
+        "message": "Normalizing and mapping finding data to internal templates..."
+      },
+      {
+        "ts": "2026-04-25T15:56:30.837259+00:00",
+        "level": "info",
+        "message": "Scan completed successfully."
+      }
+    ],
+    "error": "",
+    "started_at": "2026-04-25T15:49:22.550227+00:00",
+    "finished_at": "2026-04-25T15:56:30.814485+00:00"
+  },
+  "hardening": {
+    "status": "done",
+    "progress": {
+      "completed": 35,
+      "total": 35,
+      "label": "Hardening completed with 1 failure(s)"
+    },
+    "logs": [
+      {
+        "ts": "2026-04-25T16:00:58.766702+00:00",
+        "level": "info",
+        "message": "Preparing hardening for run run_20260425_174922_de985e"
+      },
+      {
+        "ts": "2026-04-25T16:00:58.793430+00:00",
+        "level": "info",
+        "message": "Connecting to apache (apache)"
+      },
+      {
+        "ts": "2026-04-25T16:00:58.959810+00:00",
+        "level": "info",
+        "message": "apache | apache_hide_version | Set ServerTokens Prod - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:00.142255+00:00",
+        "level": "info",
+        "message": "apache | apache_hide_version | Set ServerTokens Prod - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:00.179458+00:00",
+        "level": "info",
+        "message": "apache | apache_hide_version | Set ServerSignature Off - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:00.279453+00:00",
+        "level": "info",
+        "message": "apache | apache_hide_version | Set ServerSignature Off - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:00.318488+00:00",
+        "level": "info",
+        "message": "apache | apache_upgrade | Update package list - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:07.709435+00:00",
+        "level": "info",
+        "message": "apache | apache_upgrade | Update package list - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:07.750688+00:00",
+        "level": "info",
+        "message": "apache | apache_upgrade | Upgrade apache2 - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:09.129094+00:00",
+        "level": "info",
+        "message": "apache | apache_upgrade | Upgrade apache2 - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:09.171901+00:00",
+        "level": "info",
+        "message": "apache | apache_disable_trace | Set TraceEnable Off - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:09.272495+00:00",
+        "level": "info",
+        "message": "apache | apache_disable_trace | Set TraceEnable Off - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:09.316245+00:00",
+        "level": "info",
+        "message": "apache | apache_tls_hardening | Enable SSL and headers modules - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:09.545766+00:00",
+        "level": "info",
+        "message": "apache | apache_tls_hardening | Enable SSL and headers modules - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:09.585804+00:00",
+        "level": "info",
+        "message": "apache | apache_tls_hardening | Disable deflate module to mitigate BREACH - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:09.744951+00:00",
+        "level": "info",
+        "message": "apache | apache_tls_hardening | Disable deflate module to mitigate BREACH - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:09.785847+00:00",
+        "level": "info",
+        "message": "apache | apache_tls_hardening | Enforce TLSv1.2+ protocols - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:09.869746+00:00",
+        "level": "info",
+        "message": "apache | apache_tls_hardening | Enforce TLSv1.2+ protocols - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:09.908031+00:00",
+        "level": "info",
+        "message": "apache | apache_tls_hardening | Set strong cipher suite - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:09.995510+00:00",
+        "level": "info",
+        "message": "apache | apache_tls_hardening | Set strong cipher suite - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:10.034809+00:00",
+        "level": "info",
+        "message": "apache | apache_tls_hardening | Prefer server cipher order - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:10.117039+00:00",
+        "level": "info",
+        "message": "apache | apache_tls_hardening | Prefer server cipher order - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:10.153551+00:00",
+        "level": "info",
+        "message": "apache | apache_security_headers | Enable headers module - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:10.301844+00:00",
+        "level": "info",
+        "message": "apache | apache_security_headers | Enable headers module - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:10.340329+00:00",
+        "level": "info",
+        "message": "apache | apache_security_headers | Add Strict-Transport-Security - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:10.450528+00:00",
+        "level": "info",
+        "message": "apache | apache_security_headers | Add Strict-Transport-Security - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:10.496740+00:00",
+        "level": "info",
+        "message": "apache | apache_security_headers | Add X-Content-Type-Options - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:10.581494+00:00",
+        "level": "info",
+        "message": "apache | apache_security_headers | Add X-Content-Type-Options - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:10.623800+00:00",
+        "level": "info",
+        "message": "apache | apache_security_headers | Add X-Frame-Options - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:10.695790+00:00",
+        "level": "info",
+        "message": "apache | apache_security_headers | Add X-Frame-Options - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:10.817100+00:00",
+        "level": "info",
+        "message": "apache | apache_security_headers | Add Referrer-Policy - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:10.906429+00:00",
+        "level": "info",
+        "message": "apache | apache_security_headers | Add Referrer-Policy - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:10.944446+00:00",
+        "level": "info",
+        "message": "apache | apache_security_headers | Add Permissions-Policy - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:11.021070+00:00",
+        "level": "info",
+        "message": "apache | apache_security_headers | Add Permissions-Policy - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:11.064947+00:00",
+        "level": "info",
+        "message": "apache | remove_sensitive_files | Prepare quarantine directory - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:11.160288+00:00",
+        "level": "info",
+        "message": "apache | remove_sensitive_files | Prepare quarantine directory - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:11.207636+00:00",
+        "level": "info",
+        "message": "apache | remove_sensitive_files | Move sensitive files and .git dirs to quarantine (non-destructive) - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:11.352640+00:00",
+        "level": "info",
+        "message": "apache | remove_sensitive_files | Move sensitive files and .git dirs to quarantine (non-destructive) - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:11.399841+00:00",
+        "level": "info",
+        "message": "apache | remove_sensitive_files | Return 404 for Apache dotfiles and status endpoints - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:11.495135+00:00",
+        "level": "info",
+        "message": "apache | remove_sensitive_files | Return 404 for Apache dotfiles and status endpoints - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:11.540090+00:00",
+        "level": "info",
+        "message": "apache | restrict_status_page | Disable Apache mod_status - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:11.720281+00:00",
+        "level": "info",
+        "message": "apache | restrict_status_page | Disable Apache mod_status - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:11.770787+00:00",
+        "level": "info",
+        "message": "apache | apache_no_autoindex | Disable autoindex module - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:11.941143+00:00",
+        "level": "info",
+        "message": "apache | apache_no_autoindex | Disable autoindex module - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:11.989011+00:00",
+        "level": "info",
+        "message": "apache | apache_no_autoindex | Disable userdir module - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:12.137769+00:00",
+        "level": "info",
+        "message": "apache | apache_no_autoindex | Disable userdir module - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:12.176990+00:00",
+        "level": "info",
+        "message": "apache | apache_no_autoindex | Replace Options Indexes with -Indexes across Apache configs - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:12.314467+00:00",
+        "level": "info",
+        "message": "apache | apache_no_autoindex | Replace Options Indexes with -Indexes across Apache configs - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:12.356294+00:00",
+        "level": "info",
+        "message": "apache | apache_restrict_overrides | Set AllowOverride None for /var/www/ - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:12.439465+00:00",
+        "level": "info",
+        "message": "apache | apache_restrict_overrides | Set AllowOverride None for /var/www/ - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:12.476340+00:00",
+        "level": "info",
+        "message": "apache | apache_fix_logpath | Redirect any webroot logs to /var/log/apache2 - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:12.584922+00:00",
+        "level": "info",
+        "message": "apache | apache_fix_logpath | Redirect any webroot logs to /var/log/apache2 - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:12.632259+00:00",
+        "level": "info",
+        "message": "apache | apply_security_updates | Update package lists - running"
+      },
+      {
+        "ts": "2026-04-25T16:01:17.915110+00:00",
+        "level": "info",
+        "message": "apache | apply_security_updates | Update package lists - ok"
+      },
+      {
+        "ts": "2026-04-25T16:01:17.961540+00:00",
+        "level": "info",
+        "message": "apache | apply_security_updates | Install pending package upgrades - running"
+      },
+      {
+        "ts": "2026-04-25T16:04:57.163743+00:00",
+        "level": "info",
+        "message": "apache | apply_security_updates | Install pending package upgrades - ok"
+      },
+      {
+        "ts": "2026-04-25T16:04:57.206958+00:00",
+        "level": "info",
+        "message": "apache | apply_security_updates | Remove obsolete packages - running"
+      },
+      {
+        "ts": "2026-04-25T16:04:58.454189+00:00",
+        "level": "info",
+        "message": "apache | apply_security_updates | Remove obsolete packages - ok"
+      },
+      {
+        "ts": "2026-04-25T16:04:59.178611+00:00",
+        "level": "info",
+        "message": "Connecting to nginx (nginx)"
+      },
+      {
+        "ts": "2026-04-25T16:04:59.323554+00:00",
+        "level": "info",
+        "message": "nginx | nginx_hide_version | Set server_tokens off - running"
+      },
+      {
+        "ts": "2026-04-25T16:05:00.412993+00:00",
+        "level": "info",
+        "message": "nginx | nginx_hide_version | Set server_tokens off - ok"
+      },
+      {
+        "ts": "2026-04-25T16:05:00.457782+00:00",
+        "level": "info",
+        "message": "nginx | nginx_upgrade | Update package list - running"
+      },
+      {
+        "ts": "2026-04-25T16:05:07.522599+00:00",
+        "level": "info",
+        "message": "nginx | nginx_upgrade | Update package list - ok"
+      },
+      {
+        "ts": "2026-04-25T16:05:07.568839+00:00",
+        "level": "info",
+        "message": "nginx | nginx_upgrade | Upgrade nginx - running"
+      },
+      {
+        "ts": "2026-04-25T16:05:08.694887+00:00",
+        "level": "info",
+        "message": "nginx | nginx_upgrade | Upgrade nginx - ok"
+      },
+      {
+        "ts": "2026-04-25T16:05:08.803193+00:00",
+        "level": "info",
+        "message": "nginx | nginx_tls_hardening | Create TLS hardening snippet - running"
+      },
+      {
+        "ts": "2026-04-25T16:05:08.895103+00:00",
+        "level": "info",
+        "message": "nginx | nginx_tls_hardening | Create TLS hardening snippet - ok"
+      },
+      {
+        "ts": "2026-04-25T16:05:08.935545+00:00",
+        "level": "info",
+        "message": "nginx | nginx_tls_hardening | Disable gzip to mitigate BREACH - running"
+      },
+      {
+        "ts": "2026-04-25T16:05:09.028498+00:00",
+        "level": "info",
+        "message": "nginx | nginx_tls_hardening | Disable gzip to mitigate BREACH - ok"
+      },
+      {
+        "ts": "2026-04-25T16:05:09.068092+00:00",
+        "level": "info",
+        "message": "nginx | nginx_tls_hardening | Include TLS snippet in SSL site config - running"
+      },
+      {
+        "ts": "2026-04-25T16:05:09.178931+00:00",
+        "level": "info",
+        "message": "nginx | nginx_tls_hardening | Include TLS snippet in SSL site config - ok"
+      },
+      {
+        "ts": "2026-04-25T16:05:09.217164+00:00",
+        "level": "info",
+        "message": "nginx | nginx_security_headers | Create security headers snippet - running"
+      },
+      {
+        "ts": "2026-04-25T16:05:09.295765+00:00",
+        "level": "info",
+        "message": "nginx | nginx_security_headers | Create security headers snippet - ok"
+      },
+      {
+        "ts": "2026-04-25T16:05:09.341096+00:00",
+        "level": "info",
+        "message": "nginx | nginx_security_headers | Include headers snippet in site configs - running"
+      },
+      {
+        "ts": "2026-04-25T16:05:09.432575+00:00",
+        "level": "info",
+        "message": "nginx | nginx_security_headers | Include headers snippet in site configs - ok"
+      },
+      {
+        "ts": "2026-04-25T16:05:09.476620+00:00",
+        "level": "info",
+        "message": "nginx | remove_sensitive_files | Prepare quarantine directory - running"
+      },
+      {
+        "ts": "2026-04-25T16:05:09.564904+00:00",
+        "level": "info",
+        "message": "nginx | remove_sensitive_files | Prepare quarantine directory - ok"
+      },
+      {
+        "ts": "2026-04-25T16:05:09.607271+00:00",
+        "level": "info",
+        "message": "nginx | remove_sensitive_files | Move sensitive files and .git dirs to quarantine (non-destructive) - running"
+      },
+      {
+        "ts": "2026-04-25T16:05:09.729197+00:00",
+        "level": "info",
+        "message": "nginx | remove_sensitive_files | Move sensitive files and .git dirs to quarantine (non-destructive) - ok"
+      },
+      {
+        "ts": "2026-04-25T16:05:09.764487+00:00",
+        "level": "info",
+        "message": "nginx | remove_sensitive_files | Return 404 for Nginx dotfiles and status endpoints - running"
+      },
+      {
+        "ts": "2026-04-25T16:05:09.864522+00:00",
+        "level": "info",
+        "message": "nginx | remove_sensitive_files | Return 404 for Nginx dotfiles and status endpoints - ok"
+      },
+      {
+        "ts": "2026-04-25T16:05:09.908863+00:00",
+        "level": "info",
+        "message": "nginx | restrict_status_page | Return 404 for Nginx status endpoints - running"
+      },
+      {
+        "ts": "2026-04-25T16:05:10.005029+00:00",
+        "level": "info",
+        "message": "nginx | restrict_status_page | Return 404 for Nginx status endpoints - ok"
+      },
+      {
+        "ts": "2026-04-25T16:05:10.045202+00:00",
+        "level": "info",
+        "message": "nginx | nginx_no_autoindex | Disable autoindex in all configs - running"
+      },
+      {
+        "ts": "2026-04-25T16:05:10.183303+00:00",
+        "level": "info",
+        "message": "nginx | nginx_no_autoindex | Disable autoindex in all configs - ok"
+      },
+      {
+        "ts": "2026-04-25T16:05:10.230032+00:00",
+        "level": "info",
+        "message": "nginx | nginx_restrict_methods | Create method-restriction snippet - running"
+      },
+      {
+        "ts": "2026-04-25T16:05:10.313682+00:00",
+        "level": "info",
+        "message": "nginx | nginx_restrict_methods | Create method-restriction snippet - ok"
+      },
+      {
+        "ts": "2026-04-25T16:05:10.349832+00:00",
+        "level": "info",
+        "message": "nginx | nginx_restrict_methods | Include snippet in default site - running"
+      },
+      {
+        "ts": "2026-04-25T16:05:10.440103+00:00",
+        "level": "info",
+        "message": "nginx | nginx_restrict_methods | Include snippet in default site - ok"
+      },
+      {
+        "ts": "2026-04-25T16:05:10.480282+00:00",
+        "level": "info",
+        "message": "nginx | nginx_restrict_methods | Set client_max_body_size baseline - running"
+      },
+      {
+        "ts": "2026-04-25T16:05:10.562545+00:00",
+        "level": "info",
+        "message": "nginx | nginx_restrict_methods | Set client_max_body_size baseline - ok"
+      },
+      {
+        "ts": "2026-04-25T16:05:10.613580+00:00",
+        "level": "info",
+        "message": "nginx | nginx_fix_cookie_logging | Strip $http_cookie from log_format directives - running"
+      },
+      {
+        "ts": "2026-04-25T16:05:10.706148+00:00",
+        "level": "info",
+        "message": "nginx | nginx_fix_cookie_logging | Strip $http_cookie from log_format directives - ok"
+      },
+      {
+        "ts": "2026-04-25T16:05:10.812841+00:00",
+        "level": "info",
+        "message": "nginx | apply_security_updates | Update package lists - running"
+      },
+      {
+        "ts": "2026-04-25T16:05:15.595116+00:00",
+        "level": "info",
+        "message": "nginx | apply_security_updates | Update package lists - ok"
+      },
+      {
+        "ts": "2026-04-25T16:05:15.633283+00:00",
+        "level": "info",
+        "message": "nginx | apply_security_updates | Install pending package upgrades - running"
+      },
+      {
+        "ts": "2026-04-25T16:14:39.976554+00:00",
+        "level": "info",
+        "message": "nginx | apply_security_updates | Install pending package upgrades - ok"
+      },
+      {
+        "ts": "2026-04-25T16:14:40.020628+00:00",
+        "level": "info",
+        "message": "nginx | apply_security_updates | Remove obsolete packages - running"
+      },
+      {
+        "ts": "2026-04-25T16:14:41.150333+00:00",
+        "level": "info",
+        "message": "nginx | apply_security_updates | Remove obsolete packages - ok"
+      },
+      {
+        "ts": "2026-04-25T16:14:41.474130+00:00",
+        "level": "info",
+        "message": "Connecting to ols (ols)"
+      },
+      {
+        "ts": "2026-04-25T16:14:41.623982+00:00",
+        "level": "info",
+        "message": "ols | ols_restrict_admin | Bind admin listener to 127.0.0.1 - running"
+      },
+      {
+        "ts": "2026-04-25T16:14:42.611711+00:00",
+        "level": "info",
+        "message": "ols | ols_restrict_admin | Bind admin listener to 127.0.0.1 - ok"
+      },
+      {
+        "ts": "2026-04-25T16:14:42.655894+00:00",
+        "level": "info",
+        "message": "ols | ols_restrict_admin | Restrict external access to OLS admin port - running"
+      },
+      {
+        "ts": "2026-04-25T16:14:43.127746+00:00",
+        "level": "info",
+        "message": "ols | ols_restrict_admin | Restrict external access to OLS admin port - ok"
+      },
+      {
+        "ts": "2026-04-25T16:14:43.176814+00:00",
+        "level": "info",
+        "message": "ols | remove_sensitive_files | Prepare quarantine directory - running"
+      },
+      {
+        "ts": "2026-04-25T16:14:43.271420+00:00",
+        "level": "info",
+        "message": "ols | remove_sensitive_files | Prepare quarantine directory - ok"
+      },
+      {
+        "ts": "2026-04-25T16:14:43.311708+00:00",
+        "level": "info",
+        "message": "ols | remove_sensitive_files | Move sensitive files and .git dirs to quarantine (non-destructive) - running"
+      },
+      {
+        "ts": "2026-04-25T16:14:43.481924+00:00",
+        "level": "info",
+        "message": "ols | remove_sensitive_files | Move sensitive files and .git dirs to quarantine (non-destructive) - ok"
+      },
+      {
+        "ts": "2026-04-25T16:14:43.517826+00:00",
+        "level": "info",
+        "message": "ols | fix_tls_key_perms | chmod 600 private key files - running"
+      },
+      {
+        "ts": "2026-04-25T16:14:43.590871+00:00",
+        "level": "info",
+        "message": "ols | fix_tls_key_perms | chmod 600 private key files - ok"
+      },
+      {
+        "ts": "2026-04-25T16:14:43.630365+00:00",
+        "level": "info",
+        "message": "ols | fix_tls_key_perms | Set ownership to root - running"
+      },
+      {
+        "ts": "2026-04-25T16:14:43.715537+00:00",
+        "level": "info",
+        "message": "ols | fix_tls_key_perms | Set ownership to root - ok"
+      },
+      {
+        "ts": "2026-04-25T16:14:43.761984+00:00",
+        "level": "info",
+        "message": "ols | ols_no_autoindex | Set autoIndex and allowBrowse to safe defaults - running"
+      },
+      {
+        "ts": "2026-04-25T16:14:43.979255+00:00",
+        "level": "info",
+        "message": "ols | ols_no_autoindex | Set autoIndex and allowBrowse to safe defaults - ok"
+      },
+      {
+        "ts": "2026-04-25T16:14:44.015115+00:00",
+        "level": "info",
+        "message": "ols | ols_security_headers | Inject OLS extraHeaders directives in vhost root context - running"
+      },
+      {
+        "ts": "2026-04-25T16:14:44.501690+00:00",
+        "level": "info",
+        "message": "ols | ols_security_headers | Inject OLS extraHeaders directives in vhost root context - ok"
+      },
+      {
+        "ts": "2026-04-25T16:14:44.539732+00:00",
+        "level": "info",
+        "message": "ols | ols_enable_https | Generate self-signed cert for OLS if missing - running"
+      },
+      {
+        "ts": "2026-04-25T16:14:45.029452+00:00",
+        "level": "info",
+        "message": "ols | ols_enable_https | Generate self-signed cert for OLS if missing - ok"
+      },
+      {
+        "ts": "2026-04-25T16:14:45.074805+00:00",
+        "level": "info",
+        "message": "ols | ols_enable_https | Repair HTTPS listener on port 443 - running"
+      },
+      {
+        "ts": "2026-04-25T16:14:45.241117+00:00",
+        "level": "info",
+        "message": "ols | ols_enable_https | Repair HTTPS listener on port 443 - ok"
+      },
+      {
+        "ts": "2026-04-25T16:14:45.280985+00:00",
+        "level": "info",
+        "message": "ols | ols_enable_https | Allow external HTTPS traffic to port 443 - running"
+      },
+      {
+        "ts": "2026-04-25T16:14:45.471610+00:00",
+        "level": "info",
+        "message": "ols | ols_enable_https | Allow external HTTPS traffic to port 443 - ok"
+      },
+      {
+        "ts": "2026-04-25T16:14:45.516371+00:00",
+        "level": "info",
+        "message": "ols | ols_tls_hardening | Disable gzip/brotli compression in OLS vhost configs (BREACH mitigation) - running"
+      },
+      {
+        "ts": "2026-04-25T16:14:45.737255+00:00",
+        "level": "info",
+        "message": "ols | ols_tls_hardening | Disable gzip/brotli compression in OLS vhost configs (BREACH mitigation) - ok"
+      },
+      {
+        "ts": "2026-04-25T16:14:45.778835+00:00",
+        "level": "info",
+        "message": "ols | ols_tls_hardening | Disable gzip/brotli compression in global OLS config - running"
+      },
+      {
+        "ts": "2026-04-25T16:14:45.859604+00:00",
+        "level": "info",
+        "message": "ols | ols_tls_hardening | Disable gzip/brotli compression in global OLS config - ok"
+      },
+      {
+        "ts": "2026-04-25T16:14:45.901665+00:00",
+        "level": "info",
+        "message": "ols | ols_tls_hardening | Disable global dynamic gzip/brotli compression - running"
+      },
+      {
+        "ts": "2026-04-25T16:14:45.995633+00:00",
+        "level": "info",
+        "message": "ols | ols_tls_hardening | Disable global dynamic gzip/brotli compression - ok"
+      },
+      {
+        "ts": "2026-04-25T16:14:46.044663+00:00",
+        "level": "info",
+        "message": "ols | ols_tls_hardening | Reduce OLS TLS cipher exposure in SSL blocks - running"
+      },
+      {
+        "ts": "2026-04-25T16:14:46.168485+00:00",
+        "level": "info",
+        "message": "ols | ols_tls_hardening | Reduce OLS TLS cipher exposure in SSL blocks - ok"
+      },
+      {
+        "ts": "2026-04-25T16:14:46.210637+00:00",
+        "level": "info",
+        "message": "ols | apply_security_updates | Update package lists - running"
+      },
+      {
+        "ts": "2026-04-25T16:14:53.040158+00:00",
+        "level": "info",
+        "message": "ols | apply_security_updates | Update package lists - ok"
+      },
+      {
+        "ts": "2026-04-25T16:14:53.090446+00:00",
+        "level": "info",
+        "message": "ols | apply_security_updates | Install pending package upgrades - running"
+      },
+      {
+        "ts": "2026-04-25T16:18:25.648964+00:00",
+        "level": "info",
+        "message": "ols | apply_security_updates | Install pending package upgrades - ok"
+      },
+      {
+        "ts": "2026-04-25T16:18:25.694008+00:00",
+        "level": "info",
+        "message": "ols | apply_security_updates | Remove obsolete packages - running"
+      },
+      {
+        "ts": "2026-04-25T16:18:26.809566+00:00",
+        "level": "info",
+        "message": "ols | apply_security_updates | Remove obsolete packages - ok"
+      },
+      {
+        "ts": "2026-04-25T16:18:30.558623+00:00",
+        "level": "error",
+        "message": "Hardening completed with 1 failed remediation task(s)."
+      }
+    ],
+    "error": "",
+    "started_at": "2026-04-25T16:00:58.646067+00:00",
+    "finished_at": "2026-04-25T16:18:30.585124+00:00",
+    "source_run_id": "run_20260425_174922_de985e",
+    "rescan_run_id": null
+  },
+  "run_id": "run_20260425_174922_de985e",
+  "updated_at": "2026-04-25T16:18:30.585143+00:00"
+}

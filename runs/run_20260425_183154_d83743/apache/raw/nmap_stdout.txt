@@ -1,0 +1,28 @@
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-04-25 16:35 +0000
+Nmap scan report for 192.168.56.10
+Host is up (0.0015s latency).
+
+PORT     STATE    SERVICE   VERSION
+80/tcp   open     http      Apache httpd
+|_http-server-header: Apache
+| http-methods: 
+|_  Supported Methods: GET POST OPTIONS HEAD
+443/tcp  open     ssl/http  Apache httpd
+| http-methods: 
+|_  Supported Methods: GET POST OPTIONS HEAD
+| ssl-cert: Subject: commonName=vm-apache
+| Subject Alternative Name: DNS:vm-apache
+| Issuer: commonName=vm-apache
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2026-04-25T06:59:10
+| Not valid after:  2036-04-22T06:59:10
+| MD5:     58e9 fe42 5c7d 40d5 61d2 c594 8d55 a96c
+| SHA-1:   1b70 e305 047e bbfc a8f9 0465 be26 1e3d be6c f924
+|_SHA-256: 7229 8960 f9f4 4f6d 6a3f 2e00 b794 ab93 1e69 f973 1d8f 76bd fbe6 e1a7 1d85 ba16
+|_http-server-header: Apache
+7080/tcp filtered empowerid
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 15.89 seconds

@@ -1,0 +1,774 @@
+[
+  {
+    "run_id": "run_20260425_174922_de985e",
+    "scan_id": "run_20260425_174922_de985e",
+    "target": {
+      "name": "nginx",
+      "ip": "192.168.56.11",
+      "platform": "nginx"
+    },
+    "server_type": "nginx",
+    "source": "nmap",
+    "rule_id": "G1",
+    "category": "fingerprinting",
+    "severity": "medium",
+    "title": "Service Version Disclosure: nginx 1.18.0",
+    "description": "Nmap identified explicit version: nginx 1.18.0 on port 80",
+    "wstg_id": "WSTG-CONF-02",
+    "cwe_id": "CWE-200",
+    "cve_list": [],
+    "cvss": 5.0,
+    "evidence": {
+      "observed": "nginx 1.18.0 (port 80)",
+      "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\raw\\nmap.xml"
+    },
+    "status": "open",
+    "recommendation": "Review and apply hardening via Ansible.",
+    "ansible": {
+      "tags": [
+        "nginx_hide_version"
+      ],
+      "requires_reboot": false
+    },
+    "rule_meta": {
+      "catalog_rule_id": "G1-Nginx-ServerTokens",
+      "title": "Server Banner Disclosure",
+      "applies_to": [
+        "nginx"
+      ],
+      "expected": false
+    },
+    "references": [
+      "https://owasp.org/www-project-web-security-testing-guide/",
+      "https://nginx.org/en/docs/http/ngx_http_core_module.html#server_tokens"
+    ],
+    "evidence_entries": [
+      {
+        "source": "nmap",
+        "observed": "nginx 1.18.0 (port 80)",
+        "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\raw\\nmap.xml"
+      },
+      {
+        "source": "nmap",
+        "observed": "nginx 1.18.0 (port 443)",
+        "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\raw\\nmap.xml"
+      },
+      {
+        "source": "agent",
+        "observed": "nginx server_tokens on",
+        "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\agent.json"
+      }
+    ],
+    "check_status": "fail"
+  },
+  {
+    "run_id": "run_20260425_174922_de985e",
+    "scan_id": "run_20260425_174922_de985e",
+    "target": {
+      "name": "nginx",
+      "ip": "192.168.56.11",
+      "platform": "nginx"
+    },
+    "server_type": "nginx",
+    "source": "nmap",
+    "rule_id": "CVE-Nginx-1.18.0-Resolver-OOB",
+    "category": "components",
+    "severity": "high",
+    "title": "Known vulnerable version detected: nginx 1.18.0",
+    "description": "Detected service version matches local CVE intelligence cache entries.",
+    "wstg_id": "WSTG-CONF-08",
+    "cwe_id": "CWE-193",
+    "cve_list": [
+      "CVE-2021-23017"
+    ],
+    "cvss": 7.7,
+    "evidence": {
+      "observed": "nginx 1.18.0",
+      "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\raw\\nmap.xml"
+    },
+    "status": "open",
+    "recommendation": "Review and apply hardening via Ansible.",
+    "ansible": {
+      "tags": [
+        "nginx_upgrade"
+      ],
+      "requires_reboot": false
+    },
+    "rule_meta": {
+      "catalog_rule_id": "CVE-Nginx-1.18.0-Resolver-OOB",
+      "title": "NGINX 1.18.0 Resolver Off-By-One Vulnerability Risk",
+      "applies_to": [
+        "nginx"
+      ],
+      "expected": false
+    },
+    "references": [
+      "https://owasp.org/www-project-web-security-testing-guide/",
+      "https://nvd.nist.gov/vuln/detail/CVE-2021-23017"
+    ],
+    "evidence_entries": [
+      {
+        "source": "nmap",
+        "observed": "nginx 1.18.0",
+        "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\raw\\nmap.xml"
+      }
+    ]
+  },
+  {
+    "run_id": "run_20260425_174922_de985e",
+    "scan_id": "run_20260425_174922_de985e",
+    "target": {
+      "name": "nginx",
+      "ip": "192.168.56.11",
+      "platform": "nginx"
+    },
+    "server_type": "nginx",
+    "source": "nmap",
+    "rule_id": "G4-CERT",
+    "category": "tls",
+    "severity": "high",
+    "title": "Self-Signed TLS Certificate Detected",
+    "description": "The TLS certificate on port 443 is self-signed (subject and issuer both 'vm-nginx'). Self-signed certificates are not trusted by browsers and indicate missing CA-signed deployment.",
+    "wstg_id": "WSTG-CRYP-01",
+    "cwe_id": "CWE-295",
+    "cve_list": [],
+    "cvss": 7.5,
+    "evidence": {
+      "observed": "Subject CN=vm-nginx, Issuer CN=vm-nginx",
+      "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\raw\\nmap.xml"
+    },
+    "status": "open",
+    "recommendation": "Review and apply hardening via Ansible.",
+    "ansible": {
+      "tags": [
+        "nginx_tls_certificate"
+      ],
+      "requires_reboot": false
+    },
+    "rule_meta": {
+      "catalog_rule_id": "G4-CERT",
+      "title": "TLS Certificate Trust or Validity Failure",
+      "applies_to": [
+        "apache",
+        "nginx",
+        "ols"
+      ],
+      "expected": false
+    },
+    "references": [
+      "https://owasp.org/www-project-web-security-testing-guide/",
+      "https://cwe.mitre.org/data/definitions/295.html"
+    ],
+    "evidence_entries": [
+      {
+        "source": "nmap",
+        "observed": "Subject CN=vm-nginx, Issuer CN=vm-nginx",
+        "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\raw\\nmap.xml"
+      },
+      {
+        "source": "testssl",
+        "observed": "cert_trust: certificate does not match supplied URI\ncert_chain_of_trust: failed (self signed).\ncert_extlifeSpan: 3650 days\ncert_revocation: Neither CRL nor OCSP URI provided",
+        "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\raw\\testssl.json"
+      }
+    ]
+  },
+  {
+    "run_id": "run_20260425_174922_de985e",
+    "scan_id": "run_20260425_174922_de985e",
+    "target": {
+      "name": "nginx",
+      "ip": "192.168.56.11",
+      "platform": "nginx"
+    },
+    "server_type": "nginx",
+    "source": "testssl",
+    "rule_id": "G4-CIPHER",
+    "category": "tls",
+    "severity": "low",
+    "title": "TLS Issue: cipherlist_OBSOLETED",
+    "description": "TLS misconfiguration detected: cipherlist_OBSOLETED.",
+    "wstg_id": "WSTG-CRYP-01",
+    "cwe_id": "CWE-327",
+    "cve_list": [],
+    "cvss": 5.9,
+    "evidence": {
+      "observed": "offered",
+      "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\raw\\testssl.json"
+    },
+    "status": "open",
+    "recommendation": "Review and apply hardening via Ansible.",
+    "ansible": {
+      "tags": [
+        "nginx_tls_hardening"
+      ],
+      "requires_reboot": false
+    },
+    "rule_meta": {
+      "catalog_rule_id": "G4-CIPHER",
+      "title": "Weak or Deprecated Cipher Suite Offered",
+      "applies_to": [
+        "apache",
+        "nginx",
+        "ols"
+      ],
+      "expected": false
+    },
+    "references": [
+      "https://owasp.org/www-project-web-security-testing-guide/",
+      "https://wiki.mozilla.org/Security/Server_Side_TLS"
+    ],
+    "evidence_entries": [
+      {
+        "source": "testssl",
+        "observed": "offered",
+        "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\raw\\testssl.json"
+      },
+      {
+        "source": "testssl",
+        "observed": "cipher-tls1_2_xc028: TLSv1.2   xc028   ECDHE-RSA-AES256-SHA384           ECDH 253   AES         256      TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384\ncipher-tls1_2_xc077: TLSv1.2   xc077   ECDHE-RSA-CAMELLIA256-SHA384      ECDH 253   Camellia    256      TLS_ECDHE_RSA_WITH_CAMELLIA_256_CBC_SHA384\ncipher-tls1_2_xc027: TLSv1.2   xc027   ECDHE-RSA-AES128-SHA256           ECDH 253   AES         128      TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256\ncipher-tls1_2_xc076: TLSv1.2   xc076   ECDHE-RSA-CAMELLIA128-SHA256      ECDH 253   Camellia    128      TLS_ECDHE_RSA_WITH_CAMELLIA_128_CBC_SHA256\ncipher-tls1_2_xc014: TLSv1.2   xc014   ECDHE-RSA-AES256-SHA              ECDH 253   AES         256      TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA\ncipher-tls1_2_xc013: TLSv1.2   xc013   ECDHE-RSA-AES128-SHA              ECDH 253   AES         128      TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA\ncipher-tls1_2_x3d: TLSv1.2   x3d     AES256-SHA256                     RSA        AES         256      TLS_RSA_WITH_AES_256_CBC_SHA256\ncipher-tls1_2_xc0: TLSv1.2   xc0     CAMELLIA256-SHA256                RSA        Camellia    256      TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256\ncipher-tls1_2_x3c: TLSv1.2   x3c     AES128-SHA256                     RSA        AES         128      TLS_RSA_WITH_AES_128_CBC_SHA256\ncipher-tls1_2_xba: TLSv1.2   xba     CAMELLIA128-SHA256                RSA        Camellia    128      TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256\ncipher-tls1_2_x35: TLSv1.2   x35     AES256-SHA                        RSA        AES         256      TLS_RSA_WITH_AES_256_CBC_SHA\ncipher-tls1_2_x84: TLSv1.2   x84     CAMELLIA256-SHA                   RSA        Camellia    256      TLS_RSA_WITH_CAMELLIA_256_CBC_SHA\ncipher-tls1_2_x2f: TLSv1.2   x2f     AES128-SHA                        RSA        AES         128      TLS_RSA_WITH_AES_128_CBC_SHA\ncipher-tls1_2_x41: TLSv1.2   x41     CAMELLIA128-SHA                   RSA        Camellia    128      TLS_RSA_WITH_CAMELLIA_128_CBC_SHA",
+        "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\raw\\testssl.json"
+      }
+    ]
+  },
+  {
+    "run_id": "run_20260425_174922_de985e",
+    "scan_id": "run_20260425_174922_de985e",
+    "target": {
+      "name": "nginx",
+      "ip": "192.168.56.11",
+      "platform": "nginx"
+    },
+    "server_type": "nginx",
+    "source": "testssl",
+    "rule_id": "G4-CAA",
+    "category": "tls",
+    "severity": "low",
+    "title": "TLS Issue: DNS_CAArecord",
+    "description": "No DNS CAA record is configured. This does not expose data directly, but allows any CA to issue certificates for the domain unless restricted.",
+    "wstg_id": "WSTG-CRYP-01",
+    "cwe_id": "CWE-295",
+    "cve_list": [],
+    "cvss": 3.7,
+    "evidence": {
+      "observed": "TestSSL performed check 'DNS_CAArecord' and returned vague value: '--'",
+      "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\raw\\testssl.json"
+    },
+    "status": "open",
+    "recommendation": "Review and apply hardening via Ansible.",
+    "ansible": {
+      "tags": [
+        "fix_dns_caa"
+      ],
+      "requires_reboot": false
+    },
+    "rule_meta": {
+      "catalog_rule_id": "G4-CAA",
+      "title": "DNS CAA Record Not Configured",
+      "applies_to": [
+        "apache",
+        "nginx",
+        "ols"
+      ],
+      "expected": false
+    },
+    "references": [
+      "https://owasp.org/www-project-web-security-testing-guide/",
+      "https://www.rfc-editor.org/rfc/rfc8659"
+    ],
+    "evidence_entries": [
+      {
+        "source": "testssl",
+        "observed": "TestSSL performed check 'DNS_CAArecord' and returned vague value: '--'",
+        "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\raw\\testssl.json"
+      }
+    ]
+  },
+  {
+    "run_id": "run_20260425_174922_de985e",
+    "scan_id": "run_20260425_174922_de985e",
+    "target": {
+      "name": "nginx",
+      "ip": "192.168.56.11",
+      "platform": "nginx"
+    },
+    "server_type": "nginx",
+    "source": "testssl",
+    "rule_id": "G4-HSTS",
+    "category": "tls",
+    "severity": "low",
+    "title": "TLS Issue: HSTS",
+    "description": "HTTP Strict Transport Security (HSTS) is either not configured or configured improperly.",
+    "wstg_id": "WSTG-CRYP-03",
+    "cwe_id": "CWE-523",
+    "cve_list": [],
+    "cvss": 5.4,
+    "evidence": {
+      "observed": "not offered",
+      "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\raw\\testssl.json"
+    },
+    "status": "open",
+    "recommendation": "Review and apply hardening via Ansible.",
+    "ansible": {
+      "tags": [
+        "nginx_security_headers"
+      ],
+      "requires_reboot": false
+    },
+    "rule_meta": {
+      "catalog_rule_id": "G4-HSTS",
+      "title": "HSTS Policy Missing or Insufficient",
+      "applies_to": [
+        "apache",
+        "nginx",
+        "ols"
+      ],
+      "expected": false
+    },
+    "references": [
+      "https://owasp.org/www-project-web-security-testing-guide/",
+      "https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html"
+    ],
+    "evidence_entries": [
+      {
+        "source": "testssl",
+        "observed": "not offered",
+        "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\raw\\testssl.json"
+      }
+    ]
+  },
+  {
+    "run_id": "run_20260425_174922_de985e",
+    "scan_id": "run_20260425_174922_de985e",
+    "target": {
+      "name": "nginx",
+      "ip": "192.168.56.11",
+      "platform": "nginx"
+    },
+    "server_type": "nginx",
+    "source": "testssl",
+    "rule_id": "G4-VULN",
+    "category": "tls",
+    "severity": "medium",
+    "title": "TLS Issue: BREACH",
+    "description": "The server is vulnerable to the BREACH attack; HTTP compression on HTTPS responses can leak secret tokens.",
+    "wstg_id": "WSTG-CRYP-01",
+    "cwe_id": "CWE-310",
+    "cve_list": [],
+    "cvss": 7.4,
+    "evidence": {
+      "observed": "potentially VULNERABLE, gzip HTTP compression detected  - only supplied '/' tested",
+      "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\raw\\testssl.json"
+    },
+    "status": "open",
+    "recommendation": "Review and apply hardening via Ansible.",
+    "ansible": {
+      "tags": [
+        "nginx_tls_hardening"
+      ],
+      "requires_reboot": false
+    },
+    "rule_meta": {
+      "catalog_rule_id": "G4-VULN",
+      "title": "Known TLS Implementation Vulnerability",
+      "applies_to": [
+        "apache",
+        "nginx",
+        "ols"
+      ],
+      "expected": false
+    },
+    "references": [
+      "https://owasp.org/www-project-web-security-testing-guide/",
+      "https://cwe.mitre.org/data/definitions/310.html"
+    ],
+    "evidence_entries": [
+      {
+        "source": "testssl",
+        "observed": "potentially VULNERABLE, gzip HTTP compression detected  - only supplied '/' tested",
+        "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\raw\\testssl.json"
+      },
+      {
+        "source": "testssl",
+        "observed": "potentially vulnerable, uses obsolete TLS CBC ciphers",
+        "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\raw\\testssl.json"
+      }
+    ]
+  },
+  {
+    "run_id": "run_20260425_174922_de985e",
+    "scan_id": "run_20260425_174922_de985e",
+    "target": {
+      "name": "nginx",
+      "ip": "192.168.56.11",
+      "platform": "nginx"
+    },
+    "server_type": "nginx",
+    "source": "gobuster",
+    "rule_id": "G9",
+    "category": "files",
+    "severity": "high",
+    "title": "Sensitive File Exposed: /backup_2025.sql",
+    "description": "Sensitive path appears reachable over HTTP and may expose secrets or internal data.",
+    "wstg_id": "WSTG-CONF-06",
+    "cwe_id": "CWE-538",
+    "cve_list": [],
+    "cvss": 7.5,
+    "evidence": {
+      "observed": "/backup_2025.sql (status 200)",
+      "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\raw\\gobuster.json"
+    },
+    "status": "open",
+    "recommendation": "Review and apply hardening via Ansible.",
+    "ansible": {
+      "tags": [
+        "remove_sensitive_files"
+      ],
+      "requires_reboot": false
+    },
+    "rule_meta": {
+      "catalog_rule_id": "G9-Sensitive-Files",
+      "title": "Sensitive Files Exposed",
+      "applies_to": [
+        "apache",
+        "nginx",
+        "ols"
+      ],
+      "expected": false
+    },
+    "references": [
+      "https://owasp.org/www-project-web-security-testing-guide/",
+      "https://cwe.mitre.org/data/definitions/538.html"
+    ],
+    "evidence_entries": [
+      {
+        "source": "gobuster",
+        "observed": "/backup_2025.sql (status 200)",
+        "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\raw\\gobuster.json"
+      },
+      {
+        "source": "gobuster",
+        "observed": "/.env (status 200)",
+        "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\raw\\gobuster.json"
+      }
+    ]
+  },
+  {
+    "run_id": "run_20260425_174922_de985e",
+    "scan_id": "run_20260425_174922_de985e",
+    "target": {
+      "name": "nginx",
+      "ip": "192.168.56.11",
+      "platform": "nginx"
+    },
+    "server_type": "nginx",
+    "source": "gobuster",
+    "rule_id": "M1",
+    "category": "information",
+    "severity": "medium",
+    "title": "Status Page Exposed: /nginx_status",
+    "description": "Server administrative status page is publicly accessible.",
+    "wstg_id": "WSTG-CONF-08",
+    "cwe_id": "CWE-200",
+    "cve_list": [],
+    "cvss": 5.3,
+    "evidence": {
+      "observed": "/nginx_status (status 200)",
+      "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\raw\\gobuster.json"
+    },
+    "status": "open",
+    "recommendation": "Review and apply hardening via Ansible.",
+    "ansible": {
+      "tags": [
+        "restrict_status_page"
+      ],
+      "requires_reboot": false
+    },
+    "rule_meta": {
+      "catalog_rule_id": "M1-Status-Page-Exposure",
+      "title": "Administrative Status Interface Exposed",
+      "applies_to": [
+        "apache",
+        "nginx"
+      ],
+      "expected": false
+    },
+    "references": [
+      "https://owasp.org/www-project-web-security-testing-guide/",
+      "https://httpd.apache.org/docs/2.4/mod/mod_status.html"
+    ],
+    "evidence_entries": [
+      {
+        "source": "gobuster",
+        "observed": "/nginx_status (status 200)",
+        "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\raw\\gobuster.json"
+      }
+    ]
+  },
+  {
+    "run_id": "run_20260425_174922_de985e",
+    "scan_id": "run_20260425_174922_de985e",
+    "target": {
+      "name": "nginx",
+      "ip": "192.168.56.11",
+      "platform": "nginx"
+    },
+    "server_type": "nginx",
+    "source": "agent",
+    "rule_id": "G2",
+    "category": "files",
+    "severity": "medium",
+    "title": "Directory listing controls",
+    "description": "autoindex on;",
+    "wstg_id": "WSTG-CONF-03",
+    "cwe_id": "CWE-548",
+    "cve_list": [],
+    "cvss": 5.3,
+    "evidence": {
+      "observed": "autoindex on;",
+      "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\agent.json",
+      "recommendation": "Disable directory auto-indexing for public paths."
+    },
+    "status": "open",
+    "recommendation": "Review and apply hardening via Ansible.",
+    "ansible": {
+      "tags": [
+        "nginx_agent_check"
+      ],
+      "requires_reboot": false
+    },
+    "check_status": "fail",
+    "original_rule_id": "AG-DIR-01",
+    "rule_meta": {
+      "catalog_rule_id": "NG-N2-G2-Autoindex",
+      "title": "NGINX Autoindex Enabled",
+      "applies_to": [
+        "nginx"
+      ],
+      "expected": false
+    },
+    "references": [
+      "https://owasp.org/www-project-web-security-testing-guide/",
+      "https://nginx.org/en/docs/http/ngx_http_autoindex_module.html"
+    ],
+    "evidence_entries": [
+      {
+        "source": "agent",
+        "observed": "autoindex on;",
+        "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\agent.json"
+      }
+    ]
+  },
+  {
+    "run_id": "run_20260425_174922_de985e",
+    "scan_id": "run_20260425_174922_de985e",
+    "target": {
+      "name": "nginx",
+      "ip": "192.168.56.11",
+      "platform": "nginx"
+    },
+    "server_type": "nginx",
+    "source": "agent",
+    "rule_id": "NG-N2-G2",
+    "category": "files",
+    "severity": "medium",
+    "title": "Nginx autoindex enabled",
+    "description": "autoindex directives inspected in nginx configuration",
+    "wstg_id": "WSTG-CONF-03",
+    "cwe_id": "CWE-548",
+    "cve_list": [],
+    "cvss": 5.3,
+    "evidence": {
+      "observed": "autoindex directives inspected in nginx configuration",
+      "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\agent.json",
+      "recommendation": "Disable autoindex in public locations."
+    },
+    "status": "open",
+    "recommendation": "Review and apply hardening via Ansible.",
+    "ansible": {
+      "tags": [
+        "nginx_agent_check"
+      ],
+      "requires_reboot": false
+    },
+    "check_status": "fail",
+    "original_rule_id": "NG-N2-G2",
+    "rule_meta": {
+      "catalog_rule_id": "NG-N2-G2-Autoindex",
+      "title": "NGINX Autoindex Enabled",
+      "applies_to": [
+        "nginx"
+      ],
+      "expected": false
+    },
+    "references": [
+      "https://owasp.org/www-project-web-security-testing-guide/",
+      "https://nginx.org/en/docs/http/ngx_http_autoindex_module.html"
+    ],
+    "evidence_entries": [
+      {
+        "source": "agent",
+        "observed": "autoindex directives inspected in nginx configuration",
+        "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\agent.json"
+      }
+    ]
+  },
+  {
+    "run_id": "run_20260425_174922_de985e",
+    "scan_id": "run_20260425_174922_de985e",
+    "target": {
+      "name": "nginx",
+      "ip": "192.168.56.11",
+      "platform": "nginx"
+    },
+    "server_type": "nginx",
+    "source": "agent",
+    "rule_id": "NG-N5-G3",
+    "category": "methods",
+    "severity": "medium",
+    "title": "Nginx methods and request limits",
+    "description": "No effective method restriction found; No client_max_body_size directive found",
+    "wstg_id": "WSTG-CONF-01",
+    "cwe_id": "CWE-16",
+    "cve_list": [],
+    "cvss": 5.9,
+    "evidence": {
+      "observed": "No effective method restriction found; No client_max_body_size directive found",
+      "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\agent.json",
+      "recommendation": "Restrict methods and set request size/buffer limits for abuse resistance."
+    },
+    "status": "open",
+    "recommendation": "Review and apply hardening via Ansible.",
+    "ansible": {
+      "tags": [
+        "nginx_agent_check"
+      ],
+      "requires_reboot": false
+    },
+    "check_status": "fail",
+    "original_rule_id": "NG-N5-G3",
+    "rule_meta": {
+      "catalog_rule_id": "NG-N5-G3-Methods-Limits",
+      "title": "NGINX Methods and Limits Weak",
+      "applies_to": [
+        "nginx"
+      ],
+      "expected": false
+    },
+    "references": [
+      "https://owasp.org/www-project-web-security-testing-guide/",
+      "https://nginx.org/en/docs/http/ngx_http_core_module.html#limit_except"
+    ],
+    "evidence_entries": [
+      {
+        "source": "agent",
+        "observed": "No effective method restriction found; No client_max_body_size directive found",
+        "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\agent.json"
+      }
+    ]
+  },
+  {
+    "run_id": "run_20260425_174922_de985e",
+    "scan_id": "run_20260425_174922_de985e",
+    "target": {
+      "name": "nginx",
+      "ip": "192.168.56.11",
+      "platform": "nginx"
+    },
+    "server_type": "nginx",
+    "source": "agent",
+    "rule_id": "NG-G6-COOKIELOG",
+    "category": "logging",
+    "severity": "high",
+    "title": "Nginx log includes cookies",
+    "description": "log_format directives inspected for cookie variable usage",
+    "wstg_id": "WSTG-CONF-07",
+    "cwe_id": "CWE-532",
+    "cve_list": [],
+    "cvss": 7.1,
+    "evidence": {
+      "observed": "log_format directives inspected for cookie variable usage",
+      "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\agent.json",
+      "recommendation": "Avoid logging session cookies in access logs."
+    },
+    "status": "open",
+    "recommendation": "Review and apply hardening via Ansible.",
+    "ansible": {
+      "tags": [
+        "nginx_agent_check"
+      ],
+      "requires_reboot": false
+    },
+    "check_status": "fail",
+    "original_rule_id": "NG-G6-COOKIELOG",
+    "rule_meta": {
+      "catalog_rule_id": "NG-G6-COOKIELOG",
+      "title": "NGINX Cookie Logging Enabled",
+      "applies_to": [
+        "nginx"
+      ],
+      "expected": true
+    },
+    "references": [
+      "https://owasp.org/www-project-web-security-testing-guide/"
+    ],
+    "evidence_entries": [
+      {
+        "source": "agent",
+        "observed": "log_format directives inspected for cookie variable usage",
+        "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\agent.json"
+      }
+    ]
+  },
+  {
+    "run_id": "run_20260425_174922_de985e",
+    "scan_id": "run_20260425_174922_de985e",
+    "target": {
+      "name": "nginx",
+      "ip": "192.168.56.11",
+      "platform": "nginx"
+    },
+    "server_type": "nginx",
+    "source": "agent",
+    "rule_id": "AG-PATCH-STATE",
+    "category": "updates",
+    "severity": "low",
+    "title": "System packages pending update",
+    "description": "Host has pending package updates. Apply OS updates and security patches.",
+    "wstg_id": "WSTG-CONF-08",
+    "cwe_id": "CWE-1104",
+    "cve_list": [],
+    "cvss": 6.0,
+    "evidence": {
+      "observed": "apparmor/jammy-updates 3.0.4-2ubuntu2.5 amd64 [upgradable from: 3.0.4-2ubuntu2.4]\nbind9-dnsutils/jammy-updates,jammy-security 1:9.18.39-0ubuntu0.22.04.3 amd64 [upgradable from: 1:9.18.39-0ubuntu0.22.04.1]\nbind9-host/jammy-updates,jammy-security 1:9.18.39-0ubuntu0.22.04.3 amd64 [upgradable from: 1:9.18.39-0ubuntu0.22.04.1]\nbind9-libs/jammy-updates,jammy-security 1:9.18.39-0ubuntu0.22.04.3 amd64 [upgradable from: 1:9.18.39-0ubuntu0.22.04.1]\nbinutils-common/jammy-updates,jammy-security 2.38-4ubuntu2.12 amd64 [upgradable from: 2.38-4ubuntu2.8]\nbinutils-x86-64-linux-gnu/jammy-updates,jammy-security 2.38-4ubuntu2.12 amd64 [upgradable from: 2.38-4ubuntu2.8]\nbinutils/jammy-updates,jammy-security 2.38-4ubuntu2.12 amd64 [upgradable from: 2.38-4ubuntu2.8]\nbsdextrautils/jammy-updates,jammy-security 2.37.2-4ubuntu3.5 amd64 [upgradable from: 2.37.2-4ubuntu3.4]",
+      "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\agent.json"
+    },
+    "status": "open",
+    "recommendation": "Review and apply hardening via Ansible.",
+    "ansible": {
+      "tags": [
+        "apply_security_updates"
+      ],
+      "requires_reboot": false
+    },
+    "rule_meta": {
+      "catalog_rule_id": "AG-PATCH-STATE",
+      "title": "Pending Security Updates",
+      "applies_to": [
+        "apache",
+        "nginx",
+        "ols"
+      ],
+      "expected": false
+    },
+    "references": [
+      "https://owasp.org/www-project-web-security-testing-guide/"
+    ],
+    "evidence_entries": [
+      {
+        "source": "agent",
+        "observed": "apparmor/jammy-updates 3.0.4-2ubuntu2.5 amd64 [upgradable from: 3.0.4-2ubuntu2.4]\nbind9-dnsutils/jammy-updates,jammy-security 1:9.18.39-0ubuntu0.22.04.3 amd64 [upgradable from: 1:9.18.39-0ubuntu0.22.04.1]\nbind9-host/jammy-updates,jammy-security 1:9.18.39-0ubuntu0.22.04.3 amd64 [upgradable from: 1:9.18.39-0ubuntu0.22.04.1]\nbind9-libs/jammy-updates,jammy-security 1:9.18.39-0ubuntu0.22.04.3 amd64 [upgradable from: 1:9.18.39-0ubuntu0.22.04.1]\nbinutils-common/jammy-updates,jammy-security 2.38-4ubuntu2.12 amd64 [upgradable from: 2.38-4ubuntu2.8]\nbinutils-x86-64-linux-gnu/jammy-updates,jammy-security 2.38-4ubuntu2.12 amd64 [upgradable from: 2.38-4ubuntu2.8]\nbinutils/jammy-updates,jammy-security 2.38-4ubuntu2.12 amd64 [upgradable from: 2.38-4ubuntu2.8]\nbsdextrautils/jammy-updates,jammy-security 2.37.2-4ubuntu3.5 amd64 [upgradable from: 2.37.2-4ubuntu3.4]",
+        "raw_path": "runs\\run_20260425_174922_de985e\\nginx\\agent.json"
+      }
+    ]
+  }
+]

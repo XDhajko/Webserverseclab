@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.98 scan initiated Sun Apr 26 15:25:41 2026 as: nmap -sV -p 80,443,7080 -&#45;script http-methods,http-server-header,ssl-cert -oX /runs/run_20260426_172337_fe0047/nginx/raw/nmap.xml 192.168.56.11 -->
+<nmaprun scanner="nmap" args="nmap -sV -p 80,443,7080 -&#45;script http-methods,http-server-header,ssl-cert -oX /runs/run_20260426_172337_fe0047/nginx/raw/nmap.xml 192.168.56.11" start="1777217141" startstr="Sun Apr 26 15:25:41 2026" version="7.98" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="3" services="80,443,7080"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="unknown-response" reason_ttl="0"/>
+<address addr="192.168.56.11" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<host starttime="1777217143" endtime="1777217157"><status state="up" reason="reset" reason_ttl="63"/>
+<address addr="192.168.56.11" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="63"/><service name="http" product="nginx" method="probed" conf="10"><cpe>cpe:/a:igor_sysoev:nginx</cpe></service><script id="http-methods" output="&#xa;  Supported Methods: GET HEAD"><table key="Supported Methods">
+<elem>GET</elem>
+<elem>HEAD</elem>
+</table>
+</script></port>
+<port protocol="tcp" portid="443"><state state="open" reason="syn-ack" reason_ttl="63"/><service name="http" product="nginx" tunnel="ssl" method="probed" conf="10"><cpe>cpe:/a:igor_sysoev:nginx</cpe></service><script id="ssl-cert" output="Subject: commonName=vm-nginx&#xa;Subject Alternative Name: DNS:vm-nginx&#xa;Issuer: commonName=vm-nginx&#xa;Public Key type: rsa&#xa;Public Key bits: 2048&#xa;Signature Algorithm: sha256WithRSAEncryption&#xa;Not valid before: 2026-04-26T11:57:43&#xa;Not valid after:  2036-04-23T11:57:43&#xa;MD5:     c950 2d56 6017 c8f8 e985 331b 7b26 103c&#xa;SHA-1:   f6e7 5331 d5c3 9308 2266 0c82 7654 737a 97da 0676&#xa;SHA-256: ded2 e1fa 9170 e06a ceb1 9b43 8940 f106 4174 3d0d 799d 5df0 a398 86e0 1960 6967"><table key="subject">
+<elem key="commonName">vm-nginx</elem>
+</table>
+<table key="issuer">
+<elem key="commonName">vm-nginx</elem>
+</table>
+<table key="pubkey">
+<elem key="type">rsa</elem>
+<elem key="bits">2048</elem>
+<elem key="modulus">9B353E6BB0595B9F08ED3413927D439CB4C2507668F64C073C3FC1C8A328F9AF9737A7286984BF121DAE3EDB8B9DCDB14288AD9EC1DDF3E8A64B7B5E93B0A9E32B6829C16D9E144EAC213087EBDBF46C1B06E5C0E25C97F039618E5053B8A8447444F250DBBCB307B340F722A16A0D5C0CEB977B5BF9CB0485AF0316C6B1EC0A18325A5BE37383276DB436CCB0ECDA60986B8248FC5639FD53A7B1399157E37355C2C2B12AE192D3E5C98C63FDCD10AC8D8658693D1075A70FBB2FED5501B98796315DA7B7D101986A88E4F2C22847A198CDC31A3A3DB382C4F06B273AD4DF8B28AADBBEBB0A4CE0B9134AF047E3783B740436B3D5DFA7EA82F7A35FEBBF805D</elem>
+<elem key="exponent">65537</elem>
+</table>
+<table key="extensions">
+<table>
+<elem key="name">X509v3 Basic Constraints</elem>
+<elem key="value">CA:FALSE</elem>
+</table>
+<table>
+<elem key="name">X509v3 Subject Alternative Name</elem>
+<elem key="value">DNS:vm-nginx</elem>
+</table>
+<table>
+<elem key="name">X509v3 Subject Key Identifier</elem>
+<elem key="value">82:49:1A:40:7C:FE:1C:24:BC:02:15:FD:18:58:83:BE:61:CA:C7:FC</elem>
+</table>
+</table>
+<elem key="sig_algo">sha256WithRSAEncryption</elem>
+<table key="validity">
+<elem key="notBefore">2026-04-26T11:57:43</elem>
+<elem key="notAfter">2036-04-23T11:57:43</elem>
+</table>
+<elem key="md5">c9502d566017c8f8e985331b7b26103c</elem>
+<elem key="sha1">f6e75331d5c3930822660c827654737a97da0676</elem>
+<elem key="sha256">ded2e1fa9170e06aceb19b438940f10641743d0d799d5df0a39886e019606967</elem>
+<elem key="pem">-&#45;&#45;&#45;&#45;BEGIN CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;MIIC9TCCAd2gAwIBAgIUAck49HO7ekXIk0+E6mo6tI31C6EwDQYJKoZIhvcNAQEL&#xa;BQAwEzERMA8GA1UEAwwIdm0tbmdpbngwHhcNMjYwNDI2MTE1NzQzWhcNMzYwNDIz&#xa;MTE1NzQzWjATMREwDwYDVQQDDAh2bS1uZ2lueDCCASIwDQYJKoZIhvcNAQEBBQAD&#xa;ggEPADCCAQoCggEBAJs1PmuwWVufCO00E5J9Q5y0wlB2aPZMBzw/wcijKPmvlzen&#xa;KGmEvxIdrj7bi53NsUKIrZ7B3fPopkt7XpOwqeMraCnBbZ4UTqwhMIfr2/RsGwbl&#xa;wOJcl/A5YY5QU7ioRHRE8lDbvLMHs0D3IqFqDVwM65d7W/nLBIWvAxbGsewKGDJa&#xa;W+NzgydttDbMsOzaYJhrgkj8Vjn9U6exOZFX43NVwsKxKuGS0+XJjGP9zRCsjYZY&#xa;aT0QdacPuy/tVQG5h5YxXae30QGYaojk8sIoR6GYzcMaOj2zgsTwayc61N+LKKrb&#xa;vrsKTOC5E0rwR+N4O3QENrPV36fqgvejX+u/gF0CAwEAAaNBMD8wCQYDVR0TBAIw&#xa;ADATBgNVHREEDDAKggh2bS1uZ2lueDAdBgNVHQ4EFgQUgkkaQHz+HCS8AhX9GFiD&#xa;vmHKx/wwDQYJKoZIhvcNAQELBQADggEBAAnW1zBAvm17biNUnrjq2u/tnY86Nl+R&#xa;dhkC+iksm+KKc5tsVRfb7LdH17TxA4vXW3UazVcXArdOTz31pHuYzdB7qMngRCkQ&#xa;yFTX2Rrb0eogkP182AMh5hIascyuIGnYxAgoQnhunxninolzXP5TfnsERFbm0svK&#xa;qCwgqQ0QnB3A+BT23K+Y7noiJfoDXK/7Ka03ybtLCh+1DE8Z+wfEpaMZMLR48w0F&#xa;gqfihhmC+B9NTenhicdNV+YY5jX+XfxgloG9J9k0/LUpf1vd0f/u+0wD1vHkFMw2&#xa;YjY3+F1Wpn0mA2bGprEgKmeghAx33bQYH3bdiqtjn2YFO5Y7uyL8Hio=&#xa;-&#45;&#45;&#45;&#45;END CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;</elem>
+</script><script id="http-methods" output="&#xa;  Supported Methods: GET HEAD"><table key="Supported Methods">
+<elem>GET</elem>
+<elem>HEAD</elem>
+</table>
+</script></port>
+<port protocol="tcp" portid="7080"><state state="filtered" reason="no-response" reason_ttl="0"/><service name="empowerid" method="table" conf="3"/></port>
+</ports>
+<times srtt="1697" rttvar="3640" to="100000"/>
+</host>
+<runstats><finished time="1777217157" timestr="Sun Apr 26 15:25:57 2026" summary="Nmap done at Sun Apr 26 15:25:57 2026; 1 IP address (1 host up) scanned in 15.98 seconds" elapsed="15.98" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

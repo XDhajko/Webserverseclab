@@ -1,0 +1,26 @@
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-04-26 15:25 +0000
+Nmap scan report for 192.168.56.11
+Host is up (0.0017s latency).
+
+PORT     STATE    SERVICE   VERSION
+80/tcp   open     http      nginx
+| http-methods: 
+|_  Supported Methods: GET HEAD
+443/tcp  open     ssl/http  nginx
+| ssl-cert: Subject: commonName=vm-nginx
+| Subject Alternative Name: DNS:vm-nginx
+| Issuer: commonName=vm-nginx
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2026-04-26T11:57:43
+| Not valid after:  2036-04-23T11:57:43
+| MD5:     c950 2d56 6017 c8f8 e985 331b 7b26 103c
+| SHA-1:   f6e7 5331 d5c3 9308 2266 0c82 7654 737a 97da 0676
+|_SHA-256: ded2 e1fa 9170 e06a ceb1 9b43 8940 f106 4174 3d0d 799d 5df0 a398 86e0 1960 6967
+| http-methods: 
+|_  Supported Methods: GET HEAD
+7080/tcp filtered empowerid
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 15.98 seconds

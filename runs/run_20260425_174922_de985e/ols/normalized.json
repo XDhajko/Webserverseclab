@@ -1,0 +1,459 @@
+[
+  {
+    "run_id": "run_20260425_174922_de985e",
+    "scan_id": "run_20260425_174922_de985e",
+    "target": {
+      "name": "ols",
+      "ip": "192.168.56.12",
+      "platform": "ols"
+    },
+    "server_type": "ols",
+    "source": "nmap",
+    "rule_id": "OLS-O1-ADMIN",
+    "category": "admin_surface",
+    "severity": "medium",
+    "title": "OpenLiteSpeed WebAdmin port exposed",
+    "description": "Port 7080 is externally reachable, indicating potential WebAdmin exposure.",
+    "wstg_id": "WSTG-CONF-08",
+    "cwe_id": "CWE-284",
+    "cve_list": [],
+    "cvss": 6.5,
+    "evidence": {
+      "observed": "Port 7080 open",
+      "raw_path": "runs\\run_20260425_174922_de985e\\ols\\raw\\nmap.xml"
+    },
+    "status": "open",
+    "recommendation": "Review and apply hardening via Ansible.",
+    "ansible": {
+      "tags": [
+        "ols_restrict_admin"
+      ],
+      "requires_reboot": false
+    },
+    "rule_meta": {
+      "catalog_rule_id": "OLS-O1-Admin-Exposure",
+      "title": "OpenLiteSpeed WebAdmin Exposure",
+      "applies_to": [
+        "ols"
+      ],
+      "expected": false
+    },
+    "references": [
+      "https://owasp.org/www-project-web-security-testing-guide/",
+      "https://openlitespeed.org/"
+    ],
+    "evidence_entries": [
+      {
+        "source": "nmap",
+        "observed": "Port 7080 open",
+        "raw_path": "runs\\run_20260425_174922_de985e\\ols\\raw\\nmap.xml"
+      },
+      {
+        "source": "agent",
+        "observed": "WebAdmin listener is bound to public interface(s): 0.0.0.0:7080",
+        "raw_path": "runs\\run_20260425_174922_de985e\\ols\\agent.json"
+      }
+    ],
+    "check_status": "fail"
+  },
+  {
+    "run_id": "run_20260425_174922_de985e",
+    "scan_id": "run_20260425_174922_de985e",
+    "target": {
+      "name": "ols",
+      "ip": "192.168.56.12",
+      "platform": "ols"
+    },
+    "server_type": "ols",
+    "source": "gobuster",
+    "rule_id": "G9",
+    "category": "files",
+    "severity": "high",
+    "title": "Sensitive File Restricted: /.htaccess",
+    "description": "Sensitive path exists but is access-controlled. Verify that access controls cannot be bypassed.",
+    "wstg_id": "WSTG-CONF-06",
+    "cwe_id": "CWE-538",
+    "cve_list": [],
+    "cvss": 7.5,
+    "evidence": {
+      "observed": "/.htaccess (status 403)",
+      "raw_path": "runs\\run_20260425_174922_de985e\\ols\\raw\\gobuster.json"
+    },
+    "status": "open",
+    "recommendation": "Review and apply hardening via Ansible.",
+    "ansible": {
+      "tags": [
+        "remove_sensitive_files"
+      ],
+      "requires_reboot": false
+    },
+    "rule_meta": {
+      "catalog_rule_id": "G9-Sensitive-Files",
+      "title": "Sensitive Files Exposed",
+      "applies_to": [
+        "apache",
+        "nginx",
+        "ols"
+      ],
+      "expected": false
+    },
+    "references": [
+      "https://owasp.org/www-project-web-security-testing-guide/",
+      "https://cwe.mitre.org/data/definitions/538.html"
+    ],
+    "evidence_entries": [
+      {
+        "source": "gobuster",
+        "observed": "/.htaccess (status 403)",
+        "raw_path": "runs\\run_20260425_174922_de985e\\ols\\raw\\gobuster.json"
+      },
+      {
+        "source": "gobuster",
+        "observed": "/info.php (status 200)",
+        "raw_path": "runs\\run_20260425_174922_de985e\\ols\\raw\\gobuster.json"
+      },
+      {
+        "source": "gobuster",
+        "observed": "/phpinfo.php (status 200)",
+        "raw_path": "runs\\run_20260425_174922_de985e\\ols\\raw\\gobuster.json"
+      },
+      {
+        "source": "gobuster",
+        "observed": "/.env (status 200)",
+        "raw_path": "runs\\run_20260425_174922_de985e\\ols\\raw\\gobuster.json"
+      },
+      {
+        "source": "agent",
+        "observed": "/usr/local/lsws/Example/html/.env (mode=0o644, owner=root)\n/usr/local/lsws/Example/html/info.php (mode=0o644, owner=lsadm)",
+        "raw_path": "runs\\run_20260425_174922_de985e\\ols\\agent.json"
+      }
+    ],
+    "check_status": "fail"
+  },
+  {
+    "run_id": "run_20260425_174922_de985e",
+    "scan_id": "run_20260425_174922_de985e",
+    "target": {
+      "name": "ols",
+      "ip": "192.168.56.12",
+      "platform": "ols"
+    },
+    "server_type": "ols",
+    "source": "agent",
+    "rule_id": "AG-TLS-KEY-PERMS",
+    "category": "tls",
+    "severity": "low",
+    "title": "TLS private key permissions",
+    "description": "[{\"path\": \"$SERVER_ROOT/admin/conf/webadmin.key\", \"state\": {\"exists\": false, \"owner\": \"unknown\", \"group\": \"unknown\", \"mode\": \"unknown\", \"permission_denied\": false}}]",
+    "wstg_id": "WSTG-CONF-04",
+    "cwe_id": "CWE-732",
+    "cve_list": [],
+    "cvss": 7.5,
+    "evidence": {
+      "observed": "[{\"path\": \"$SERVER_ROOT/admin/conf/webadmin.key\", \"state\": {\"exists\": false, \"owner\": \"unknown\", \"group\": \"unknown\", \"mode\": \"unknown\", \"permission_denied\": false}}]",
+      "raw_path": "runs\\run_20260425_174922_de985e\\ols\\agent.json",
+      "recommendation": "Restrict private key access to root and service group only."
+    },
+    "status": "open",
+    "recommendation": "Review and apply hardening via Ansible.",
+    "ansible": {
+      "tags": [
+        "ols_agent_check"
+      ],
+      "requires_reboot": false
+    },
+    "check_status": "unknown",
+    "original_rule_id": "AG-TLS-KEY-PERMS",
+    "rule_meta": {
+      "catalog_rule_id": "AG-TLS-KEY-PERMS",
+      "title": "Weak TLS Private Key Permissions",
+      "applies_to": [
+        "apache",
+        "nginx",
+        "ols"
+      ],
+      "expected": false
+    },
+    "references": [
+      "https://owasp.org/www-project-web-security-testing-guide/"
+    ],
+    "evidence_entries": [
+      {
+        "source": "agent",
+        "observed": "[{\"path\": \"$SERVER_ROOT/admin/conf/webadmin.key\", \"state\": {\"exists\": false, \"owner\": \"unknown\", \"group\": \"unknown\", \"mode\": \"unknown\", \"permission_denied\": false}}]",
+        "raw_path": "runs\\run_20260425_174922_de985e\\ols\\agent.json"
+      }
+    ]
+  },
+  {
+    "run_id": "run_20260425_174922_de985e",
+    "scan_id": "run_20260425_174922_de985e",
+    "target": {
+      "name": "ols",
+      "ip": "192.168.56.12",
+      "platform": "ols"
+    },
+    "server_type": "ols",
+    "source": "agent",
+    "rule_id": "G2",
+    "category": "files",
+    "severity": "medium",
+    "title": "Directory listing controls",
+    "description": "autoIndex 1\nautoindex 1",
+    "wstg_id": "WSTG-CONF-03",
+    "cwe_id": "CWE-548",
+    "cve_list": [],
+    "cvss": 5.3,
+    "evidence": {
+      "observed": "autoIndex 1\nautoindex 1",
+      "raw_path": "runs\\run_20260425_174922_de985e\\ols\\agent.json",
+      "recommendation": "Disable directory auto-indexing for public paths."
+    },
+    "status": "open",
+    "recommendation": "Review and apply hardening via Ansible.",
+    "ansible": {
+      "tags": [
+        "ols_agent_check"
+      ],
+      "requires_reboot": false
+    },
+    "check_status": "fail",
+    "original_rule_id": "AG-DIR-01",
+    "rule_meta": {
+      "catalog_rule_id": "G2-Directory-Listing",
+      "title": "Directory Listing Enabled",
+      "applies_to": [
+        "apache",
+        "nginx",
+        "ols"
+      ],
+      "expected": false
+    },
+    "references": [
+      "https://owasp.org/www-project-web-security-testing-guide/",
+      "https://cwe.mitre.org/data/definitions/548.html"
+    ],
+    "evidence_entries": [
+      {
+        "source": "agent",
+        "observed": "autoIndex 1\nautoindex 1",
+        "raw_path": "runs\\run_20260425_174922_de985e\\ols\\agent.json"
+      }
+    ]
+  },
+  {
+    "run_id": "run_20260425_174922_de985e",
+    "scan_id": "run_20260425_174922_de985e",
+    "target": {
+      "name": "ols",
+      "ip": "192.168.56.12",
+      "platform": "ols"
+    },
+    "server_type": "ols",
+    "source": "agent",
+    "rule_id": "G5",
+    "category": "headers",
+    "severity": "medium",
+    "title": "Security headers configuration presence",
+    "description": "Detected headers in config: none\nDetected headers in live response (http://127.0.0.1/ status 200): none",
+    "wstg_id": "WSTG-CONF-05",
+    "cwe_id": "CWE-693",
+    "cve_list": [],
+    "cvss": 5.4,
+    "evidence": {
+      "observed": "Detected headers in config: none\nDetected headers in live response (http://127.0.0.1/ status 200): none",
+      "raw_path": "runs\\run_20260425_174922_de985e\\ols\\agent.json",
+      "recommendation": "Configure HSTS, X-Frame-Options, X-Content-Type-Options, and CSP where applicable."
+    },
+    "status": "open",
+    "recommendation": "Review and apply hardening via Ansible.",
+    "ansible": {
+      "tags": [
+        "ols_agent_check"
+      ],
+      "requires_reboot": false
+    },
+    "check_status": "fail",
+    "original_rule_id": "AG-HEADERS-01",
+    "rule_meta": {
+      "catalog_rule_id": "G5-Security-Headers",
+      "title": "Missing Security Response Headers",
+      "applies_to": [
+        "apache",
+        "nginx",
+        "ols"
+      ],
+      "expected": false
+    },
+    "references": [
+      "https://owasp.org/www-project-web-security-testing-guide/",
+      "https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html"
+    ],
+    "evidence_entries": [
+      {
+        "source": "agent",
+        "observed": "Detected headers in config: none\nDetected headers in live response (http://127.0.0.1/ status 200): none",
+        "raw_path": "runs\\run_20260425_174922_de985e\\ols\\agent.json"
+      }
+    ]
+  },
+  {
+    "run_id": "run_20260425_174922_de985e",
+    "scan_id": "run_20260425_174922_de985e",
+    "target": {
+      "name": "ols",
+      "ip": "192.168.56.12",
+      "platform": "ols"
+    },
+    "server_type": "ols",
+    "source": "agent",
+    "rule_id": "OLS-O4-G2",
+    "category": "files",
+    "severity": "medium",
+    "title": "OpenLiteSpeed example vhost or directory listing",
+    "description": "allowBrowse 1 or autoIndex 1 detected in OLS vhost config",
+    "wstg_id": "WSTG-CONF-03",
+    "cwe_id": "CWE-548",
+    "cve_list": [],
+    "cvss": 5.3,
+    "evidence": {
+      "observed": "allowBrowse 1 or autoIndex 1 detected in OLS vhost config",
+      "raw_path": "runs\\run_20260425_174922_de985e\\ols\\agent.json",
+      "recommendation": "Disable directory listing and remove sample/example vhost content."
+    },
+    "status": "open",
+    "recommendation": "Review and apply hardening via Ansible.",
+    "ansible": {
+      "tags": [
+        "ols_agent_check"
+      ],
+      "requires_reboot": false
+    },
+    "check_status": "fail",
+    "original_rule_id": "OLS-O4-G2",
+    "rule_meta": {
+      "catalog_rule_id": "OLS-O4-G2",
+      "title": "OpenLiteSpeed Example VHost/Index Exposure",
+      "applies_to": [
+        "ols"
+      ],
+      "expected": true
+    },
+    "references": [
+      "https://owasp.org/www-project-web-security-testing-guide/"
+    ],
+    "evidence_entries": [
+      {
+        "source": "agent",
+        "observed": "allowBrowse 1 or autoIndex 1 detected in OLS vhost config",
+        "raw_path": "runs\\run_20260425_174922_de985e\\ols\\agent.json"
+      }
+    ]
+  },
+  {
+    "run_id": "run_20260425_174922_de985e",
+    "scan_id": "run_20260425_174922_de985e",
+    "target": {
+      "name": "ols",
+      "ip": "192.168.56.12",
+      "platform": "ols"
+    },
+    "server_type": "ols",
+    "source": "agent",
+    "rule_id": "OLS-HTTP-ONLY",
+    "category": "tls",
+    "severity": "medium",
+    "title": "OpenLiteSpeed lacks HTTPS listener",
+    "description": "No HTTPS listener found in config or live sockets",
+    "wstg_id": "WSTG-CONF-04",
+    "cwe_id": "CWE-319",
+    "cve_list": [],
+    "cvss": 5.8,
+    "evidence": {
+      "observed": "No HTTPS listener found in config or live sockets",
+      "raw_path": "runs\\run_20260425_174922_de985e\\ols\\agent.json",
+      "recommendation": "Enable HTTPS listener and redirect HTTP to HTTPS."
+    },
+    "status": "open",
+    "recommendation": "Review and apply hardening via Ansible.",
+    "ansible": {
+      "tags": [
+        "ols_agent_check"
+      ],
+      "requires_reboot": false
+    },
+    "check_status": "fail",
+    "original_rule_id": "OLS-HTTP-ONLY",
+    "rule_meta": {
+      "catalog_rule_id": "OLS-HTTP-ONLY",
+      "title": "OpenLiteSpeed HTTP-Only Deployment",
+      "applies_to": [
+        "ols"
+      ],
+      "expected": true
+    },
+    "references": [
+      "https://owasp.org/www-project-web-security-testing-guide/",
+      "https://www.rfc-editor.org/rfc/rfc8446"
+    ],
+    "evidence_entries": [
+      {
+        "source": "agent",
+        "observed": "No HTTPS listener found in config or live sockets",
+        "raw_path": "runs\\run_20260425_174922_de985e\\ols\\agent.json"
+      }
+    ]
+  },
+  {
+    "run_id": "run_20260425_174922_de985e",
+    "scan_id": "run_20260425_174922_de985e",
+    "target": {
+      "name": "ols",
+      "ip": "192.168.56.12",
+      "platform": "ols"
+    },
+    "server_type": "ols",
+    "source": "agent",
+    "rule_id": "AG-PATCH-STATE",
+    "category": "updates",
+    "severity": "low",
+    "title": "System packages pending update",
+    "description": "Host has pending package updates. Apply OS updates and security patches.",
+    "wstg_id": "WSTG-CONF-08",
+    "cwe_id": "CWE-1104",
+    "cve_list": [],
+    "cvss": 6.0,
+    "evidence": {
+      "observed": "apparmor/jammy-updates 3.0.4-2ubuntu2.5 amd64 [upgradable from: 3.0.4-2ubuntu2.4]\nbind9-dnsutils/jammy-updates,jammy-security 1:9.18.39-0ubuntu0.22.04.3 amd64 [upgradable from: 1:9.18.39-0ubuntu0.22.04.1]\nbind9-host/jammy-updates,jammy-security 1:9.18.39-0ubuntu0.22.04.3 amd64 [upgradable from: 1:9.18.39-0ubuntu0.22.04.1]\nbind9-libs/jammy-updates,jammy-security 1:9.18.39-0ubuntu0.22.04.3 amd64 [upgradable from: 1:9.18.39-0ubuntu0.22.04.1]\nbinutils-common/jammy-updates,jammy-security 2.38-4ubuntu2.12 amd64 [upgradable from: 2.38-4ubuntu2.8]\nbinutils-x86-64-linux-gnu/jammy-updates,jammy-security 2.38-4ubuntu2.12 amd64 [upgradable from: 2.38-4ubuntu2.8]\nbinutils/jammy-updates,jammy-security 2.38-4ubuntu2.12 amd64 [upgradable from: 2.38-4ubuntu2.8]\nbsdextrautils/jammy-updates,jammy-security 2.37.2-4ubuntu3.5 amd64 [upgradable from: 2.37.2-4ubuntu3.4]",
+      "raw_path": "runs\\run_20260425_174922_de985e\\ols\\agent.json"
+    },
+    "status": "open",
+    "recommendation": "Review and apply hardening via Ansible.",
+    "ansible": {
+      "tags": [
+        "apply_security_updates"
+      ],
+      "requires_reboot": false
+    },
+    "rule_meta": {
+      "catalog_rule_id": "AG-PATCH-STATE",
+      "title": "Pending Security Updates",
+      "applies_to": [
+        "apache",
+        "nginx",
+        "ols"
+      ],
+      "expected": false
+    },
+    "references": [
+      "https://owasp.org/www-project-web-security-testing-guide/"
+    ],
+    "evidence_entries": [
+      {
+        "source": "agent",
+        "observed": "apparmor/jammy-updates 3.0.4-2ubuntu2.5 amd64 [upgradable from: 3.0.4-2ubuntu2.4]\nbind9-dnsutils/jammy-updates,jammy-security 1:9.18.39-0ubuntu0.22.04.3 amd64 [upgradable from: 1:9.18.39-0ubuntu0.22.04.1]\nbind9-host/jammy-updates,jammy-security 1:9.18.39-0ubuntu0.22.04.3 amd64 [upgradable from: 1:9.18.39-0ubuntu0.22.04.1]\nbind9-libs/jammy-updates,jammy-security 1:9.18.39-0ubuntu0.22.04.3 amd64 [upgradable from: 1:9.18.39-0ubuntu0.22.04.1]\nbinutils-common/jammy-updates,jammy-security 2.38-4ubuntu2.12 amd64 [upgradable from: 2.38-4ubuntu2.8]\nbinutils-x86-64-linux-gnu/jammy-updates,jammy-security 2.38-4ubuntu2.12 amd64 [upgradable from: 2.38-4ubuntu2.8]\nbinutils/jammy-updates,jammy-security 2.38-4ubuntu2.12 amd64 [upgradable from: 2.38-4ubuntu2.8]\nbsdextrautils/jammy-updates,jammy-security 2.37.2-4ubuntu3.5 amd64 [upgradable from: 2.37.2-4ubuntu3.4]",
+        "raw_path": "runs\\run_20260425_174922_de985e\\ols\\agent.json"
+      }
+    ]
+  }
+]

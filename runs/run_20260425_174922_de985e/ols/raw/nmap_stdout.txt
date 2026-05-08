@@ -1,0 +1,170 @@
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-04-25 15:49 +0000
+Nmap scan report for 192.168.56.12
+Host is up (0.0020s latency).
+
+PORT     STATE    SERVICE       VERSION
+80/tcp   open     http          LiteSpeed
+| fingerprint-strings: 
+|   GetRequest, HTTPOptions: 
+|     HTTP/1.0 200 OK
+|     etag: "2015-69ec66c1-3ea8b;;;"
+|     last-modified: Sat, 25 Apr 2026 07:01:21 GMT
+|     content-type: text/html
+|     content-length: 8213
+|     accept-ranges: bytes
+|     date: Sat, 25 Apr 2026 15:49:34 GMT
+|     server: LiteSpeed
+|     connection: close
+|     <!DOCTYPE html>
+|     <html lang="en">
+|     <head>
+|     <meta charset="utf-8" />
+|     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+|     <meta name="description" content="" />
+|     <meta name="author" content="" />
+|     <title>Clean Blog - Start Bootstrap Theme</title>
+|     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+|     <!-- Font Awesome icons (free version)-->
+|     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+|     <!-- Google fonts-->
+|_    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,40
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-server-header: LiteSpeed
+443/tcp  filtered https
+7080/tcp open     ssl/empowerid LiteSpeed
+| ssl-cert: Subject: commonName=openlitespeed.host/organizationName=LiteSpeedCommunity/stateOrProvinceName=NJ/countryName=US
+| Issuer: commonName=openlitespeed.host/organizationName=LiteSpeedCommunity/stateOrProvinceName=NJ/countryName=US
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2026-04-25T07:01:03
+| Not valid after:  2028-07-23T07:01:03
+| MD5:     0dac 764d 30e2 64b7 2542 fbf0 9033 1aaf
+| SHA-1:   5c0d 3aac 3078 4a15 e011 e0b7 f802 b7f1 a829 458f
+|_SHA-256: a593 85f3 9e40 58be be96 57f2 0f4b 2d72 6f8e 1d59 6d80 8b17 e4de 6077 cdb7 f211
+| fingerprint-strings: 
+|   GetRequest: 
+|     HTTP/1.0 302 Found
+|     x-powered-by: PHP/8.3.30
+|     x-frame-options: SAMEORIGIN
+|     content-security-policy: frame-ancestors 'self'
+|     referrer-policy: same-origin
+|     x-content-type-options: nosniff
+|     set-cookie: LSUI37FE0C43B84483E0=267b01061dbbdd9a2fa345887f9daa59; path=/; secure; HttpOnly
+|     expires: Thu, 19 Nov 1981 08:52:00 GMT
+|     cache-control: no-store, no-cache, must-revalidate
+|     pragma: no-cache
+|     set-cookie: LSID37FE0C43B84483E0=deleted; expires=Thu, 01 Jan 1970 00:00:01 GMT; Max-Age=0; path=/
+|     set-cookie: LSPA37FE0C43B84483E0=deleted; expires=Thu, 01 Jan 1970 00:00:01 GMT; Max-Age=0; path=/
+|     set-cookie: LSUI37FE0C43B84483E0=deleted; expires=Thu, 01 Jan 1970 00:00:01 GMT; Max-Age=0; path=/
+|     location: /login.php
+|     content-type: text/html; charset=UTF-8
+|     content-length: 0
+|     date: Sat, 25 Apr 2026 15:49:50 GMT
+|     server: LiteSpeed
+|     alt-svc: h3=":7080"; ma=2592000, h3-29=":7080"; ma=2592000, h3-Q050=":708
+|   HTTPOptions: 
+|     HTTP/1.0 302 Found
+|     x-powered-by: PHP/8.3.30
+|     x-frame-options: SAMEORIGIN
+|     content-security-policy: frame-ancestors 'self'
+|     referrer-policy: same-origin
+|     x-content-type-options: nosniff
+|     set-cookie: LSUI37FE0C43B84483E0=fca3e7dd1630b10b1f8c03db381f2af3; path=/; secure; HttpOnly
+|     expires: Thu, 19 Nov 1981 08:52:00 GMT
+|     cache-control: no-store, no-cache, must-revalidate
+|     pragma: no-cache
+|     set-cookie: LSID37FE0C43B84483E0=deleted; expires=Thu, 01 Jan 1970 00:00:01 GMT; Max-Age=0; path=/
+|     set-cookie: LSPA37FE0C43B84483E0=deleted; expires=Thu, 01 Jan 1970 00:00:01 GMT; Max-Age=0; path=/
+|     set-cookie: LSUI37FE0C43B84483E0=deleted; expires=Thu, 01 Jan 1970 00:00:01 GMT; Max-Age=0; path=/
+|     location: /login.php
+|     content-type: text/html; charset=UTF-8
+|     content-length: 0
+|     date: Sat, 25 Apr 2026 15:49:50 GMT
+|     server: LiteSpeed
+|_    alt-svc: h3=":7080"; ma=2592000, h3-29=":7080"; ma=2592000, h3-Q050=":708
+|_http-server-header: LiteSpeed
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+2 services unrecognized despite returning data. If you know the service/version, please submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port80-TCP:V=7.98%I=7%D=4/25%Time=69ECE28E%P=x86_64-unknown-linux-gnu%r
+SF:(GetRequest,2106,"HTTP/1\.0\x20200\x20OK\r\netag:\x20\"2015-69ec66c1-3e
+SF:a8b;;;\"\r\nlast-modified:\x20Sat,\x2025\x20Apr\x202026\x2007:01:21\x20
+SF:GMT\r\ncontent-type:\x20text/html\r\ncontent-length:\x208213\r\naccept-
+SF:ranges:\x20bytes\r\ndate:\x20Sat,\x2025\x20Apr\x202026\x2015:49:34\x20G
+SF:MT\r\nserver:\x20LiteSpeed\r\nconnection:\x20close\r\n\r\n<!DOCTYPE\x20
+SF:html>\n<html\x20lang=\"en\">\n\x20\x20\x20\x20<head>\n\x20\x20\x20\x20\
+SF:x20\x20\x20\x20<meta\x20charset=\"utf-8\"\x20/>\n\x20\x20\x20\x20\x20\x
+SF:20\x20\x20<meta\x20name=\"viewport\"\x20content=\"width=device-width,\x
+SF:20initial-scale=1,\x20shrink-to-fit=no\"\x20/>\n\x20\x20\x20\x20\x20\x2
+SF:0\x20\x20<meta\x20name=\"description\"\x20content=\"\"\x20/>\n\x20\x20\
+SF:x20\x20\x20\x20\x20\x20<meta\x20name=\"author\"\x20content=\"\"\x20/>\n
+SF:\x20\x20\x20\x20\x20\x20\x20\x20<title>Clean\x20Blog\x20-\x20Start\x20B
+SF:ootstrap\x20Theme</title>\n\x20\x20\x20\x20\x20\x20\x20\x20<link\x20rel
+SF:=\"icon\"\x20type=\"image/x-icon\"\x20href=\"assets/favicon\.ico\"\x20/
+SF:>\n\x20\x20\x20\x20\x20\x20\x20\x20<!--\x20Font\x20Awesome\x20icons\x20
+SF:\(free\x20version\)-->\n\x20\x20\x20\x20\x20\x20\x20\x20<script\x20src=
+SF:\"https://use\.fontawesome\.com/releases/v6\.3\.0/js/all\.js\"\x20cross
+SF:origin=\"anonymous\"></script>\n\x20\x20\x20\x20\x20\x20\x20\x20<!--\x2
+SF:0Google\x20fonts-->\n\x20\x20\x20\x20\x20\x20\x20\x20<link\x20href=\"ht
+SF:tps://fonts\.googleapis\.com/css\?family=Lora:400,700,40")%r(HTTPOption
+SF:s,2106,"HTTP/1\.0\x20200\x20OK\r\netag:\x20\"2015-69ec66c1-3ea8b;;;\"\r
+SF:\nlast-modified:\x20Sat,\x2025\x20Apr\x202026\x2007:01:21\x20GMT\r\ncon
+SF:tent-type:\x20text/html\r\ncontent-length:\x208213\r\naccept-ranges:\x2
+SF:0bytes\r\ndate:\x20Sat,\x2025\x20Apr\x202026\x2015:49:34\x20GMT\r\nserv
+SF:er:\x20LiteSpeed\r\nconnection:\x20close\r\n\r\n<!DOCTYPE\x20html>\n<ht
+SF:ml\x20lang=\"en\">\n\x20\x20\x20\x20<head>\n\x20\x20\x20\x20\x20\x20\x2
+SF:0\x20<meta\x20charset=\"utf-8\"\x20/>\n\x20\x20\x20\x20\x20\x20\x20\x20
+SF:<meta\x20name=\"viewport\"\x20content=\"width=device-width,\x20initial-
+SF:scale=1,\x20shrink-to-fit=no\"\x20/>\n\x20\x20\x20\x20\x20\x20\x20\x20<
+SF:meta\x20name=\"description\"\x20content=\"\"\x20/>\n\x20\x20\x20\x20\x2
+SF:0\x20\x20\x20<meta\x20name=\"author\"\x20content=\"\"\x20/>\n\x20\x20\x
+SF:20\x20\x20\x20\x20\x20<title>Clean\x20Blog\x20-\x20Start\x20Bootstrap\x
+SF:20Theme</title>\n\x20\x20\x20\x20\x20\x20\x20\x20<link\x20rel=\"icon\"\
+SF:x20type=\"image/x-icon\"\x20href=\"assets/favicon\.ico\"\x20/>\n\x20\x2
+SF:0\x20\x20\x20\x20\x20\x20<!--\x20Font\x20Awesome\x20icons\x20\(free\x20
+SF:version\)-->\n\x20\x20\x20\x20\x20\x20\x20\x20<script\x20src=\"https://
+SF:use\.fontawesome\.com/releases/v6\.3\.0/js/all\.js\"\x20crossorigin=\"a
+SF:nonymous\"></script>\n\x20\x20\x20\x20\x20\x20\x20\x20<!--\x20Google\x2
+SF:0fonts-->\n\x20\x20\x20\x20\x20\x20\x20\x20<link\x20href=\"https://font
+SF:s\.googleapis\.com/css\?family=Lora:400,700,40");
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port7080-TCP:V=7.98%T=SSL%I=7%D=4/25%Time=69ECE29E%P=x86_64-unknown-lin
+SF:ux-gnu%r(GetRequest,408,"HTTP/1\.0\x20302\x20Found\r\nx-powered-by:\x20
+SF:PHP/8\.3\.30\r\nx-frame-options:\x20SAMEORIGIN\r\ncontent-security-poli
+SF:cy:\x20frame-ancestors\x20'self'\r\nreferrer-policy:\x20same-origin\r\n
+SF:x-content-type-options:\x20nosniff\r\nset-cookie:\x20LSUI37FE0C43B84483
+SF:E0=267b01061dbbdd9a2fa345887f9daa59;\x20path=/;\x20secure;\x20HttpOnly\
+SF:r\nexpires:\x20Thu,\x2019\x20Nov\x201981\x2008:52:00\x20GMT\r\ncache-co
+SF:ntrol:\x20no-store,\x20no-cache,\x20must-revalidate\r\npragma:\x20no-ca
+SF:che\r\nset-cookie:\x20LSID37FE0C43B84483E0=deleted;\x20expires=Thu,\x20
+SF:01\x20Jan\x201970\x2000:00:01\x20GMT;\x20Max-Age=0;\x20path=/\r\nset-co
+SF:okie:\x20LSPA37FE0C43B84483E0=deleted;\x20expires=Thu,\x2001\x20Jan\x20
+SF:1970\x2000:00:01\x20GMT;\x20Max-Age=0;\x20path=/\r\nset-cookie:\x20LSUI
+SF:37FE0C43B84483E0=deleted;\x20expires=Thu,\x2001\x20Jan\x201970\x2000:00
+SF::01\x20GMT;\x20Max-Age=0;\x20path=/\r\nlocation:\x20/login\.php\r\ncont
+SF:ent-type:\x20text/html;\x20charset=UTF-8\r\ncontent-length:\x200\r\ndat
+SF:e:\x20Sat,\x2025\x20Apr\x202026\x2015:49:50\x20GMT\r\nserver:\x20LiteSp
+SF:eed\r\nalt-svc:\x20h3=\":7080\";\x20ma=2592000,\x20h3-29=\":7080\";\x20
+SF:ma=2592000,\x20h3-Q050=\":708")%r(HTTPOptions,408,"HTTP/1\.0\x20302\x20
+SF:Found\r\nx-powered-by:\x20PHP/8\.3\.30\r\nx-frame-options:\x20SAMEORIGI
+SF:N\r\ncontent-security-policy:\x20frame-ancestors\x20'self'\r\nreferrer-
+SF:policy:\x20same-origin\r\nx-content-type-options:\x20nosniff\r\nset-coo
+SF:kie:\x20LSUI37FE0C43B84483E0=fca3e7dd1630b10b1f8c03db381f2af3;\x20path=
+SF:/;\x20secure;\x20HttpOnly\r\nexpires:\x20Thu,\x2019\x20Nov\x201981\x200
+SF:8:52:00\x20GMT\r\ncache-control:\x20no-store,\x20no-cache,\x20must-reva
+SF:lidate\r\npragma:\x20no-cache\r\nset-cookie:\x20LSID37FE0C43B84483E0=de
+SF:leted;\x20expires=Thu,\x2001\x20Jan\x201970\x2000:00:01\x20GMT;\x20Max-
+SF:Age=0;\x20path=/\r\nset-cookie:\x20LSPA37FE0C43B84483E0=deleted;\x20exp
+SF:ires=Thu,\x2001\x20Jan\x201970\x2000:00:01\x20GMT;\x20Max-Age=0;\x20pat
+SF:h=/\r\nset-cookie:\x20LSUI37FE0C43B84483E0=deleted;\x20expires=Thu,\x20
+SF:01\x20Jan\x201970\x2000:00:01\x20GMT;\x20Max-Age=0;\x20path=/\r\nlocati
+SF:on:\x20/login\.php\r\ncontent-type:\x20text/html;\x20charset=UTF-8\r\nc
+SF:ontent-length:\x200\r\ndate:\x20Sat,\x2025\x20Apr\x202026\x2015:49:50\x
+SF:20GMT\r\nserver:\x20LiteSpeed\r\nalt-svc:\x20h3=\":7080\";\x20ma=259200
+SF:0,\x20h3-29=\":7080\";\x20ma=2592000,\x20h3-Q050=\":708");
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 108.42 seconds

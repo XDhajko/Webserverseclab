@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.98 scan initiated Sat Apr 25 15:53:39 2026 as: nmap -sV -p 80,443,7080 -&#45;script http-methods,http-server-header,ssl-cert -oX /runs/run_20260425_174922_de985e/apache/raw/nmap.xml 192.168.56.10 -->
+<nmaprun scanner="nmap" args="nmap -sV -p 80,443,7080 -&#45;script http-methods,http-server-header,ssl-cert -oX /runs/run_20260425_174922_de985e/apache/raw/nmap.xml 192.168.56.10" start="1777132419" startstr="Sat Apr 25 15:53:39 2026" version="7.98" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="3" services="80,443,7080"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="unknown-response" reason_ttl="0"/>
+<address addr="192.168.56.10" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<host starttime="1777132421" endtime="1777132435"><status state="up" reason="reset" reason_ttl="63"/>
+<address addr="192.168.56.10" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="63"/><service name="http" product="Apache httpd" version="2.4.52" extrainfo="(Ubuntu) OpenSSL/3.0.2" method="probed" conf="10"><cpe>cpe:/a:apache:http_server:2.4.52</cpe></service><script id="http-server-header" output="Apache/2.4.52 (Ubuntu) OpenSSL/3.0.2"><elem>Apache/2.4.52 (Ubuntu) OpenSSL/3.0.2</elem>
+</script><script id="http-methods" output="&#xa;  Supported Methods: OPTIONS HEAD GET POST TRACE&#xa;  Potentially risky methods: TRACE"><table key="Supported Methods">
+<elem>OPTIONS</elem>
+<elem>HEAD</elem>
+<elem>GET</elem>
+<elem>POST</elem>
+<elem>TRACE</elem>
+</table>
+<table key="Potentially risky methods">
+<elem>TRACE</elem>
+</table>
+</script></port>
+<port protocol="tcp" portid="443"><state state="open" reason="syn-ack" reason_ttl="63"/><service name="http" product="Apache httpd" version="2.4.52" extrainfo="(Ubuntu) OpenSSL/3.0.2" tunnel="ssl" method="probed" conf="10"><cpe>cpe:/a:apache:http_server:2.4.52</cpe></service><script id="ssl-cert" output="Subject: commonName=vm-apache&#xa;Subject Alternative Name: DNS:vm-apache&#xa;Issuer: commonName=vm-apache&#xa;Public Key type: rsa&#xa;Public Key bits: 2048&#xa;Signature Algorithm: sha256WithRSAEncryption&#xa;Not valid before: 2026-04-25T06:59:10&#xa;Not valid after:  2036-04-22T06:59:10&#xa;MD5:     58e9 fe42 5c7d 40d5 61d2 c594 8d55 a96c&#xa;SHA-1:   1b70 e305 047e bbfc a8f9 0465 be26 1e3d be6c f924&#xa;SHA-256: 7229 8960 f9f4 4f6d 6a3f 2e00 b794 ab93 1e69 f973 1d8f 76bd fbe6 e1a7 1d85 ba16"><table key="subject">
+<elem key="commonName">vm-apache</elem>
+</table>
+<table key="issuer">
+<elem key="commonName">vm-apache</elem>
+</table>
+<table key="pubkey">
+<elem key="type">rsa</elem>
+<elem key="bits">2048</elem>
+<elem key="modulus">AED72E45769B2E8C72F2149CA76D8507380287488825FCDFB15671EAC5B1AB9C7A956C1EA6B561AC31A63833D1FED274974BB0BB426FBAE1AE1E1B3169E7C1FC3091FDAA9E012018C374EB3BF66390F7B763B21E7A8FCD175EA3B3D1330DAE1B4E7FDB32F67092D690FEA6154C1AF68E7417E567D8C4F3F0A1010E626435F98A6B9ACF7658CF08F7082900A9A778F8DEEA39285AA7305750514A08EDC0A37C4DAD378A57869438FEC01EC23E415C48B809DF71B7D6A5CF3D9F495D94BD3785635DB179F9C5B06CB8EDF7095C13383D8128AD7668B509F87BEA55D5BA5C570EB5916C03E368F1044996C5933BB7633D13C8DF55AF8385215DE86564B5E46C5511</elem>
+<elem key="exponent">65537</elem>
+</table>
+<table key="extensions">
+<table>
+<elem key="name">X509v3 Basic Constraints</elem>
+<elem key="value">CA:FALSE</elem>
+</table>
+<table>
+<elem key="name">X509v3 Subject Alternative Name</elem>
+<elem key="value">DNS:vm-apache</elem>
+</table>
+<table>
+<elem key="name">X509v3 Subject Key Identifier</elem>
+<elem key="value">08:33:B8:7F:81:DD:08:84:DD:28:89:5E:32:EB:6F:6F:C7:C2:8C:A7</elem>
+</table>
+</table>
+<elem key="sig_algo">sha256WithRSAEncryption</elem>
+<table key="validity">
+<elem key="notBefore">2026-04-25T06:59:10</elem>
+<elem key="notAfter">2036-04-22T06:59:10</elem>
+</table>
+<elem key="md5">58e9fe425c7d40d561d2c5948d55a96c</elem>
+<elem key="sha1">1b70e305047ebbfca8f90465be261e3dbe6cf924</elem>
+<elem key="sha256">72298960f9f44f6d6a3f2e00b794ab931e69f9731d8f76bdfbe6e1a71d85ba16</elem>
+<elem key="pem">-&#45;&#45;&#45;&#45;BEGIN CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;MIIC+DCCAeCgAwIBAgIUGfGXabtQcPDxpNWrofGD+1VtAI8wDQYJKoZIhvcNAQEL&#xa;BQAwFDESMBAGA1UEAwwJdm0tYXBhY2hlMB4XDTI2MDQyNTA2NTkxMFoXDTM2MDQy&#xa;MjA2NTkxMFowFDESMBAGA1UEAwwJdm0tYXBhY2hlMIIBIjANBgkqhkiG9w0BAQEF&#xa;AAOCAQ8AMIIBCgKCAQEArtcuRXabLoxy8hScp22FBzgCh0iIJfzfsVZx6sWxq5x6&#xa;lWweprVhrDGmODPR/tJ0l0uwu0JvuuGuHhsxaefB/DCR/aqeASAYw3TrO/ZjkPe3&#xa;Y7Ieeo/NF16js9EzDa4bTn/bMvZwktaQ/qYVTBr2jnQX5WfYxPPwoQEOYmQ1+Ypr&#xa;ms92WM8I9wgpAKmnePje6jkoWqcwV1BRSgjtwKN8Ta03ileGlDj+wB7CPkFcSLgJ&#xa;33G31qXPPZ9JXZS9N4VjXbF5+cWwbLjt9wlcEzg9gSitdmi1Cfh76lXVulxXDrWR&#xa;bAPjaPEESZbFkzu3Yz0TyN9Vr4OFIV3oZWS15GxVEQIDAQABo0IwQDAJBgNVHRME&#xa;AjAAMBQGA1UdEQQNMAuCCXZtLWFwYWNoZTAdBgNVHQ4EFgQUCDO4f4HdCITdKIle&#xa;Mutvb8fCjKcwDQYJKoZIhvcNAQELBQADggEBAFGxpfze+6CTmkH8+txh+5Ql6Ydt&#xa;j/aX/2VqfnnHw1lD07H6ZbeCk+nqTi3ZTj6EtReUBEjRusp9KZMDr+HR+qvHZbof&#xa;Bq1KT0I5QUVFFO42MY+pgeD779jXSG+6Xp2EvmymFex27Yg7r+MwfFwMC1nax4ZX&#xa;qyWflRq0RPzv1Y2sQdIkIgKJglSjAFgsLt/s8hd6m2kdTlOS5s6BUPIMOzRnToCJ&#xa;gojSzNQNxsLg/avJ+ZOIguoMS/GYdyFk8Y8u3+IgFpXMekG/81iwjzc37WZOzvHr&#xa;qYPDFwHb/f9BUyD5LGIYWhaXttiufz5nTdj8EuXfECpde4I+u7o+xpsBUK4=&#xa;-&#45;&#45;&#45;&#45;END CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;</elem>
+</script><script id="http-server-header" output="Apache/2.4.52 (Ubuntu) OpenSSL/3.0.2"><elem>Apache/2.4.52 (Ubuntu) OpenSSL/3.0.2</elem>
+</script><script id="http-methods" output="&#xa;  Supported Methods: OPTIONS HEAD GET POST TRACE&#xa;  Potentially risky methods: TRACE"><table key="Supported Methods">
+<elem>OPTIONS</elem>
+<elem>HEAD</elem>
+<elem>GET</elem>
+<elem>POST</elem>
+<elem>TRACE</elem>
+</table>
+<table key="Potentially risky methods">
+<elem>TRACE</elem>
+</table>
+</script></port>
+<port protocol="tcp" portid="7080"><state state="filtered" reason="no-response" reason_ttl="0"/><service name="empowerid" method="table" conf="3"/></port>
+</ports>
+<times srtt="1509" rttvar="3590" to="100000"/>
+</host>
+<runstats><finished time="1777132435" timestr="Sat Apr 25 15:53:55 2026" summary="Nmap done at Sat Apr 25 15:53:55 2026; 1 IP address (1 host up) scanned in 16.02 seconds" elapsed="16.02" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Security Audit Report - run_20260425_174922_de985e</title>
+  <style>
+    body { font-family: Segoe UI, Arial, sans-serif; margin: 28px; color: #1f2937; }
+    h1 { margin-bottom: 4px; }
+    .meta { color: #4b5563; margin-bottom: 18px; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+    .card { border: 1px solid #d1d5db; border-radius: 6px; padding: 10px; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th, td { border: 1px solid #e5e7eb; padding: 6px; vertical-align: top; text-align: left; }
+    th { background: #f3f4f6; }
+    .small { font-size: 11px; color: #6b7280; }
+    @media print { body { margin: 10mm; } }
+  </style>
+</head>
+<body>
+  <h1>Security Audit Report</h1>
+  <div class="meta">Run: run_20260425_174922_de985e | Profile: standards_mode | Generated: 2026-04-25T15:56:30.779596+00:00</div>
+
+  <div class="grid">
+    <div class="card"><strong>Total Findings</strong><div>37</div></div>
+    <div class="card"><strong>High</strong><div>9</div></div>
+    <div class="card"><strong>Medium</strong><div>18</div></div>
+    <div class="card"><strong>Low</strong><div>10</div></div>
+    <div class="card"><strong>Info</strong><div>0</div></div>
+    <div class="card"><strong>Unknown</strong><div>0</div></div>
+  </div>
+
+  <h2>Findings</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Severity</th>
+        <th>Target</th>
+        <th>Rule</th>
+        <th>Title</th>
+        <th>WSTG</th>
+        <th>CWE</th>
+        <th>CVSS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>MEDIUM</td><td>apache</td><td>G1</td><td>Service Version Disclosure: Apache httpd 2.4.52</td><td>WSTG-CONF-02</td><td>CWE-200</td><td>5.3</td></tr>
+      <tr><td>HIGH</td><td>apache</td><td>CVE-Apache-2.4.52-Request-Smuggling</td><td>Known vulnerable version detected: Apache httpd 2.4.52</td><td>WSTG-CONF-08</td><td>CWE-444</td><td>9.8</td></tr>
+      <tr><td>MEDIUM</td><td>apache</td><td>G3</td><td>TRACE Method Detected via Nmap</td><td>WSTG-CONF-01</td><td>CWE-693</td><td>5.9</td></tr>
+      <tr><td>HIGH</td><td>apache</td><td>G4-CERT</td><td>Self-Signed TLS Certificate Detected</td><td>WSTG-CRYP-01</td><td>CWE-295</td><td>7.5</td></tr>
+      <tr><td>LOW</td><td>apache</td><td>G4-CIPHER</td><td>TLS Issue: cipherlist_OBSOLETED</td><td>WSTG-CRYP-01</td><td>CWE-327</td><td>5.9</td></tr>
+      <tr><td>LOW</td><td>apache</td><td>G4-CAA</td><td>TLS Issue: DNS_CAArecord</td><td>WSTG-CRYP-01</td><td>CWE-295</td><td>3.7</td></tr>
+      <tr><td>LOW</td><td>apache</td><td>G4-HSTS</td><td>TLS Issue: HSTS</td><td>WSTG-CRYP-03</td><td>CWE-523</td><td>5.4</td></tr>
+      <tr><td>MEDIUM</td><td>apache</td><td>G5</td><td>TLS Issue: security_headers</td><td>WSTG-CONF-05</td><td>CWE-693</td><td>5.4</td></tr>
+      <tr><td>MEDIUM</td><td>apache</td><td>G4-VULN</td><td>TLS Issue: BREACH</td><td>WSTG-CRYP-01</td><td>CWE-310</td><td>7.4</td></tr>
+      <tr><td>HIGH</td><td>apache</td><td>G9</td><td>Sensitive File Restricted: /.htaccess</td><td>WSTG-CONF-06</td><td>CWE-538</td><td>7.5</td></tr>
+      <tr><td>MEDIUM</td><td>apache</td><td>M1</td><td>Status Page Exposed: /server-status</td><td>WSTG-CONF-08</td><td>CWE-200</td><td>5.3</td></tr>
+      <tr><td>MEDIUM</td><td>apache</td><td>G2</td><td>Directory listing controls</td><td>WSTG-CONF-03</td><td>CWE-548</td><td>5.3</td></tr>
+      <tr><td>MEDIUM</td><td>apache</td><td>AP-A5-G8</td><td>Apache AllowOverride broad override</td><td>WSTG-CONF-03</td><td>CWE-16</td><td>5.3</td></tr>
+      <tr><td>HIGH</td><td>apache</td><td>AP-G6-LOGPATH</td><td>Apache logs in web root</td><td>WSTG-CONF-07</td><td>CWE-532</td><td>7.1</td></tr>
+      <tr><td>LOW</td><td>apache</td><td>AG-PATCH-STATE</td><td>System packages pending update</td><td>WSTG-CONF-08</td><td>CWE-1104</td><td>6.0</td></tr>
+      <tr><td>MEDIUM</td><td>nginx</td><td>G1</td><td>Service Version Disclosure: nginx 1.18.0</td><td>WSTG-CONF-02</td><td>CWE-200</td><td>5.0</td></tr>
+      <tr><td>HIGH</td><td>nginx</td><td>CVE-Nginx-1.18.0-Resolver-OOB</td><td>Known vulnerable version detected: nginx 1.18.0</td><td>WSTG-CONF-08</td><td>CWE-193</td><td>7.7</td></tr>
+      <tr><td>HIGH</td><td>nginx</td><td>G4-CERT</td><td>Self-Signed TLS Certificate Detected</td><td>WSTG-CRYP-01</td><td>CWE-295</td><td>7.5</td></tr>
+      <tr><td>LOW</td><td>nginx</td><td>G4-CIPHER</td><td>TLS Issue: cipherlist_OBSOLETED</td><td>WSTG-CRYP-01</td><td>CWE-327</td><td>5.9</td></tr>
+      <tr><td>LOW</td><td>nginx</td><td>G4-CAA</td><td>TLS Issue: DNS_CAArecord</td><td>WSTG-CRYP-01</td><td>CWE-295</td><td>3.7</td></tr>
+      <tr><td>LOW</td><td>nginx</td><td>G4-HSTS</td><td>TLS Issue: HSTS</td><td>WSTG-CRYP-03</td><td>CWE-523</td><td>5.4</td></tr>
+      <tr><td>MEDIUM</td><td>nginx</td><td>G4-VULN</td><td>TLS Issue: BREACH</td><td>WSTG-CRYP-01</td><td>CWE-310</td><td>7.4</td></tr>
+      <tr><td>HIGH</td><td>nginx</td><td>G9</td><td>Sensitive File Exposed: /backup_2025.sql</td><td>WSTG-CONF-06</td><td>CWE-538</td><td>7.5</td></tr>
+      <tr><td>MEDIUM</td><td>nginx</td><td>M1</td><td>Status Page Exposed: /nginx_status</td><td>WSTG-CONF-08</td><td>CWE-200</td><td>5.3</td></tr>
+      <tr><td>MEDIUM</td><td>nginx</td><td>G2</td><td>Directory listing controls</td><td>WSTG-CONF-03</td><td>CWE-548</td><td>5.3</td></tr>
+      <tr><td>MEDIUM</td><td>nginx</td><td>NG-N2-G2</td><td>Nginx autoindex enabled</td><td>WSTG-CONF-03</td><td>CWE-548</td><td>5.3</td></tr>
+      <tr><td>MEDIUM</td><td>nginx</td><td>NG-N5-G3</td><td>Nginx methods and request limits</td><td>WSTG-CONF-01</td><td>CWE-16</td><td>5.9</td></tr>
+      <tr><td>HIGH</td><td>nginx</td><td>NG-G6-COOKIELOG</td><td>Nginx log includes cookies</td><td>WSTG-CONF-07</td><td>CWE-532</td><td>7.1</td></tr>
+      <tr><td>LOW</td><td>nginx</td><td>AG-PATCH-STATE</td><td>System packages pending update</td><td>WSTG-CONF-08</td><td>CWE-1104</td><td>6.0</td></tr>
+      <tr><td>MEDIUM</td><td>ols</td><td>OLS-O1-ADMIN</td><td>OpenLiteSpeed WebAdmin port exposed</td><td>WSTG-CONF-08</td><td>CWE-284</td><td>6.5</td></tr>
+      <tr><td>HIGH</td><td>ols</td><td>G9</td><td>Sensitive File Restricted: /.htaccess</td><td>WSTG-CONF-06</td><td>CWE-538</td><td>7.5</td></tr>
+      <tr><td>LOW</td><td>ols</td><td>AG-TLS-KEY-PERMS</td><td>TLS private key permissions</td><td>WSTG-CONF-04</td><td>CWE-732</td><td>7.5</td></tr>
+      <tr><td>MEDIUM</td><td>ols</td><td>G2</td><td>Directory listing controls</td><td>WSTG-CONF-03</td><td>CWE-548</td><td>5.3</td></tr>
+      <tr><td>MEDIUM</td><td>ols</td><td>G5</td><td>Security headers configuration presence</td><td>WSTG-CONF-05</td><td>CWE-693</td><td>5.4</td></tr>
+      <tr><td>MEDIUM</td><td>ols</td><td>OLS-O4-G2</td><td>OpenLiteSpeed example vhost or directory listing</td><td>WSTG-CONF-03</td><td>CWE-548</td><td>5.3</td></tr>
+      <tr><td>MEDIUM</td><td>ols</td><td>OLS-HTTP-ONLY</td><td>OpenLiteSpeed lacks HTTPS listener</td><td>WSTG-CONF-04</td><td>CWE-319</td><td>5.8</td></tr>
+      <tr><td>LOW</td><td>ols</td><td>AG-PATCH-STATE</td><td>System packages pending update</td><td>WSTG-CONF-08</td><td>CWE-1104</td><td>6.0</td></tr>
+
+    </tbody>
+  </table>
+  <p class="small">This HTML file is optimized for Print to PDF export.</p>
+</body>
+</html>

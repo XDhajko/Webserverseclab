@@ -1,0 +1,4 @@
+/assets (Status: 301)
+/css (Status: 301)
+/index.html (Status: 200)
+/js (Status: 301)

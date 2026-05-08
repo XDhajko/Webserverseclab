@@ -1,0 +1,4 @@
+Error: the server returns a status code that matches the provided options for non existing urls. http://192.168.56.12/7cdb5e38-9491-4d95-b1e4-1bf0742d9840 => 403. To force processing of Wildcard responses, specify the '--wildcard' switch
+Error: unknown flag: --exclude-length
+Gobuster wildcard fallback used for baseline status 403 and body length 1240.
+Treating wildcard-only directory responses as no Gobuster findings for this target.

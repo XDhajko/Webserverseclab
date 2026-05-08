@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Security Audit Report - run_20260425_183154_d83743</title>
+  <style>
+    body { font-family: Segoe UI, Arial, sans-serif; margin: 28px; color: #1f2937; }
+    h1 { margin-bottom: 4px; }
+    .meta { color: #4b5563; margin-bottom: 18px; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+    .card { border: 1px solid #d1d5db; border-radius: 6px; padding: 10px; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th, td { border: 1px solid #e5e7eb; padding: 6px; vertical-align: top; text-align: left; }
+    th { background: #f3f4f6; }
+    .small { font-size: 11px; color: #6b7280; }
+    @media print { body { margin: 10mm; } }
+  </style>
+</head>
+<body>
+  <h1>Security Audit Report</h1>
+  <div class="meta">Run: run_20260425_183154_d83743 | Profile: standards_mode | Generated: 2026-04-25T16:37:15.382871+00:00</div>
+
+  <div class="grid">
+    <div class="card"><strong>Total Findings</strong><div>6</div></div>
+    <div class="card"><strong>High</strong><div>3</div></div>
+    <div class="card"><strong>Medium</strong><div>0</div></div>
+    <div class="card"><strong>Low</strong><div>3</div></div>
+    <div class="card"><strong>Info</strong><div>0</div></div>
+    <div class="card"><strong>Unknown</strong><div>0</div></div>
+  </div>
+
+  <h2>Findings</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Severity</th>
+        <th>Target</th>
+        <th>Rule</th>
+        <th>Title</th>
+        <th>WSTG</th>
+        <th>CWE</th>
+        <th>CVSS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>HIGH</td><td>apache</td><td>G4-CERT</td><td>Self-Signed TLS Certificate Detected</td><td>WSTG-CRYP-01</td><td>CWE-295</td><td>7.5</td></tr>
+      <tr><td>LOW</td><td>apache</td><td>G4-CAA</td><td>TLS Issue: DNS_CAArecord</td><td>WSTG-CRYP-01</td><td>CWE-295</td><td>3.7</td></tr>
+      <tr><td>HIGH</td><td>nginx</td><td>G4-CERT</td><td>Self-Signed TLS Certificate Detected</td><td>WSTG-CRYP-01</td><td>CWE-295</td><td>7.5</td></tr>
+      <tr><td>LOW</td><td>nginx</td><td>G4-CAA</td><td>TLS Issue: DNS_CAArecord</td><td>WSTG-CRYP-01</td><td>CWE-295</td><td>3.7</td></tr>
+      <tr><td>HIGH</td><td>ols</td><td>G4-CERT</td><td>Self-Signed TLS Certificate Detected</td><td>WSTG-CRYP-01</td><td>CWE-295</td><td>7.5</td></tr>
+      <tr><td>LOW</td><td>ols</td><td>G4-CAA</td><td>TLS Issue: DNS_CAArecord</td><td>WSTG-CRYP-01</td><td>CWE-295</td><td>3.7</td></tr>
+
+    </tbody>
+  </table>
+  <p class="small">This HTML file is optimized for Print to PDF export.</p>
+</body>
+</html>

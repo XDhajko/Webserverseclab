@@ -1,0 +1,1 @@
+testssl succeeded after retrying ports: 192.168.56.12:443, 192.168.56.12:7080

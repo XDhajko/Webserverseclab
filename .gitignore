@@ -12,9 +12,7 @@ env/
 # Backup files
 *.bak
 
-# Runtime data - scan outputs and run artifacts
-scans/*.json
-runs/*/
+# Local config overrides (keep scans/ and runs/ committed)
 
 # Local config overrides
 config/app_settings.json

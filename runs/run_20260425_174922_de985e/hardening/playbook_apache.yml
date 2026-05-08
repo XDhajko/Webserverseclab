@@ -1,0 +1,208 @@
+- hosts: apache
+  become: true
+  tasks:
+  - name: '[apache_hide_version] Set ServerTokens Prod'
+    ansible.builtin.shell: for F in /etc/apache2/conf-enabled/security.conf /etc/apache2/conf-available/security.conf;
+      do [ -f "$F" ] || continue; grep -qE '^[[:space:]]*ServerTokens\b' "$F" && sed
+      -i 's/^[[:space:]]*ServerTokens .*/ServerTokens Prod/' "$F" || echo 'ServerTokens
+      Prod' >> "$F"; done
+    become: true
+    tags:
+    - apache_hide_version
+  - name: '[apache_hide_version] Set ServerSignature Off'
+    ansible.builtin.shell: for F in /etc/apache2/conf-enabled/security.conf /etc/apache2/conf-available/security.conf;
+      do [ -f "$F" ] || continue; grep -qE '^[[:space:]]*ServerSignature\b' "$F" &&
+      sed -i 's/^[[:space:]]*ServerSignature .*/ServerSignature Off/' "$F" || echo
+      'ServerSignature Off' >> "$F"; done
+    become: true
+    tags:
+    - apache_hide_version
+  - name: '[apache_upgrade] Update package list'
+    ansible.builtin.shell: apt-get update -qq
+    become: true
+    tags:
+    - apache_upgrade
+  - name: '[apache_upgrade] Upgrade apache2'
+    ansible.builtin.shell: DEBIAN_FRONTEND=noninteractive apt-get install --only-upgrade
+      -y apache2 2>/dev/null; true
+    become: true
+    tags:
+    - apache_upgrade
+  - name: '[apache_disable_trace] Set TraceEnable Off'
+    ansible.builtin.shell: for F in /etc/apache2/conf-enabled/security.conf /etc/apache2/conf-available/security.conf;
+      do [ -f "$F" ] || continue; grep -qE '^[[:space:]]*TraceEnable\b' "$F" && sed
+      -i 's/^[[:space:]]*TraceEnable .*/TraceEnable Off/' "$F" || echo 'TraceEnable
+      Off' >> "$F"; done
+    become: true
+    tags:
+    - apache_disable_trace
+  - name: '[apache_tls_hardening] Enable SSL and headers modules'
+    ansible.builtin.shell: a2enmod ssl headers 2>/dev/null; true
+    become: true
+    tags:
+    - apache_tls_hardening
+  - name: '[apache_tls_hardening] Disable deflate module to mitigate BREACH'
+    ansible.builtin.shell: a2dismod -f deflate 2>/dev/null; true
+    become: true
+    tags:
+    - apache_tls_hardening
+  - name: '[apache_tls_hardening] Enforce TLSv1.2+ protocols'
+    ansible.builtin.shell: sed -i 's/^\s*SSLProtocol .*/SSLProtocol -all +TLSv1.2
+      +TLSv1.3/' /etc/apache2/mods-enabled/ssl.conf
+    become: true
+    tags:
+    - apache_tls_hardening
+  - name: '[apache_tls_hardening] Set strong cipher suite'
+    ansible.builtin.shell: sed -i 's|^\s*SSLCipherSuite .*|SSLCipherSuite ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256|'
+      /etc/apache2/mods-enabled/ssl.conf
+    become: true
+    tags:
+    - apache_tls_hardening
+  - name: '[apache_tls_hardening] Prefer server cipher order'
+    ansible.builtin.shell: grep -q '^\s*SSLHonorCipherOrder' /etc/apache2/mods-enabled/ssl.conf
+      && sed -i 's/^\s*SSLHonorCipherOrder .*/SSLHonorCipherOrder on/' /etc/apache2/mods-enabled/ssl.conf
+      || echo 'SSLHonorCipherOrder on' >> /etc/apache2/mods-enabled/ssl.conf
+    become: true
+    tags:
+    - apache_tls_hardening
+  - name: '[apache_security_headers] Enable headers module'
+    ansible.builtin.shell: a2enmod headers 2>/dev/null; true
+    become: true
+    tags:
+    - apache_security_headers
+  - name: '[apache_security_headers] Add Strict-Transport-Security'
+    ansible.builtin.shell: grep -qE '^[[:space:]]*Header[[:space:]]+always[[:space:]]+set[[:space:]]+Strict-Transport-Security\b'
+      /etc/apache2/conf-enabled/security.conf || echo 'Header always set Strict-Transport-Security
+      "max-age=31536000; includeSubDomains"' >> /etc/apache2/conf-enabled/security.conf
+    become: true
+    tags:
+    - apache_security_headers
+  - name: '[apache_security_headers] Add X-Content-Type-Options'
+    ansible.builtin.shell: grep -qE '^[[:space:]]*Header[[:space:]]+always[[:space:]]+set[[:space:]]+X-Content-Type-Options\b'
+      /etc/apache2/conf-enabled/security.conf || echo 'Header always set X-Content-Type-Options
+      "nosniff"' >> /etc/apache2/conf-enabled/security.conf
+    become: true
+    tags:
+    - apache_security_headers
+  - name: '[apache_security_headers] Add X-Frame-Options'
+    ansible.builtin.shell: grep -qE '^[[:space:]]*Header[[:space:]]+always[[:space:]]+set[[:space:]]+X-Frame-Options\b'
+      /etc/apache2/conf-enabled/security.conf || echo 'Header always set X-Frame-Options
+      "SAMEORIGIN"' >> /etc/apache2/conf-enabled/security.conf
+    become: true
+    tags:
+    - apache_security_headers
+  - name: '[apache_security_headers] Add Referrer-Policy'
+    ansible.builtin.shell: grep -qE '^[[:space:]]*Header[[:space:]]+always[[:space:]]+set[[:space:]]+Referrer-Policy\b'
+      /etc/apache2/conf-enabled/security.conf || echo 'Header always set Referrer-Policy
+      "strict-origin-when-cross-origin"' >> /etc/apache2/conf-enabled/security.conf
+    become: true
+    tags:
+    - apache_security_headers
+  - name: '[apache_security_headers] Add Permissions-Policy'
+    ansible.builtin.shell: grep -qE '^[[:space:]]*Header[[:space:]]+always[[:space:]]+set[[:space:]]+Permissions-Policy\b'
+      /etc/apache2/conf-enabled/security.conf || echo 'Header always set Permissions-Policy
+      "geolocation=(), camera=(), microphone=()"' >> /etc/apache2/conf-enabled/security.conf
+    become: true
+    tags:
+    - apache_security_headers
+  - name: '[remove_sensitive_files] Prepare quarantine directory'
+    ansible.builtin.shell: mkdir -p /var/quarantine/webserverseclab; chmod 700 /var/quarantine/webserverseclab
+      2>/dev/null; true
+    become: true
+    tags:
+    - remove_sensitive_files
+  - name: '[remove_sensitive_files] Move sensitive files and .git dirs to quarantine
+      (non-destructive)'
+    ansible.builtin.shell: ROOTS='/var/www /usr/share/nginx/html'; if [ -d /usr/local/lsws
+      ]; then   VH_ROOT=$(grep -h 'vhRoot' /usr/local/lsws/conf/httpd_config.conf
+      2>/dev/null | awk '{print $NF}' | sed 's|/$||' | head -1);   [ -n "$VH_ROOT"
+      ] && [ "${VH_ROOT#/}" = "$VH_ROOT" ] && VH_ROOT="/usr/local/lsws/$VH_ROOT";   DOCROOT=$(grep
+      -rh 'docRoot' /usr/local/lsws/conf/vhosts/ 2>/dev/null | head -1 | awk '{print
+      $NF}' | sed 's|/$||');   DOCROOT=$(echo "$DOCROOT" | sed "s|\$VH_ROOT|$VH_ROOT|g;s|\$SERVER_ROOT|/usr/local/lsws|g");   [
+      -n "$DOCROOT" ] && [ "${DOCROOT#/}" = "$DOCROOT" ] && DOCROOT="/usr/local/lsws/$DOCROOT";   [
+      -z "$DOCROOT" ] && DOCROOT='/usr/local/lsws/Example/html';   ROOTS="$ROOTS $DOCROOT";
+      fi; for ROOT in $ROOTS; do   [ -d "$ROOT" ] || continue;   find "$ROOT" \( -path
+      '*/.git' -o -name '.env' -o -name '*.bak' -o -name '*.old'   -o -name '*.backup'
+      -o -name '*.swp' -o -name '*~' -o -name '.htpasswd' -o -name '.htaccess'   -o
+      -name 'info.php' -o -name 'phpinfo.php' -o -name '*.sql' \) -print0 2>/dev/null   |
+      while IFS= read -r -d '' P; do       REL=${P#/}; DEST="/var/quarantine/webserverseclab/$REL";       mkdir
+      -p "$(dirname "$DEST")";       mv "$P" "$DEST" 2>/dev/null || true;     done;
+      done; true
+    become: true
+    tags:
+    - remove_sensitive_files
+  - name: '[remove_sensitive_files] Return 404 for Apache dotfiles and status endpoints'
+    ansible.builtin.shell: for F in /etc/apache2/conf-enabled/security.conf /etc/apache2/conf-available/security.conf;
+      do [ -f "$F" ] || continue; sed -i '/RedirectMatch 404 "^\/\\\./d; /RedirectMatch
+      404 "^\/(server-status|nginx_status)\$/d' "$F"; echo 'RedirectMatch 404 "^/\.(?!well-known(?:/|$)).*"'
+      >> "$F"; echo 'RedirectMatch 404 "^/(server-status|nginx_status)$"' >> "$F";
+      done; true
+    become: true
+    tags:
+    - remove_sensitive_files
+  - name: '[restrict_status_page] Disable Apache mod_status'
+    ansible.builtin.shell: a2dismod -f status 2>/dev/null;for F in /etc/apache2/mods-enabled/status.conf
+      /etc/apache2/mods-available/status.conf; do [ -f "$F" ] || continue; sed -i
+      's/Require all granted/Require all denied/' "$F";done; true
+    become: true
+    tags:
+    - restrict_status_page
+  - name: '[apache_no_autoindex] Disable autoindex module'
+    ansible.builtin.shell: a2dismod -f autoindex 2>/dev/null; true
+    become: true
+    tags:
+    - apache_no_autoindex
+  - name: '[apache_no_autoindex] Disable userdir module'
+    ansible.builtin.shell: a2dismod -f userdir 2>/dev/null; true
+    become: true
+    tags:
+    - apache_no_autoindex
+  - name: '[apache_no_autoindex] Replace Options Indexes with -Indexes across Apache
+      configs'
+    ansible.builtin.shell: find /etc/apache2 -type f -name '*.conf' -exec sed -i -E
+      '/^[[:space:]]*Options[[:space:]]+/ s/[[:space:]][+-]?Indexes([[:space:]]|$)/\1/g;
+      /^[[:space:]]*Options[[:space:]]+$/ s//Options FollowSymLinks/' {} + 2>/dev/null;
+      true
+    become: true
+    tags:
+    - apache_no_autoindex
+  - name: '[apache_restrict_overrides] Set AllowOverride None for /var/www/'
+    ansible.builtin.shell: sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/s/AllowOverride
+      .*/AllowOverride None/' /etc/apache2/apache2.conf
+    become: true
+    tags:
+    - apache_restrict_overrides
+  - name: '[apache_fix_logpath] Redirect any webroot logs to /var/log/apache2'
+    ansible.builtin.shell: find /etc/apache2/ -name '*.conf' -exec sed -i 's|ErrorLog
+      /var/www/[^ ]*|ErrorLog /var/log/apache2/error.log|g; s|CustomLog /var/www/[^
+      ]*|CustomLog /var/log/apache2/access.log|g' {} + 2>/dev/null; true
+    become: true
+    tags:
+    - apache_fix_logpath
+  - name: '[apply_security_updates] Update package lists'
+    ansible.builtin.shell: apt-get update -qq
+    become: true
+    tags:
+    - apply_security_updates
+  - name: '[apply_security_updates] Install pending package upgrades'
+    ansible.builtin.shell: DEBIAN_FRONTEND=noninteractive apt-get full-upgrade -y
+      -o Dpkg::Options::='--force-confold' 2>/dev/null; true
+    become: true
+    tags:
+    - apply_security_updates
+  - name: '[apply_security_updates] Remove obsolete packages'
+    ansible.builtin.shell: DEBIAN_FRONTEND=noninteractive apt-get autoremove -y 2>/dev/null;
+      true
+    become: true
+    tags:
+    - apply_security_updates
+  - name: Verify apache configuration
+    ansible.builtin.shell: apache2ctl -t 2>&1
+    become: true
+    tags:
+    - verify
+  - name: Reload apache service
+    ansible.builtin.shell: systemctl reload apache2
+    become: true
+    tags:
+    - reload

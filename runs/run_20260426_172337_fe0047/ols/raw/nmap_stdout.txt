@@ -1,0 +1,142 @@
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-04-26 15:23 +0000
+Nmap scan report for 192.168.56.12
+Host is up (0.0020s latency).
+
+PORT     STATE    SERVICE   VERSION
+80/tcp   open     http      LiteSpeed
+| fingerprint-strings: 
+|   GetRequest, HTTPOptions: 
+|     HTTP/1.0 403 Forbidden
+|     content-type: text/html
+|     cache-control: private, no-cache, max-age=0
+|     pragma: no-cache
+|     content-length: 1240
+|     date: Sun, 26 Apr 2026 15:23:50 GMT
+|     server: LiteSpeed
+|     strict-transport-security: max-age=31536000; includeSubDomains
+|     x-frame-options: SAMEORIGIN
+|     x-content-type-options: nosniff
+|     content-security-policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' fonts.googleapis.com;
+|     referrer-policy: strict-origin-when-cross-origin
+|     permissions-policy: geolocation=()
+|     connection: close
+|     <!DOCTYPE html>
+|     <html style="height:100%">
+|     <head>
+|     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+|     <title> 403 Forbidden
+|     </title><style>@media (prefers-color-scheme:dark){body{background-color:#000!important}}</style></head>
+|_    <body style="color: #444; margin:0;font: normal 14px/20px Arial, Helvetica, s
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-server-header: LiteSpeed
+443/tcp  open     ssl/https LiteSpeed
+| fingerprint-strings: 
+|   GetRequest, HTTPOptions: 
+|     HTTP/1.0 403 Forbidden
+|     content-type: text/html
+|     cache-control: private, no-cache, max-age=0
+|     pragma: no-cache
+|     content-length: 1240
+|     date: Sun, 26 Apr 2026 15:23:56 GMT
+|     server: LiteSpeed
+|     strict-transport-security: max-age=31536000; includeSubDomains
+|     x-frame-options: SAMEORIGIN
+|     x-content-type-options: nosniff
+|     content-security-policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' fonts.googleapis.com;
+|     referrer-policy: strict-origin-when-cross-origin
+|     permissions-policy: geolocation=()
+|     alt-svc: h3=":443"; ma=2592000, h3-29=":443"; ma=2592000, h3-Q050=":443"; ma=2592000, h3-Q046=":443"; ma=2592000, h3-Q043=":443"; ma=2592000, quic=":443"; ma=2592000; v="43,46"
+|     connection: close
+|     <!DOCTYPE html>
+|     <html style="height:100%">
+|     <head>
+|     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+|_    <title> 403 Forbidden
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-server-header: LiteSpeed
+| ssl-cert: Subject: commonName=192.168.56.12
+| Issuer: commonName=192.168.56.12
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2026-04-26T14:44:37
+| Not valid after:  2027-04-26T14:44:37
+| MD5:     f99c 7b24 f599 e9c1 954e e81b f471 e731
+| SHA-1:   3a2e d552 711e a763 4bd6 1776 9481 6c89 9144 224a
+|_SHA-256: 320f 7b50 6e62 504e 488a c996 f83a 1c9b 235d c85c b974 afc7 22b3 da27 d189 25c0
+7080/tcp filtered empowerid
+2 services unrecognized despite returning data. If you know the service/version, please submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port80-TCP:V=7.98%I=7%D=4/26%Time=69EE2E06%P=x86_64-unknown-linux-gnu%r
+SF:(GetRequest,707,"HTTP/1\.0\x20403\x20Forbidden\r\ncontent-type:\x20text
+SF:/html\r\ncache-control:\x20private,\x20no-cache,\x20max-age=0\r\npragma
+SF::\x20no-cache\r\ncontent-length:\x201240\r\ndate:\x20Sun,\x2026\x20Apr\
+SF:x202026\x2015:23:50\x20GMT\r\nserver:\x20LiteSpeed\r\nstrict-transport-
+SF:security:\x20max-age=31536000;\x20includeSubDomains\r\nx-frame-options:
+SF:\x20SAMEORIGIN\r\nx-content-type-options:\x20nosniff\r\ncontent-securit
+SF:y-policy:\x20default-src\x20'self';\x20script-src\x20'self'\x20'unsafe-
+SF:inline';\x20style-src\x20'self'\x20'unsafe-inline'\x20fonts\.googleapis
+SF:\.com;\r\nreferrer-policy:\x20strict-origin-when-cross-origin\r\npermis
+SF:sions-policy:\x20geolocation=\(\)\r\nconnection:\x20close\r\n\r\n<!DOCT
+SF:YPE\x20html>\n<html\x20style=\"height:100%\">\n<head>\n<meta\x20name=\"
+SF:viewport\"\x20content=\"width=device-width,\x20initial-scale=1,\x20shri
+SF:nk-to-fit=no\">\n<title>\x20403\x20Forbidden\r\n</title><style>@media\x
+SF:20\(prefers-color-scheme:dark\){body{background-color:#000!important}}<
+SF:/style></head>\n<body\x20style=\"color:\x20#444;\x20margin:0;font:\x20n
+SF:ormal\x2014px/20px\x20Arial,\x20Helvetica,\x20s")%r(HTTPOptions,707,"HT
+SF:TP/1\.0\x20403\x20Forbidden\r\ncontent-type:\x20text/html\r\ncache-cont
+SF:rol:\x20private,\x20no-cache,\x20max-age=0\r\npragma:\x20no-cache\r\nco
+SF:ntent-length:\x201240\r\ndate:\x20Sun,\x2026\x20Apr\x202026\x2015:23:50
+SF:\x20GMT\r\nserver:\x20LiteSpeed\r\nstrict-transport-security:\x20max-ag
+SF:e=31536000;\x20includeSubDomains\r\nx-frame-options:\x20SAMEORIGIN\r\nx
+SF:-content-type-options:\x20nosniff\r\ncontent-security-policy:\x20defaul
+SF:t-src\x20'self';\x20script-src\x20'self'\x20'unsafe-inline';\x20style-s
+SF:rc\x20'self'\x20'unsafe-inline'\x20fonts\.googleapis\.com;\r\nreferrer-
+SF:policy:\x20strict-origin-when-cross-origin\r\npermissions-policy:\x20ge
+SF:olocation=\(\)\r\nconnection:\x20close\r\n\r\n<!DOCTYPE\x20html>\n<html
+SF:\x20style=\"height:100%\">\n<head>\n<meta\x20name=\"viewport\"\x20conte
+SF:nt=\"width=device-width,\x20initial-scale=1,\x20shrink-to-fit=no\">\n<t
+SF:itle>\x20403\x20Forbidden\r\n</title><style>@media\x20\(prefers-color-s
+SF:cheme:dark\){body{background-color:#000!important}}</style></head>\n<bo
+SF:dy\x20style=\"color:\x20#444;\x20margin:0;font:\x20normal\x2014px/20px\
+SF:x20Arial,\x20Helvetica,\x20s");
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port443-TCP:V=7.98%T=SSL%I=7%D=4/26%Time=69EE2E0C%P=x86_64-unknown-linu
+SF:x-gnu%r(GetRequest,7B9,"HTTP/1\.0\x20403\x20Forbidden\r\ncontent-type:\
+SF:x20text/html\r\ncache-control:\x20private,\x20no-cache,\x20max-age=0\r\
+SF:npragma:\x20no-cache\r\ncontent-length:\x201240\r\ndate:\x20Sun,\x2026\
+SF:x20Apr\x202026\x2015:23:56\x20GMT\r\nserver:\x20LiteSpeed\r\nstrict-tra
+SF:nsport-security:\x20max-age=31536000;\x20includeSubDomains\r\nx-frame-o
+SF:ptions:\x20SAMEORIGIN\r\nx-content-type-options:\x20nosniff\r\ncontent-
+SF:security-policy:\x20default-src\x20'self';\x20script-src\x20'self'\x20'
+SF:unsafe-inline';\x20style-src\x20'self'\x20'unsafe-inline'\x20fonts\.goo
+SF:gleapis\.com;\r\nreferrer-policy:\x20strict-origin-when-cross-origin\r\
+SF:npermissions-policy:\x20geolocation=\(\)\r\nalt-svc:\x20h3=\":443\";\x2
+SF:0ma=2592000,\x20h3-29=\":443\";\x20ma=2592000,\x20h3-Q050=\":443\";\x20
+SF:ma=2592000,\x20h3-Q046=\":443\";\x20ma=2592000,\x20h3-Q043=\":443\";\x2
+SF:0ma=2592000,\x20quic=\":443\";\x20ma=2592000;\x20v=\"43,46\"\r\nconnect
+SF:ion:\x20close\r\n\r\n<!DOCTYPE\x20html>\n<html\x20style=\"height:100%\"
+SF:>\n<head>\n<meta\x20name=\"viewport\"\x20content=\"width=device-width,\
+SF:x20initial-scale=1,\x20shrink-to-fit=no\">\n<title>\x20403\x20Forbidden
+SF:\r\n</t")%r(HTTPOptions,7B9,"HTTP/1\.0\x20403\x20Forbidden\r\ncontent-t
+SF:ype:\x20text/html\r\ncache-control:\x20private,\x20no-cache,\x20max-age
+SF:=0\r\npragma:\x20no-cache\r\ncontent-length:\x201240\r\ndate:\x20Sun,\x
+SF:2026\x20Apr\x202026\x2015:23:56\x20GMT\r\nserver:\x20LiteSpeed\r\nstric
+SF:t-transport-security:\x20max-age=31536000;\x20includeSubDomains\r\nx-fr
+SF:ame-options:\x20SAMEORIGIN\r\nx-content-type-options:\x20nosniff\r\ncon
+SF:tent-security-policy:\x20default-src\x20'self';\x20script-src\x20'self'
+SF:\x20'unsafe-inline';\x20style-src\x20'self'\x20'unsafe-inline'\x20fonts
+SF:\.googleapis\.com;\r\nreferrer-policy:\x20strict-origin-when-cross-orig
+SF:in\r\npermissions-policy:\x20geolocation=\(\)\r\nalt-svc:\x20h3=\":443\
+SF:";\x20ma=2592000,\x20h3-29=\":443\";\x20ma=2592000,\x20h3-Q050=\":443\"
+SF:;\x20ma=2592000,\x20h3-Q046=\":443\";\x20ma=2592000,\x20h3-Q043=\":443\
+SF:";\x20ma=2592000,\x20quic=\":443\";\x20ma=2592000;\x20v=\"43,46\"\r\nco
+SF:nnection:\x20close\r\n\r\n<!DOCTYPE\x20html>\n<html\x20style=\"height:1
+SF:00%\">\n<head>\n<meta\x20name=\"viewport\"\x20content=\"width=device-wi
+SF:dth,\x20initial-scale=1,\x20shrink-to-fit=no\">\n<title>\x20403\x20Forb
+SF:idden\r\n</t");
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 107.41 seconds

@@ -1,0 +1,182 @@
+{
+  "agent_version": "1.0.0",
+  "timestamp": "2026-04-26T15:27:45.708008+00:00",
+  "host": {
+    "hostname": "vm-nginx",
+    "kernel": "5.15.0-157-generic",
+    "os_release": {
+      "PRETTY_NAME": "Ubuntu 22.04.5 LTS",
+      "NAME": "Ubuntu",
+      "VERSION_ID": "22.04",
+      "VERSION": "22.04.5 LTS (Jammy Jellyfish)",
+      "VERSION_CODENAME": "jammy",
+      "ID": "ubuntu",
+      "ID_LIKE": "debian",
+      "HOME_URL": "https://www.ubuntu.com/",
+      "SUPPORT_URL": "https://help.ubuntu.com/",
+      "BUG_REPORT_URL": "https://bugs.launchpad.net/ubuntu/",
+      "PRIVACY_POLICY_URL": "https://www.ubuntu.com/legal/terms-and-policies/privacy-policy",
+      "UBUNTU_CODENAME": "jammy"
+    }
+  },
+  "platform_detected": "nginx",
+  "evidence": {
+    "config_paths": {
+      "web_root": "/usr/share/nginx/html",
+      "config_root": "/etc/nginx",
+      "tls_key_candidates": [
+        "/etc/ssl/private/ssl-cert-snakeoil.key"
+      ],
+      "logs": [
+        "/var/log/nginx"
+      ],
+      "config_files": [
+        "/etc/nginx/nginx.conf"
+      ]
+    },
+    "process_snapshot": "USER     COMMAND         COMMAND\nroot     systemd         /lib/systemd/systemd --system --deserialize 39\nroot     kthreadd        [kthreadd]\nroot     rcu_gp          [rcu_gp]\nroot     rcu_par_gp      [rcu_par_gp]\nroot     slub_flushwq    [slub_flushwq]\nroot     netns           [netns]\nroot     kworker/0:0H-ev [kworker/0:0H-events_highpri]\nroot     mm_percpu_wq    [mm_percpu_wq]\nroot     rcu_tasks_rude_ [rcu_tasks_rude_]\nroot     rcu_tasks_trace [rcu_tasks_trace]\nroot     ksoftirqd/0     [ksoftirqd/0]\nroot     rcu_sched       [rcu_sched]\nroot     migration/0     [migration/0]\nroot     idle_inject/0   [idle_inject/0]\nroot     cpuhp/0         [cpuhp/0]\nroot     cpuhp/1         [cpuhp/1]\nroot     idle_inject/1   [idle_inject/1]\nroot     migration/1     [migration/1]\nroot     ksoftirqd/1     [ksoftirqd/1]\nroot     kworker/1:0H-ev [kworker/1:0H-events_highpri]\nroot     kdevtmpfs       [kdevtmpfs]\nroot     inet_frag_wq    [inet_frag_wq]\nroot     kauditd         [kauditd]\nroot     khungtaskd      [khungtaskd]\nroot     oom_reaper      [oom_reaper]\nroot     writeback       [writeback]\nroot     kcompactd0      [kcompactd0]\nroot     ksmd            [ksmd]\nroot     khugepaged      [khugepaged]\nroot     kintegrityd     [kintegrityd]\nroot     kblockd         [kblockd]\nroot     blkcg_punt_bio  [blkcg_punt_bio]\nroot     tpm_dev_wq      [tpm_dev_wq]\nroot     ata_sff         [ata_sff]\nroot     md              [md]\nroot     edac-poller     [edac-poller]\nroot     devfreq_wq      [devfreq_wq]\nroot     watchdogd       [watchdogd]\nroot     kworker/0:1H-kb [kworker/0:1H-kblockd]\nroot     kswapd0         [kswapd0]\nroot     ecryptfs-kthrea [ecryptfs-kthrea]\nroot     kthrotld        [kthrotld]\nroot     acpi_thermal_pm [acpi_thermal_pm]\nroot     scsi_eh_0       [scsi_eh_0]\nroot     scsi_tmf_0      [scsi_tmf_0]\nroot     scsi_eh_1       [scsi_eh_1]\nroot     scsi_tmf_1      [scsi_tmf_1]\nroot     vfio-irqfd-clea [vfio-irqfd-clea]\nroot     mld             [mld]\nroot     ipv6_addrconf   [ipv6_addrconf]\nroot     kstrp           [kstrp]\nroot     zswap-shrink    [zswap-shrink]\nroot     kworker/u5:0    [kworker/u5:0]\nroot     charger_manager [charger_manager]\nroot     kworker/1:1H-kb [kworker/1:1H-kblockd]\nroot     cryptd          [cryptd]\nroot     mpt_poll_0      [mpt_poll_0]\nroot     mpt/0           [mpt/0]\nroot     scsi_eh_2       [scsi_eh_2]\nroot     scsi_tmf_2      [scsi_tmf_2]\nroot     raid5wq         [raid5wq]\nroot     jbd2/sda1-8     [jbd2/sda1-8]\nroot     ext4-rsv-conver [ext4-rsv-conver]\nroot     kaluad          [kaluad]\nroot     kmpath_rdacd    [kmpath_rdacd]\nroot     kmpathd         [kmpathd]\nroot     kmpath_handlerd [kmpath_handlerd]\nroot     multipathd      /sbin/multipathd -d -s\nmessage+ dbus-daemon     @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only\nroot     irqbalance      /usr/sbin/irqbalance --foreground\nroot     networkd-dispat /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers\nroot     systemd-logind  /lib/systemd/systemd-logind\nroot     cron            /usr/sbin/cron -f -P\nroot     agetty          /sbin/agetty -o -p -- \\u --keep-baud 115200,57600,38400,9600 ttyS0 vt220\nroot     agetty          /sbin/agetty -o -p -- \\u --noclear tty1 linux\nroot     unattended-upgr /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal\nroot     systemd-udevd   /lib/systemd/systemd-udevd\nroot     sshd            sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups\nsystemd+ systemd-network /lib/systemd/systemd-networkd\nsystemd+ systemd-resolve /lib/systemd/systemd-resolved\nroot     systemd-journal /lib/systemd/systemd-journald\nsystemd+ systemd-timesyn /lib/systemd/systemd-timesyncd\nroot     snapd           /usr/lib/snapd/snapd\nroot     polkitd         /usr/libexec/polkitd --no-debug\nroot     packagekitd     /usr/libexec/packagekitd\nsyslog   rsyslogd        /usr/sbin/rsyslogd -n -iNONE\nroot     kworker/u4:2-ev [kworker/u4:2-events_unbound]\nroot     kworker/0"
+  },
+  "checks": [
+    {
+      "rule_id": "AG-PLATFORM",
+      "category": "discovery",
+      "severity": "info",
+      "title": "Platform detection",
+      "status": "pass",
+      "evidence": "Detected platform: nginx",
+      "recommendation": "Verify platform-specific hardening profile is selected."
+    },
+    {
+      "rule_id": "AG-RUNTIME-USER",
+      "category": "permissions",
+      "severity": "medium",
+      "title": "Web runtime user least privilege",
+      "status": "pass",
+      "evidence": "Worker process user: www-data",
+      "recommendation": "Run web workers as a dedicated non-root service account."
+    },
+    {
+      "rule_id": "AG-WEBROOT-PERMS",
+      "category": "permissions",
+      "severity": "medium",
+      "title": "Web root permissions",
+      "status": "pass",
+      "evidence": "Web root /usr/share/nginx/html: owner=root, group=root, mode=0o755",
+      "recommendation": "Ensure web root ownership and permissions are restricted."
+    },
+    {
+      "rule_id": "AG-TLS-KEY-PERMS",
+      "category": "tls",
+      "severity": "high",
+      "title": "TLS private key permissions",
+      "status": "pass",
+      "evidence": "[{\"path\": \"/etc/ssl/private/ssl-cert-snakeoil.key\", \"state\": {\"exists\": true, \"owner\": \"root\", \"group\": \"ssl-cert\", \"mode\": \"0o640\", \"permission_denied\": false}}]",
+      "recommendation": "Restrict private key access to root and service group only."
+    },
+    {
+      "rule_id": "AG-FP-01",
+      "category": "fingerprinting",
+      "severity": "medium",
+      "title": "Server fingerprinting disclosure controls",
+      "status": "pass",
+      "evidence": "nginx server_tokens not enabled (default: off)",
+      "recommendation": "Suppress version and signature disclosure in server responses."
+    },
+    {
+      "rule_id": "AG-DIR-01",
+      "category": "files",
+      "severity": "medium",
+      "title": "Directory listing controls",
+      "status": "pass",
+      "evidence": "No directory listing directives found in config",
+      "recommendation": "Disable directory auto-indexing for public paths."
+    },
+    {
+      "rule_id": "AG-METHODS-01",
+      "category": "methods",
+      "severity": "medium",
+      "title": "Potentially risky HTTP method settings",
+      "status": "pass",
+      "evidence": "nginx does not support TRACE by default",
+      "recommendation": "Disable TRACE and restrict unneeded methods."
+    },
+    {
+      "rule_id": "AG-HEADERS-01",
+      "category": "headers",
+      "severity": "medium",
+      "title": "Security headers configuration presence",
+      "status": "pass",
+      "evidence": "Detected headers in config: strict-transport-security, x-frame-options, x-content-type-options, content-security-policy, referrer-policy\nDetected headers in live response (https://127.0.0.1/ status 200): strict-transport-security, x-frame-options, x-content-type-options, content-security-policy, referrer-policy",
+      "recommendation": "Configure HSTS, X-Frame-Options, X-Content-Type-Options, and CSP where applicable."
+    },
+    {
+      "rule_id": "AG-LOG-01",
+      "category": "logging",
+      "severity": "low",
+      "title": "Logging path availability",
+      "status": "pass",
+      "evidence": "[{\"path\": \"/var/log/nginx\", \"state\": {\"exists\": true, \"owner\": \"root\", \"group\": \"adm\", \"mode\": \"0o755\", \"permission_denied\": false}}]",
+      "recommendation": "Ensure access and error logs are enabled and retained securely."
+    },
+    {
+      "rule_id": "AG-MODULES-01",
+      "category": "modules",
+      "severity": "low",
+      "title": "Enabled module inventory",
+      "status": "pass",
+      "evidence": "--with-cc-opt='-g\n--with-ld-opt='-Wl,-Bsymbolic-functions\n--with-compat\n--with-debug\n--with-pcre-jit\n--with-http_ssl_module\n--with-http_stub_status_module\n--with-http_realip_module\n--with-http_auth_request_module\n--with-http_v2_module\n--with-http_dav_module\n--with-http_slice_module\n--with-threads\n--with-http_addition_module\n--with-http_gunzip_module\n--with-http_gzip_static_module\n--with-http_sub_module",
+      "recommendation": "Disable unnecessary modules to reduce attack surface."
+    },
+    {
+      "rule_id": "AG-EXPOSED-01",
+      "category": "files",
+      "severity": "high",
+      "title": "Sensitive file indicators in web root",
+      "status": "pass",
+      "evidence": "No common sensitive filenames found in web root",
+      "recommendation": "Remove or block sensitive files from public document roots."
+    },
+    {
+      "rule_id": "NG-N2-G2",
+      "category": "files",
+      "severity": "medium",
+      "title": "Nginx autoindex enabled",
+      "status": "pass",
+      "evidence": "autoindex directives inspected in nginx configuration",
+      "recommendation": "Disable autoindex in public locations."
+    },
+    {
+      "rule_id": "NG-N5-G3",
+      "category": "methods",
+      "severity": "medium",
+      "title": "Nginx methods and request limits",
+      "status": "pass",
+      "evidence": "Method restriction and client_max_body_size are configured",
+      "recommendation": "Restrict methods and set request size/buffer limits for abuse resistance."
+    },
+    {
+      "rule_id": "NG-G6-COOKIELOG",
+      "category": "logging",
+      "severity": "high",
+      "title": "Nginx log includes cookies",
+      "status": "pass",
+      "evidence": "log_format directives inspected for cookie variable usage",
+      "recommendation": "Avoid logging session cookies in access logs."
+    }
+  ],
+  "package_state": {
+    "upgradable": [],
+    "installed_packages": {
+      "nginx": "1.18.0-6ubuntu14.8",
+      "openssl": "3.0.2-0ubuntu1.23"
+    },
+    "trivy": {
+      "mode": "deep",
+      "status": "error",
+      "error": "",
+      "binary": "/tmp/webserverseclab_trivy/trivy",
+      "installed_temp": true
+    }
+  },
+  "cleanup_hint": "Controller should delete uploaded script from /tmp after execution"
+}

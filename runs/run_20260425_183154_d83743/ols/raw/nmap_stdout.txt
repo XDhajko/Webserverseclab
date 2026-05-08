@@ -1,0 +1,145 @@
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-04-25 16:31 +0000
+Nmap scan report for 192.168.56.12
+Host is up (0.0017s latency).
+
+PORT     STATE    SERVICE   VERSION
+80/tcp   open     http      LiteSpeed
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+| fingerprint-strings: 
+|   GetRequest, HTTPOptions: 
+|     HTTP/1.0 403 Forbidden
+|     content-type: text/html
+|     cache-control: private, no-cache, max-age=0
+|     pragma: no-cache
+|     content-length: 1240
+|     date: Sat, 25 Apr 2026 16:32:05 GMT
+|     server: LiteSpeed
+|     location: $DOC_ROOT/
+|     accessible: 1
+|     strict-transport-security: max-age=31536000; includeSubDomains
+|     x-frame-options: SAMEORIGIN
+|     x-content-type-options: nosniff
+|     referrer-policy: strict-origin-when-cross-origin
+|     permissions-policy: geolocation=(self "")
+|     connection: close
+|     <!DOCTYPE html>
+|     <html style="height:100%">
+|     <head>
+|     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+|     <title> 403 Forbidden
+|     </title><style>@media (prefers-color-scheme:dark){body{background-color:#000!important}}</style></head>
+|     <body style="color: #444; margin:0;font: normal 14px/20px Arial, Helvetica, sans-serif; height:100%; background-color: #fff;">
+|_    <div style="height:auto; min-height:100%;
+|_http-server-header: LiteSpeed
+443/tcp  open     ssl/https LiteSpeed
+| fingerprint-strings: 
+|   GetRequest, HTTPOptions: 
+|     HTTP/1.0 403 Forbidden
+|     content-type: text/html
+|     cache-control: private, no-cache, max-age=0
+|     pragma: no-cache
+|     content-length: 1240
+|     date: Sat, 25 Apr 2026 16:32:11 GMT
+|     server: LiteSpeed
+|     location: $DOC_ROOT/
+|     accessible: 1
+|     strict-transport-security: max-age=31536000; includeSubDomains
+|     x-frame-options: SAMEORIGIN
+|     x-content-type-options: nosniff
+|     referrer-policy: strict-origin-when-cross-origin
+|     permissions-policy: geolocation=(self "")
+|     alt-svc: h3=":443"; ma=2592000, h3-29=":443"; ma=2592000, h3-Q050=":443"; ma=2592000, h3-Q046=":443"; ma=2592000, h3-Q043=":443"; ma=2592000, quic=":443"; ma=2592000; v="43,46"
+|     connection: close
+|     <!DOCTYPE html>
+|     <html style="height:100%">
+|     <head>
+|     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+|     <title> 403 Forbidden
+|_    </title><style>@media (prefers-color-scheme:dark){body{background-color:#000!important}}</style
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+| ssl-cert: Subject: commonName=localhost
+| Issuer: commonName=localhost
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2026-04-25T16:14:45
+| Not valid after:  2027-04-25T16:14:45
+| MD5:     77fc 0119 20ee b1fc 66a0 9bcf 8aed 4049
+| SHA-1:   1dd1 f3f9 9993 12e8 5fbc 2020 2061 0c79 bf6a 192e
+|_SHA-256: 0ce3 02c5 5d32 e8eb 7a34 893f 6ec9 5774 8ffc c0ed 9721 236d efb2 0afe 541f 662a
+|_http-server-header: LiteSpeed
+7080/tcp filtered empowerid
+2 services unrecognized despite returning data. If you know the service/version, please submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port80-TCP:V=7.98%I=7%D=4/25%Time=69ECEC85%P=x86_64-unknown-linux-gnu%r
+SF:(GetRequest,6AB,"HTTP/1\.0\x20403\x20Forbidden\r\ncontent-type:\x20text
+SF:/html\r\ncache-control:\x20private,\x20no-cache,\x20max-age=0\r\npragma
+SF::\x20no-cache\r\ncontent-length:\x201240\r\ndate:\x20Sat,\x2025\x20Apr\
+SF:x202026\x2016:32:05\x20GMT\r\nserver:\x20LiteSpeed\r\nlocation:\x20\$DO
+SF:C_ROOT/\r\naccessible:\x201\r\nstrict-transport-security:\x20max-age=31
+SF:536000;\x20includeSubDomains\r\nx-frame-options:\x20SAMEORIGIN\r\nx-con
+SF:tent-type-options:\x20nosniff\r\nreferrer-policy:\x20strict-origin-when
+SF:-cross-origin\r\npermissions-policy:\x20geolocation=\(self\x20\"\"\)\r\
+SF:nconnection:\x20close\r\n\r\n<!DOCTYPE\x20html>\n<html\x20style=\"heigh
+SF:t:100%\">\n<head>\n<meta\x20name=\"viewport\"\x20content=\"width=device
+SF:-width,\x20initial-scale=1,\x20shrink-to-fit=no\">\n<title>\x20403\x20F
+SF:orbidden\r\n</title><style>@media\x20\(prefers-color-scheme:dark\){body
+SF:{background-color:#000!important}}</style></head>\n<body\x20style=\"col
+SF:or:\x20#444;\x20margin:0;font:\x20normal\x2014px/20px\x20Arial,\x20Helv
+SF:etica,\x20sans-serif;\x20height:100%;\x20background-color:\x20#fff;\">\
+SF:n<div\x20style=\"height:auto;\x20min-height:100%;\x20")%r(HTTPOptions,6
+SF:AB,"HTTP/1\.0\x20403\x20Forbidden\r\ncontent-type:\x20text/html\r\ncach
+SF:e-control:\x20private,\x20no-cache,\x20max-age=0\r\npragma:\x20no-cache
+SF:\r\ncontent-length:\x201240\r\ndate:\x20Sat,\x2025\x20Apr\x202026\x2016
+SF::32:05\x20GMT\r\nserver:\x20LiteSpeed\r\nlocation:\x20\$DOC_ROOT/\r\nac
+SF:cessible:\x201\r\nstrict-transport-security:\x20max-age=31536000;\x20in
+SF:cludeSubDomains\r\nx-frame-options:\x20SAMEORIGIN\r\nx-content-type-opt
+SF:ions:\x20nosniff\r\nreferrer-policy:\x20strict-origin-when-cross-origin
+SF:\r\npermissions-policy:\x20geolocation=\(self\x20\"\"\)\r\nconnection:\
+SF:x20close\r\n\r\n<!DOCTYPE\x20html>\n<html\x20style=\"height:100%\">\n<h
+SF:ead>\n<meta\x20name=\"viewport\"\x20content=\"width=device-width,\x20in
+SF:itial-scale=1,\x20shrink-to-fit=no\">\n<title>\x20403\x20Forbidden\r\n<
+SF:/title><style>@media\x20\(prefers-color-scheme:dark\){body{background-c
+SF:olor:#000!important}}</style></head>\n<body\x20style=\"color:\x20#444;\
+SF:x20margin:0;font:\x20normal\x2014px/20px\x20Arial,\x20Helvetica,\x20san
+SF:s-serif;\x20height:100%;\x20background-color:\x20#fff;\">\n<div\x20styl
+SF:e=\"height:auto;\x20min-height:100%;\x20");
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port443-TCP:V=7.98%T=SSL%I=7%D=4/25%Time=69ECEC8B%P=x86_64-unknown-linu
+SF:x-gnu%r(GetRequest,75D,"HTTP/1\.0\x20403\x20Forbidden\r\ncontent-type:\
+SF:x20text/html\r\ncache-control:\x20private,\x20no-cache,\x20max-age=0\r\
+SF:npragma:\x20no-cache\r\ncontent-length:\x201240\r\ndate:\x20Sat,\x2025\
+SF:x20Apr\x202026\x2016:32:11\x20GMT\r\nserver:\x20LiteSpeed\r\nlocation:\
+SF:x20\$DOC_ROOT/\r\naccessible:\x201\r\nstrict-transport-security:\x20max
+SF:-age=31536000;\x20includeSubDomains\r\nx-frame-options:\x20SAMEORIGIN\r
+SF:\nx-content-type-options:\x20nosniff\r\nreferrer-policy:\x20strict-orig
+SF:in-when-cross-origin\r\npermissions-policy:\x20geolocation=\(self\x20\"
+SF:\"\)\r\nalt-svc:\x20h3=\":443\";\x20ma=2592000,\x20h3-29=\":443\";\x20m
+SF:a=2592000,\x20h3-Q050=\":443\";\x20ma=2592000,\x20h3-Q046=\":443\";\x20
+SF:ma=2592000,\x20h3-Q043=\":443\";\x20ma=2592000,\x20quic=\":443\";\x20ma
+SF:=2592000;\x20v=\"43,46\"\r\nconnection:\x20close\r\n\r\n<!DOCTYPE\x20ht
+SF:ml>\n<html\x20style=\"height:100%\">\n<head>\n<meta\x20name=\"viewport\
+SF:"\x20content=\"width=device-width,\x20initial-scale=1,\x20shrink-to-fit
+SF:=no\">\n<title>\x20403\x20Forbidden\r\n</title><style>@media\x20\(prefe
+SF:rs-color-scheme:dark\){body{background-color:#000!important}}</style")%
+SF:r(HTTPOptions,75D,"HTTP/1\.0\x20403\x20Forbidden\r\ncontent-type:\x20te
+SF:xt/html\r\ncache-control:\x20private,\x20no-cache,\x20max-age=0\r\nprag
+SF:ma:\x20no-cache\r\ncontent-length:\x201240\r\ndate:\x20Sat,\x2025\x20Ap
+SF:r\x202026\x2016:32:11\x20GMT\r\nserver:\x20LiteSpeed\r\nlocation:\x20\$
+SF:DOC_ROOT/\r\naccessible:\x201\r\nstrict-transport-security:\x20max-age=
+SF:31536000;\x20includeSubDomains\r\nx-frame-options:\x20SAMEORIGIN\r\nx-c
+SF:ontent-type-options:\x20nosniff\r\nreferrer-policy:\x20strict-origin-wh
+SF:en-cross-origin\r\npermissions-policy:\x20geolocation=\(self\x20\"\"\)\
+SF:r\nalt-svc:\x20h3=\":443\";\x20ma=2592000,\x20h3-29=\":443\";\x20ma=259
+SF:2000,\x20h3-Q050=\":443\";\x20ma=2592000,\x20h3-Q046=\":443\";\x20ma=25
+SF:92000,\x20h3-Q043=\":443\";\x20ma=2592000,\x20quic=\":443\";\x20ma=2592
+SF:000;\x20v=\"43,46\"\r\nconnection:\x20close\r\n\r\n<!DOCTYPE\x20html>\n
+SF:<html\x20style=\"height:100%\">\n<head>\n<meta\x20name=\"viewport\"\x20
+SF:content=\"width=device-width,\x20initial-scale=1,\x20shrink-to-fit=no\"
+SF:>\n<title>\x20403\x20Forbidden\r\n</title><style>@media\x20\(prefers-co
+SF:lor-scheme:dark\){body{background-color:#000!important}}</style");
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 106.45 seconds

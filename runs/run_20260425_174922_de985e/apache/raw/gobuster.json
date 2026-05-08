@@ -1,0 +1,1 @@
+[{"path": "/.hta", "status": 403}, {"path": "/.htaccess", "status": 403}, {"path": "/.htpasswd", "status": 403}, {"path": "/assets", "status": 301}, {"path": "/css", "status": 301}, {"path": "/index.html", "status": 200}, {"path": "/js", "status": 301}, {"path": "/server-status", "status": 200}, {"path": "/.git/config", "status": 200}, {"path": "/.env", "status": 200}]

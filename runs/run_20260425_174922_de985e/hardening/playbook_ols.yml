@@ -1,0 +1,236 @@
+- hosts: ols
+  become: true
+  tasks:
+  - name: '[ols_restrict_admin] Bind admin listener to 127.0.0.1'
+    ansible.builtin.shell: CONF=/usr/local/lsws/admin/conf/admin_config.conf; [ -f
+      "$CONF" ] || exit 1; sed -i -E 's#^([[:space:]]*address)[[:space:]]+[^[:space:]]+:7080([[:space:]]*)$#\1               127.0.0.1:7080#'
+      "$CONF" 2>/dev/null; awk 'BEGIN {local_seen=0} /^[[:space:]]*address[[:space:]]+127\.0\.0\.1:7080([[:space:]]|$)/
+      { if (local_seen++) next } { print }' "$CONF" > "$CONF.tmp" && mv "$CONF.tmp"
+      "$CONF"; grep -qE '^[[:space:]]*address[[:space:]]+127\.0\.0\.1:7080\b' "$CONF"
+      2>/dev/null || sed -i '/^[[:space:]]*listener[[:space:]]\+/a\  address               127.0.0.1:7080'
+      "$CONF" 2>/dev/null; grep -qE '^[[:space:]]*address[[:space:]]+127\.0\.0\.1:7080\b'
+      "$CONF" 2>/dev/null || exit 1
+    become: true
+    tags:
+    - ols_restrict_admin
+  - name: '[ols_restrict_admin] Restrict external access to OLS admin port'
+    ansible.builtin.shell: 'if command -v ufw >/dev/null 2>&1 && ufw status 2>/dev/null
+      | grep -q ''^Status: active''; then ufw deny 7080/tcp >/dev/null 2>&1 || true;
+      fi; if command -v iptables >/dev/null 2>&1; then iptables -C INPUT -p tcp --dport
+      7080 ! -s 127.0.0.1 -j REJECT >/dev/null 2>&1 || iptables -I INPUT -p tcp --dport
+      7080 ! -s 127.0.0.1 -j REJECT >/dev/null 2>&1 || true; fi; if command -v ip6tables
+      >/dev/null 2>&1; then ip6tables -C INPUT -p tcp --dport 7080 -j REJECT >/dev/null
+      2>&1 || ip6tables -I INPUT -p tcp --dport 7080 -j REJECT >/dev/null 2>&1 ||
+      true; fi; if command -v iptables >/dev/null 2>&1; then iptables -C INPUT -p
+      tcp --dport 7080 ! -s 127.0.0.1 -j REJECT >/dev/null 2>&1 || exit 1; fi'
+    become: true
+    tags:
+    - ols_restrict_admin
+  - name: '[remove_sensitive_files] Prepare quarantine directory'
+    ansible.builtin.shell: mkdir -p /var/quarantine/webserverseclab; chmod 700 /var/quarantine/webserverseclab
+      2>/dev/null; true
+    become: true
+    tags:
+    - remove_sensitive_files
+  - name: '[remove_sensitive_files] Move sensitive files and .git dirs to quarantine
+      (non-destructive)'
+    ansible.builtin.shell: ROOTS='/var/www /usr/share/nginx/html'; if [ -d /usr/local/lsws
+      ]; then   VH_ROOT=$(grep -h 'vhRoot' /usr/local/lsws/conf/httpd_config.conf
+      2>/dev/null | awk '{print $NF}' | sed 's|/$||' | head -1);   [ -n "$VH_ROOT"
+      ] && [ "${VH_ROOT#/}" = "$VH_ROOT" ] && VH_ROOT="/usr/local/lsws/$VH_ROOT";   DOCROOT=$(grep
+      -rh 'docRoot' /usr/local/lsws/conf/vhosts/ 2>/dev/null | head -1 | awk '{print
+      $NF}' | sed 's|/$||');   DOCROOT=$(echo "$DOCROOT" | sed "s|\$VH_ROOT|$VH_ROOT|g;s|\$SERVER_ROOT|/usr/local/lsws|g");   [
+      -n "$DOCROOT" ] && [ "${DOCROOT#/}" = "$DOCROOT" ] && DOCROOT="/usr/local/lsws/$DOCROOT";   [
+      -z "$DOCROOT" ] && DOCROOT='/usr/local/lsws/Example/html';   ROOTS="$ROOTS $DOCROOT";
+      fi; for ROOT in $ROOTS; do   [ -d "$ROOT" ] || continue;   find "$ROOT" \( -path
+      '*/.git' -o -name '.env' -o -name '*.bak' -o -name '*.old'   -o -name '*.backup'
+      -o -name '*.swp' -o -name '*~' -o -name '.htpasswd' -o -name '.htaccess'   -o
+      -name 'info.php' -o -name 'phpinfo.php' -o -name '*.sql' \) -print0 2>/dev/null   |
+      while IFS= read -r -d '' P; do       REL=${P#/}; DEST="/var/quarantine/webserverseclab/$REL";       mkdir
+      -p "$(dirname "$DEST")";       mv "$P" "$DEST" 2>/dev/null || true;     done;
+      done; true
+    become: true
+    tags:
+    - remove_sensitive_files
+  - name: '[fix_tls_key_perms] chmod 600 private key files'
+    ansible.builtin.shell: find /etc/ssl/private /etc/letsencrypt/live /usr/local/lsws/conf
+      -name '*.key' -o -name '*.pem' -o -name 'privkey*' 2>/dev/null | xargs -r chmod
+      600 2>/dev/null; true
+    become: true
+    tags:
+    - fix_tls_key_perms
+  - name: '[fix_tls_key_perms] Set ownership to root'
+    ansible.builtin.shell: find /etc/ssl/private /etc/letsencrypt/live /usr/local/lsws/conf
+      -name '*.key' -o -name '*.pem' -o -name 'privkey*' 2>/dev/null | xargs -r chown
+      root:root 2>/dev/null; true
+    become: true
+    tags:
+    - fix_tls_key_perms
+  - name: '[ols_no_autoindex] Set autoIndex and allowBrowse to safe defaults'
+    ansible.builtin.shell: find /usr/local/lsws/conf/vhosts -type f \( -name 'vhconf.conf*'
+      -o -name 'vhost.conf*' \) -exec sed -i -E 's#^([[:space:]]*[Aa]uto[Ii]ndex)[[:space:]]+1\b#\1
+      0#g; s#^([[:space:]]*allowBrowse)[[:space:]]+1\b#\1 0#g' {} + 2>/dev/null;for
+      F in /usr/local/lsws/conf/vhosts/*/vhconf.conf* /usr/local/lsws/conf/vhosts/*/vhost.conf*;
+      do [ -f "$F" ] || continue; grep -qi '^[[:space:]]*[Aa]uto[Ii]ndex[[:space:]]+0\b'
+      "$F" 2>/dev/null || sed -i '/context \/ {/a\  autoIndex            0' "$F" 2>/dev/null;
+      grep -qi '^[[:space:]]*allowBrowse[[:space:]]+0\b' "$F" 2>/dev/null || sed -i
+      '/context \/ {/a\  allowBrowse         0' "$F" 2>/dev/null; done; find /usr/local/lsws
+      -name '.htaccess' -exec sed -i -E '/^[[:space:]]*Options[[:space:]]+/ s/[[:space:]][+-]?Indexes([[:space:]]|$)/
+      -Indexes\1/g' {} + 2>/dev/null; true
+    become: true
+    tags:
+    - ols_no_autoindex
+  - name: '[ols_security_headers] Inject OLS extraHeaders directives in vhost root
+      context'
+    ansible.builtin.shell: "for F in /usr/local/lsws/conf/vhosts/*/vhconf.conf* /usr/local/lsws/conf/vhosts/*/vhost.conf*;\
+      \ do [ -f \"$F\" ] || continue; sed -i '/extraHeaders[[:space:]]\\+<<<END_webserverseclab_headers/,/END_webserverseclab_headers/d'\
+      \ \"$F\" 2>/dev/null; if grep -q 'context / {' \"$F\" 2>/dev/null; then   sed\
+      \ -i -E 's#^([[:space:]]*accessible)[[:space:]]+.*#\\1              1#g' \"\
+      $F\" 2>/dev/null;   sed -i '/context \\/ {/a\\END_webserverseclab_headers' \"\
+      $F\" 2>/dev/null;   sed -i '/context \\/ {/a\\Permissions-Policy: geolocation=(self\
+      \ \"\")' \"$F\" 2>/dev/null;   sed -i '/context \\/ {/a\\Referrer-Policy: strict-origin-when-cross-origin'\
+      \ \"$F\" 2>/dev/null;   sed -i '/context \\/ {/a\\X-Content-Type-Options: nosniff'\
+      \ \"$F\" 2>/dev/null;   sed -i '/context \\/ {/a\\X-Frame-Options: SAMEORIGIN'\
+      \ \"$F\" 2>/dev/null;   sed -i '/context \\/ {/a\\Strict-Transport-Security:\
+      \ max-age=31536000; includeSubDomains' \"$F\" 2>/dev/null;   grep -qi '^[[:space:]]*accessible[[:space:]]+1\\\
+      b' \"$F\" 2>/dev/null   || sed -i '/context \\/ {/a\\  accessible          \
+      \    1' \"$F\" 2>/dev/null;   grep -qi '^[[:space:]]*location[[:space:]]+\\\
+      $DOC_ROOT/' \"$F\" 2>/dev/null   || sed -i '/context \\/ {/a\\  location   \
+      \             $DOC_ROOT/' \"$F\" 2>/dev/null;   sed -i '/context \\/ {/a\\ \
+      \ extraHeaders            <<<END_webserverseclab_headers' \"$F\" 2>/dev/null;\
+      \ else   cat >> \"$F\" <<'EOF'\n# webserverseclab headers context begin\ncontext\
+      \ / {\n  location                $DOC_ROOT/\n  accessible              1\n \
+      \ allowBrowse             0\n  extraHeaders            <<<END_webserverseclab_headers\n\
+      Strict-Transport-Security: max-age=31536000; includeSubDomains\nX-Frame-Options:\
+      \ SAMEORIGIN\nX-Content-Type-Options: nosniff\nReferrer-Policy: strict-origin-when-cross-origin\n\
+      Permissions-Policy: geolocation=(self \"\")\nEND_webserverseclab_headers\n}\n\
+      # webserverseclab headers context end\nEOF\n fi; grep -qi 'extraHeaders[[:space:]]\\\
+      +<<<END_webserverseclab_headers' \"$F\" && grep -qi 'X-Frame-Options: SAMEORIGIN'\
+      \ \"$F\" && grep -qi 'X-Content-Type-Options: nosniff' \"$F\" && grep -qi 'Referrer-Policy:\
+      \ strict-origin-when-cross-origin' \"$F\" || exit 1; done"
+    become: true
+    tags:
+    - ols_security_headers
+  - name: '[ols_enable_https] Generate self-signed cert for OLS if missing'
+    ansible.builtin.shell: '[ -f /usr/local/lsws/conf/key.pem ] && [ -f /usr/local/lsws/conf/cert.pem
+      ] || openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /usr/local/lsws/conf/key.pem
+      -out /usr/local/lsws/conf/cert.pem -subj ''/CN=localhost'' -sha256'
+    become: true
+    tags:
+    - ols_enable_https
+  - name: '[ols_enable_https] Repair HTTPS listener on port 443'
+    ansible.builtin.shell: "CONF=/usr/local/lsws/conf/httpd_config.conf; [ -f \"$CONF\"\
+      \ ] || exit 1; VH_NAME=$(grep -m1 '^virtualHost ' \"$CONF\" 2>/dev/null | awk\
+      \ '{print $2}'); [ -z \"$VH_NAME\" ] && VH_NAME=Example; HTTP_MAPS=$(awk 'BEGIN\
+      \ {in_listener=0; has_http=0; maps=\"\"} !in_listener && /^[[:space:]]*listener[[:space:]]+[^[:space:]]+[[:space:]]*\\\
+      {[[:space:]]*$/ {   in_listener=1; has_http=0; maps=\"\"; next } in_listener\
+      \ {   if ($0 ~ /^[[:space:]]*address[[:space:]]+[^[:space:]]*:80([[:space:]]|$)/)\
+      \ has_http=1;   if ($0 ~ /^[[:space:]]*map[[:space:]]+[^[:space:]]+[[:space:]]+/)\
+      \ maps = maps $0 ORS;   if ($0 ~ /^[[:space:]]*}[[:space:]]*$/) {     if (has_http\
+      \ && maps != \"\") { printf \"%s\", maps; exit }     in_listener=0; has_http=0;\
+      \ maps=\"\"   } }' \"$CONF\"); [ -z \"$HTTP_MAPS\" ] && HTTP_MAPS=\"  map  \
+      \                   ${VH_NAME} *\"; TMP=$(mktemp); awk 'BEGIN {in_managed=0;\
+      \ in_listener=0; drop=0; buf=\"\"} /^[[:space:]]*# webserverseclab https begin[[:space:]]*$/\
+      \ {in_managed=1; next} /^[[:space:]]*# webserverseclab https end[[:space:]]*$/\
+      \ {in_managed=0; next} in_managed {next} !in_listener && /^[[:space:]]*listener[[:space:]]+[^[:space:]]+[[:space:]]*\\\
+      {[[:space:]]*$/ {   in_listener=1;   drop=($0 ~ /^[[:space:]]*listener[[:space:]]+(HTTPS|Secure)[[:space:]]*\\\
+      {[[:space:]]*$/);   buf=$0 ORS;   next } in_listener {   if ($0 ~ /^[[:space:]]*address[[:space:]]+[^[:space:]]*:443([[:space:]]|$)/)\
+      \ drop=1;   buf = buf $0 ORS;   if ($0 ~ /^[[:space:]]*}[[:space:]]*$/) {  \
+      \   if (!drop) printf \"%s\", buf;     buf=\"\"; in_listener=0; drop=0   } \
+      \  next } {print} END { if (in_listener && !drop) printf \"%s\", buf }' \"$CONF\"\
+      \ > \"$TMP\" && mv \"$TMP\" \"$CONF\"; cat >> \"$CONF\" <<EOF\n# webserverseclab\
+      \ https begin\nlistener HTTPS {\n  address                 *:443\n  secure \
+      \                 1\n  keyFile                 /usr/local/lsws/conf/key.pem\n\
+      \  certFile                /usr/local/lsws/conf/cert.pem\n${HTTP_MAPS}\n}\n\
+      # webserverseclab https end\nEOF\n MANAGED_BLOCK=$(awk '/# webserverseclab https\
+      \ begin/,/# webserverseclab https end/' \"$CONF\"); echo \"$MANAGED_BLOCK\"\
+      \ | grep -qE '^[[:space:]]*address[[:space:]]+\\*:443\\b' && echo \"$MANAGED_BLOCK\"\
+      \ | grep -qE '^[[:space:]]*secure[[:space:]]+1\\b' && echo \"$MANAGED_BLOCK\"\
+      \ | grep -qE '^[[:space:]]*keyFile[[:space:]]+/usr/local/lsws/conf/key\\.pem\\\
+      b' && echo \"$MANAGED_BLOCK\" | grep -qE '^[[:space:]]*certFile[[:space:]]+/usr/local/lsws/conf/cert\\\
+      .pem\\b' && echo \"$MANAGED_BLOCK\" | grep -qE '^[[:space:]]*map[[:space:]]+[^[:space:]]+[[:space:]]+[^[:space:]]+'\
+      \ || exit 1"
+    become: true
+    tags:
+    - ols_enable_https
+  - name: '[ols_enable_https] Allow external HTTPS traffic to port 443'
+    ansible.builtin.shell: 'if command -v ufw >/dev/null 2>&1 && ufw status 2>/dev/null
+      | grep -q ''^Status: active''; then ufw allow 443/tcp >/dev/null 2>&1 || true;
+      fi; if command -v iptables >/dev/null 2>&1; then iptables -C INPUT -p tcp --dport
+      443 -j ACCEPT >/dev/null 2>&1 || iptables -I INPUT -p tcp --dport 443 -j ACCEPT
+      >/dev/null 2>&1 || true; fi; if command -v ip6tables >/dev/null 2>&1; then ip6tables
+      -C INPUT -p tcp --dport 443 -j ACCEPT >/dev/null 2>&1 || ip6tables -I INPUT
+      -p tcp --dport 443 -j ACCEPT >/dev/null 2>&1 || true; fi; if command -v iptables
+      >/dev/null 2>&1; then iptables -C INPUT -p tcp --dport 443 -j ACCEPT >/dev/null
+      2>&1 || exit 1; fi'
+    become: true
+    tags:
+    - ols_enable_https
+  - name: '[ols_tls_hardening] Disable gzip/brotli compression in OLS vhost configs
+      (BREACH mitigation)'
+    ansible.builtin.shell: for F in /usr/local/lsws/conf/vhosts/*/vhconf.conf* /usr/local/lsws/conf/vhosts/*/vhost.conf*;
+      do [ -f "$F" ] || continue; sed -i -E 's/^([[:space:]]*enableGzip)[[:space:]]+[0-9]+/\1
+      0/g; s/^([[:space:]]*enableDynGzip)[[:space:]]+[0-9]+/\1 0/g; s/^([[:space:]]*enableBr)[[:space:]]+[0-9]+/\1
+      0/g' "$F" 2>/dev/null; grep -q '^[[:space:]]*enableBr[[:space:]]\+0\b' "$F"
+      2>/dev/null || sed -i '/context \/ {/a\  enableBr             0' "$F" 2>/dev/null;
+      grep -q '^[[:space:]]*enableDynGzip[[:space:]]\+0\b' "$F" 2>/dev/null || sed
+      -i '/context \/ {/a\  enableDynGzip       0' "$F" 2>/dev/null; grep -q '^[[:space:]]*enableGzip[[:space:]]\+0\b'
+      "$F" 2>/dev/null || sed -i '/context \/ {/a\  enableGzip          0' "$F" 2>/dev/null;
+      done; true
+    become: true
+    tags:
+    - ols_tls_hardening
+  - name: '[ols_tls_hardening] Disable gzip/brotli compression in global OLS config'
+    ansible.builtin.shell: sed -i -E 's/^([[:space:]]*enableGzip)[[:space:]]+[0-9]+/\1
+      0/g; s/^([[:space:]]*enableDynGzip)[[:space:]]+[0-9]+/\1 0/g; s/^([[:space:]]*enableBr)[[:space:]]+[0-9]+/\1
+      0/g' /usr/local/lsws/conf/httpd_config.conf 2>/dev/null; true
+    become: true
+    tags:
+    - ols_tls_hardening
+  - name: '[ols_tls_hardening] Disable global dynamic gzip/brotli compression'
+    ansible.builtin.shell: sed -i -E 's/^([[:space:]]*enableGzipCompress)[[:space:]]+[0-9]+/\1           0/g;
+      s/^([[:space:]]*enableDynGzipCompress)[[:space:]]+[0-9]+/\1        0/g; s/^([[:space:]]*enableBrCompress)[[:space:]]+[0-9]+/\1              0/g'
+      /usr/local/lsws/conf/httpd_config.conf 2>/dev/null; true
+    become: true
+    tags:
+    - ols_tls_hardening
+  - name: '[ols_tls_hardening] Reduce OLS TLS cipher exposure in SSL blocks'
+    ansible.builtin.shell: if grep -qE '^listener (Secure|HTTPS)[[:space:]]*{' /usr/local/lsws/conf/httpd_config.conf
+      2>/dev/null; then sed -i '/^listener \(Secure\|HTTPS\)[[:space:]]*{/,/^}/{/^[[:space:]]*ciphers[[:space:]]/d;}'
+      /usr/local/lsws/conf/httpd_config.conf 2>/dev/null; sed -i '/^listener \(Secure\|HTTPS\)[[:space:]]*{/a\    ciphers                 EECDH+AESGCM:EECDH+CHACHA20'
+      /usr/local/lsws/conf/httpd_config.conf 2>/dev/null; fi;find /usr/local/lsws/conf
+      /usr/local/lsws/conf/vhosts -type f \( -name 'httpd_config.conf' -o -name 'vhconf.conf*'
+      -o -name 'vhost.conf*' \) -exec sed -i -E 's#^([[:space:]]*ciphers)[[:space:]]+.*#\1
+      EECDH+AESGCM:EECDH+CHACHA20#g' {} + 2>/dev/null; true
+    become: true
+    tags:
+    - ols_tls_hardening
+  - name: '[apply_security_updates] Update package lists'
+    ansible.builtin.shell: apt-get update -qq
+    become: true
+    tags:
+    - apply_security_updates
+  - name: '[apply_security_updates] Install pending package upgrades'
+    ansible.builtin.shell: DEBIAN_FRONTEND=noninteractive apt-get full-upgrade -y
+      -o Dpkg::Options::='--force-confold' 2>/dev/null; true
+    become: true
+    tags:
+    - apply_security_updates
+  - name: '[apply_security_updates] Remove obsolete packages'
+    ansible.builtin.shell: DEBIAN_FRONTEND=noninteractive apt-get autoremove -y 2>/dev/null;
+      true
+    become: true
+    tags:
+    - apply_security_updates
+  - name: Verify ols configuration
+    ansible.builtin.shell: if [ -x /usr/local/lsws/bin/openlitespeed ]; then /usr/local/lsws/bin/openlitespeed
+      -t 2>&1; else echo 'OpenLiteSpeed verify binary not found'; exit 1; fi
+    become: true
+    tags:
+    - verify
+  - name: Reload ols service
+    ansible.builtin.shell: systemctl restart lsws 2>&1 || /usr/local/lsws/bin/lswsctrl
+      restart
+    become: true
+    tags:
+    - reload

@@ -1,0 +1,203 @@
+- hosts: nginx
+  become: true
+  tasks:
+  - name: '[nginx_hide_version] Set server_tokens off'
+    ansible.builtin.shell: grep -qP '^\s*server_tokens' /etc/nginx/nginx.conf && sed
+      -i 's/^\(\s*\)server_tokens .*/\1server_tokens off;/' /etc/nginx/nginx.conf
+      || sed -i '/http\s*{/a\    server_tokens off;' /etc/nginx/nginx.conf
+    become: true
+    tags:
+    - nginx_hide_version
+  - name: '[nginx_upgrade] Update package list'
+    ansible.builtin.shell: apt-get update -qq
+    become: true
+    tags:
+    - nginx_upgrade
+  - name: '[nginx_upgrade] Upgrade nginx'
+    ansible.builtin.shell: DEBIAN_FRONTEND=noninteractive apt-get install --only-upgrade
+      -y nginx 2>/dev/null; true
+    become: true
+    tags:
+    - nginx_upgrade
+  - name: '[nginx_tls_hardening] Create TLS hardening snippet'
+    ansible.builtin.shell: 'mkdir -p /etc/nginx/snippets; cat > /etc/nginx/snippets/ssl-hardening.conf
+      << ''EOF''
+
+      ssl_protocols TLSv1.2 TLSv1.3;
+
+      ssl_ciphers ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256;
+
+      ssl_prefer_server_ciphers on;
+
+      ssl_session_tickets off;
+
+      EOF'
+    become: true
+    tags:
+    - nginx_tls_hardening
+  - name: '[nginx_tls_hardening] Disable gzip to mitigate BREACH'
+    ansible.builtin.shell: grep -qP '^\s*gzip\s' /etc/nginx/nginx.conf && sed -i 's/^\(\s*\)gzip
+      .*/\1gzip off;/' /etc/nginx/nginx.conf || sed -i '/http\s*{/a\    gzip off;'
+      /etc/nginx/nginx.conf
+    become: true
+    tags:
+    - nginx_tls_hardening
+  - name: '[nginx_tls_hardening] Include TLS snippet in SSL site config'
+    ansible.builtin.shell: 'for F in /etc/nginx/sites-enabled/*; do if grep -q ''ssl_certificate''
+      "$F" 2>/dev/null; then   sed -i ''/ssl-hardening/d'' "$F";   sed -i ''/^\s*ssl_protocols
+      /d; /^\s*ssl_ciphers /d; /^\s*ssl_prefer_server_ciphers /d; /^\s*add_header\s\+Strict-Transport-Security\b/d''
+      "$F";   sed -i ''0,/ssl_certificate /{/ssl_certificate /a\    include /etc/nginx/snippets/ssl-hardening.conf;
+
+      }'' "$F"; fi; done; true'
+    become: true
+    tags:
+    - nginx_tls_hardening
+  - name: '[nginx_security_headers] Create security headers snippet'
+    ansible.builtin.shell: 'mkdir -p /etc/nginx/snippets; cat > /etc/nginx/snippets/security-headers.conf
+      << ''EOF''
+
+      add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+
+      add_header X-Content-Type-Options "nosniff" always;
+
+      add_header X-Frame-Options "SAMEORIGIN" always;
+
+      add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+      add_header Permissions-Policy "geolocation=(), camera=(), microphone=()" always;
+
+      EOF'
+    become: true
+    tags:
+    - nginx_security_headers
+  - name: '[nginx_security_headers] Include headers snippet in site configs'
+    ansible.builtin.shell: 'for F in /etc/nginx/sites-enabled/*; do sed -i ''/security-headers/d''
+      "$F" 2>/dev/null; sed -i ''/add_header\s\+Strict-Transport-Security\b/d; /add_header\s\+X-Content-Type-Options\b/d;
+      /add_header\s\+X-Frame-Options\b/d; /add_header\s\+Referrer-Policy\b/d; /add_header\s\+Permissions-Policy\b/d''
+      "$F" 2>/dev/null; sed -i ''0,/server_name/{/server_name/a\    include /etc/nginx/snippets/security-headers.conf;
+
+      }'' "$F" 2>/dev/null; done; true'
+    become: true
+    tags:
+    - nginx_security_headers
+  - name: '[remove_sensitive_files] Prepare quarantine directory'
+    ansible.builtin.shell: mkdir -p /var/quarantine/webserverseclab; chmod 700 /var/quarantine/webserverseclab
+      2>/dev/null; true
+    become: true
+    tags:
+    - remove_sensitive_files
+  - name: '[remove_sensitive_files] Move sensitive files and .git dirs to quarantine
+      (non-destructive)'
+    ansible.builtin.shell: ROOTS='/var/www /usr/share/nginx/html'; if [ -d /usr/local/lsws
+      ]; then   VH_ROOT=$(grep -h 'vhRoot' /usr/local/lsws/conf/httpd_config.conf
+      2>/dev/null | awk '{print $NF}' | sed 's|/$||' | head -1);   [ -n "$VH_ROOT"
+      ] && [ "${VH_ROOT#/}" = "$VH_ROOT" ] && VH_ROOT="/usr/local/lsws/$VH_ROOT";   DOCROOT=$(grep
+      -rh 'docRoot' /usr/local/lsws/conf/vhosts/ 2>/dev/null | head -1 | awk '{print
+      $NF}' | sed 's|/$||');   DOCROOT=$(echo "$DOCROOT" | sed "s|\$VH_ROOT|$VH_ROOT|g;s|\$SERVER_ROOT|/usr/local/lsws|g");   [
+      -n "$DOCROOT" ] && [ "${DOCROOT#/}" = "$DOCROOT" ] && DOCROOT="/usr/local/lsws/$DOCROOT";   [
+      -z "$DOCROOT" ] && DOCROOT='/usr/local/lsws/Example/html';   ROOTS="$ROOTS $DOCROOT";
+      fi; for ROOT in $ROOTS; do   [ -d "$ROOT" ] || continue;   find "$ROOT" \( -path
+      '*/.git' -o -name '.env' -o -name '*.bak' -o -name '*.old'   -o -name '*.backup'
+      -o -name '*.swp' -o -name '*~' -o -name '.htpasswd' -o -name '.htaccess'   -o
+      -name 'info.php' -o -name 'phpinfo.php' -o -name '*.sql' \) -print0 2>/dev/null   |
+      while IFS= read -r -d '' P; do       REL=${P#/}; DEST="/var/quarantine/webserverseclab/$REL";       mkdir
+      -p "$(dirname "$DEST")";       mv "$P" "$DEST" 2>/dev/null || true;     done;
+      done; true
+    become: true
+    tags:
+    - remove_sensitive_files
+  - name: '[remove_sensitive_files] Return 404 for Nginx dotfiles and status endpoints'
+    ansible.builtin.shell: 'mkdir -p /etc/nginx/snippets; cat > /etc/nginx/snippets/hide-sensitive-paths-404.conf
+      << ''EOF''
+
+      if ($request_uri ~ "^/\.(?!well-known(?:/|$))") { return 404; }
+
+      if ($request_uri ~ "^/(server-status|nginx_status)$") { return 404; }
+
+      EOF
+
+      for F in /etc/nginx/sites-enabled/*; do [ -f "$F" ] || continue; sed -i ''/hide-sensitive-paths-404/d''
+      "$F" 2>/dev/null; sed -i ''0,/server_name/{/server_name/a\    include /etc/nginx/snippets/hide-sensitive-paths-404.conf;
+
+      }'' "$F" 2>/dev/null;done; true'
+    become: true
+    tags:
+    - remove_sensitive_files
+  - name: '[restrict_status_page] Return 404 for Nginx status endpoints'
+    ansible.builtin.shell: 'mkdir -p /etc/nginx/snippets; cat > /etc/nginx/snippets/status-404.conf
+      << ''EOF''
+
+      if ($request_uri ~ "^/(server-status|nginx_status)$") { return 404; }
+
+      EOF
+
+      for F in /etc/nginx/sites-enabled/*; do [ -f "$F" ] || continue; sed -i ''/status-404/d''
+      "$F" 2>/dev/null; sed -i ''0,/server_name/{/server_name/a\    include /etc/nginx/snippets/status-404.conf;
+
+      }'' "$F" 2>/dev/null;done; true'
+    become: true
+    tags:
+    - restrict_status_page
+  - name: '[nginx_no_autoindex] Disable autoindex in all configs'
+    ansible.builtin.shell: for F in /etc/nginx/nginx.conf /etc/nginx/conf.d/* /etc/nginx/snippets/*
+      /etc/nginx/sites-available/* /etc/nginx/sites-enabled/*; do [ -f "$F" ] || continue;
+      sed -i -E 's/autoindex[[:space:]]+on[[:space:]]*;/autoindex off;/Ig' "$F" 2>/dev/null;
+      done; true
+    become: true
+    tags:
+    - nginx_no_autoindex
+  - name: '[nginx_restrict_methods] Create method-restriction snippet'
+    ansible.builtin.shell: "mkdir -p /etc/nginx/snippets; cat > /etc/nginx/snippets/restrict-methods.conf\
+      \ << 'EOF'\nif ($request_method !~ ^(GET|HEAD|POST)$ ) {\n    return 405;\n\
+      }\nEOF"
+    become: true
+    tags:
+    - nginx_restrict_methods
+  - name: '[nginx_restrict_methods] Include snippet in default site'
+    ansible.builtin.shell: 'for F in /etc/nginx/sites-enabled/*; do sed -i ''/restrict-methods/d''
+      "$F" 2>/dev/null; sed -i ''0,/server_name/{/server_name/a\    include /etc/nginx/snippets/restrict-methods.conf;
+
+      }'' "$F" 2>/dev/null; done; true'
+    become: true
+    tags:
+    - nginx_restrict_methods
+  - name: '[nginx_restrict_methods] Set client_max_body_size baseline'
+    ansible.builtin.shell: grep -qP '^\s*client_max_body_size\b' /etc/nginx/nginx.conf
+      && sed -i 's/^\(\s*\)client_max_body_size .*/\1client_max_body_size 10m;/' /etc/nginx/nginx.conf
+      || sed -i '/http\s*{/a\    client_max_body_size 10m;' /etc/nginx/nginx.conf
+    become: true
+    tags:
+    - nginx_restrict_methods
+  - name: '[nginx_fix_cookie_logging] Strip $http_cookie from log_format directives'
+    ansible.builtin.shell: find /etc/nginx/ -name '*.conf' -exec sed -i 's/\$http_cookie//g'
+      {} + 2>/dev/null; true
+    become: true
+    tags:
+    - nginx_fix_cookie_logging
+  - name: '[apply_security_updates] Update package lists'
+    ansible.builtin.shell: apt-get update -qq
+    become: true
+    tags:
+    - apply_security_updates
+  - name: '[apply_security_updates] Install pending package upgrades'
+    ansible.builtin.shell: DEBIAN_FRONTEND=noninteractive apt-get full-upgrade -y
+      -o Dpkg::Options::='--force-confold' 2>/dev/null; true
+    become: true
+    tags:
+    - apply_security_updates
+  - name: '[apply_security_updates] Remove obsolete packages'
+    ansible.builtin.shell: DEBIAN_FRONTEND=noninteractive apt-get autoremove -y 2>/dev/null;
+      true
+    become: true
+    tags:
+    - apply_security_updates
+  - name: Verify nginx configuration
+    ansible.builtin.shell: nginx -t 2>&1
+    become: true
+    tags:
+    - verify
+  - name: Reload nginx service
+    ansible.builtin.shell: systemctl reload nginx
+    become: true
+    tags:
+    - reload
